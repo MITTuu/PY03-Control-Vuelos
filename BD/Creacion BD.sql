@@ -66,6 +66,7 @@ CREATE TABLE Flight (
 
 CREATE TABLE FlightPassengers (
     idPassenger INT NOT NULL,
+    passportNumber VARCHAR(32) NOT NULL UNIQUE,
     idFlight INT NOT NULL,
     confirmed BIT NOT NULL,
     PRIMARY KEY (idPassenger, idFlight),
