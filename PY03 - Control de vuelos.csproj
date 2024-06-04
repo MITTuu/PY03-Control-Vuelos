@@ -54,10 +54,55 @@
     <Compile Include="Programa\APP\GUI_Login.Designer.cs">
       <DependentUpon>GUI_Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Programa\APP\GUI_Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\APP\GUI_Main.Designer.cs">
+      <DependentUpon>GUI_Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_airlines.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_airlines.Designer.cs">
+      <DependentUpon>Panel_airlines.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_flight.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_flight.Designer.cs">
+      <DependentUpon>Panel_flight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_passengers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_passengers.Designer.cs">
+      <DependentUpon>Panel_passengers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_viewData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_viewData.Designer.cs">
+      <DependentUpon>Panel_viewData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Programa\Modelo\Conexion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Programa\APP\GUI_Login.resx">
       <DependentUpon>GUI_Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\APP\GUI_Main.resx">
+      <DependentUpon>GUI_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\APP\Panel_airlines.resx">
+      <DependentUpon>Panel_airlines.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\APP\Panel_flight.resx">
+      <DependentUpon>Panel_flight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\APP\Panel_passengers.resx">
+      <DependentUpon>Panel_passengers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\APP\Panel_viewData.resx">
+      <DependentUpon>Panel_viewData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
