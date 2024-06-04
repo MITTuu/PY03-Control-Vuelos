@@ -1,3 +1,5 @@
+USE AirlineControl;
+
 -- Stored Procedures AppUSers
 CREATE PROCEDURE GetUserByEmailAndPassword
     @Email VARCHAR(255),
