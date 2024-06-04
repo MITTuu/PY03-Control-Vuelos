@@ -188,7 +188,10 @@ namespace PY03___Control_de_vuelos.Programa.APP
 
         }
 
+        private void GUI_Main_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }
 
