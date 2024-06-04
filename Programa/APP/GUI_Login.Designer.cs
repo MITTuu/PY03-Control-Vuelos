@@ -101,9 +101,10 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(180, 80);
+            this.pictureBox1.Image = global::PY03___Control_de_vuelos.Properties.Resources.iconLogoA;
+            this.pictureBox1.Location = new System.Drawing.Point(126, -28);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(208, 147);
+            this.pictureBox1.Size = new System.Drawing.Size(314, 273);
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             // 
@@ -121,12 +122,11 @@
             this.Controls.Add(this.btn_login);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GUI_Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inicio se sesión";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GUI_Login_FormClosed);
-            this.Load += new System.EventHandler(this.GUI_Login_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -9,16 +9,19 @@ CREATE TABLE Airline (
     name VARCHAR(255) NOT NULL,
     motto VARCHAR(255) NOT NULL
 );
+GO
 
 CREATE TABLE City (
     cityCode VARCHAR(3) PRIMARY KEY NOT NULL,
     name VARCHAR(255) NOT NULL
 );
+GO
 
 CREATE TABLE Brand (
     idBrand INT PRIMARY KEY NOT NULL IDENTITY(1,1),
     name VARCHAR(255) NOT NULL
 );
+GO
 
 CREATE TABLE Plane (
     registrationNumber VARCHAR(50) PRIMARY KEY NOT NULL,
@@ -28,6 +31,7 @@ CREATE TABLE Plane (
     FOREIGN KEY (idAirline) REFERENCES Airline(idAirline),
     FOREIGN KEY (idBrand) REFERENCES Brand(idBrand)
 );
+GO
 
 CREATE TABLE Passengers (
     idPassenger INT PRIMARY KEY NOT NULL IDENTITY(1,1),
@@ -38,6 +42,7 @@ CREATE TABLE Passengers (
     email VARCHAR(255) NOT NULL UNIQUE,
     phoneNumber VARCHAR(50) NOT NULL
 );
+GO
 
 CREATE TABLE Pilots (
     idPilot INT PRIMARY KEY NOT NULL IDENTITY(1,1),
@@ -49,6 +54,7 @@ CREATE TABLE Pilots (
     idAirline INT NOT NULL,
     FOREIGN KEY (idAirline) REFERENCES Airline(idAirline)
 );
+GO
 
 CREATE TABLE Flight (
     idFlight INT PRIMARY KEY NOT NULL IDENTITY(1,1),
@@ -64,6 +70,7 @@ CREATE TABLE Flight (
     FOREIGN KEY (departureCityCode) REFERENCES City(cityCode),
     FOREIGN KEY (arrivalCityCode) REFERENCES City(cityCode)
 );
+GO
 
 CREATE TABLE FlightPassengers (
     idPassenger INT NOT NULL,
@@ -73,11 +80,13 @@ CREATE TABLE FlightPassengers (
     FOREIGN KEY (idPassenger) REFERENCES Passengers(idPassenger),
     FOREIGN KEY (idFlight) REFERENCES Flight(idFlight)
 );
+GO
 
 CREATE TABLE Roles (
     idRole INT PRIMARY KEY NOT NULL,
     name VARCHAR(255) NOT NULL
 );
+GO
 
 CREATE TABLE AppUser (
     idUser INT PRIMARY KEY NOT NULL IDENTITY(1,1),

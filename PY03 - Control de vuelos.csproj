@@ -84,6 +84,24 @@
     <Compile Include="Programa\APP\Panel_viewData.Designer.cs">
       <DependentUpon>Panel_viewData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Programa\Componets\airlineComponent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\Componets\airlineComponent.Designer.cs">
+      <DependentUpon>airlineComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Programa\Componets\Dialog_addAirlines.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\Componets\Dialog_addAirlines.Designer.cs">
+      <DependentUpon>Dialog_addAirlines.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Programa\Componets\Dialog_addPlanes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\Componets\Dialog_addPlanes.Designer.cs">
+      <DependentUpon>Dialog_addPlanes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Programa\Modelo\Conexion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Programa\APP\GUI_Login.resx">
@@ -103,6 +121,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Programa\APP\Panel_viewData.resx">
       <DependentUpon>Panel_viewData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\Componets\airlineComponent.resx">
+      <DependentUpon>airlineComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\Componets\Dialog_addAirlines.resx">
+      <DependentUpon>Dialog_addAirlines.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\Componets\Dialog_addPlanes.resx">
+      <DependentUpon>Dialog_addPlanes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -127,13 +154,18 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="BD\Creacion BD.sql" />
     <Content Include="BD\Inserts.sql" />
     <Content Include="BD\Stored Procedures.sql" />
+    <None Include="Resources\iconLogoA.png" />
+    <None Include="Resources\iconLogo.png" />
+    <None Include="Resources\iconMenu.png" />
+    <None Include="Resources\iconViewData.png" />
+    <None Include="Resources\iconPlane.png" />
+    <None Include="Resources\iconAirlines.png" />
+    <None Include="Resources\iconePassengers.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

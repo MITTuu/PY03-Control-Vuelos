@@ -32,7 +32,7 @@ namespace PY03___Control_de_vuelos.Programa.APP
             
             if (idRol == 2)
             {
-                btn_airlines.Enabled = false;
+                btn_passengers.Enabled = false;
             } 
 
         }
@@ -134,22 +134,22 @@ namespace PY03___Control_de_vuelos.Programa.APP
 
         private void btn_flight_MouseHover(object sender, EventArgs e)
         {
-            toolTip1.SetToolTip(this.btn_flight, "Gestor de vuelos");
+            toolTip1.SetToolTip(this.btn_viewData, "Gestor de vuelos");
         }
 
         private void btn_passengers_MouseHover(object sender, EventArgs e)
         {
-            toolTip1.SetToolTip(this.btn_passengers, "Gestor de pasajeros");
+            toolTip1.SetToolTip(this.btn_flight, "Gestor de pasajeros");
         }
 
         private void btn_airlines_MouseHover(object sender, EventArgs e)
         {
-            toolTip1.SetToolTip(this.btn_airlines, "Gestor de aerolíneas");
+            toolTip1.SetToolTip(this.btn_passengers, "Gestor de aerolíneas");
         }
 
         private void btn_viewData_MouseHover(object sender, EventArgs e)
         {
-            toolTip1.SetToolTip(this.btn_viewData, "Vista de datos");
+            toolTip1.SetToolTip(this.btn_airlines, "Vista de datos");
         }
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace PY03___Control_de_vuelos.Programa.APP
             if (this.close) { Application.Exit(); }
             else
             {
-                String mensaje = "¿Desea close la aplicación?";
+                String mensaje = "¿Desea cerrar la aplicación?";
                 DialogResult resultado = MessageBox.Show(mensaje, "close", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (resultado == DialogResult.Yes)

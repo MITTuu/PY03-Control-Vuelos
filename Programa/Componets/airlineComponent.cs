@@ -1,0 +1,105 @@
+﻿using System;
+using System.Data;
+using System.Drawing;
+using System.Windows.Forms;
+using PY03___Control_de_vuelos.Programa.Modelo;
+
+namespace PY03___Control_de_vuelos.Programa.Componets
+{
+    public partial class airlineComponent : Form
+    {
+        private Conexion conexion;
+
+        public airlineComponent()
+        {
+            InitializeComponent();
+            conexion = new Conexion();
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            DataTable dataTable = conexion.GetAirlinesWithPlanes();
+
+            if (dataTable != null)
+            {
+                // Añadir el título "AEROLINEAS"
+                Label titleLabel = new Label
+                {
+                    Text = "AEROLINEAS",
+                    Font = new Font("Arial", 16, FontStyle.Bold),
+                    AutoSize = true,
+                    Margin = new Padding(10, 10, 10, 20)
+                };
+                flowLayoutPanel.Controls.Add(titleLabel);
+
+                string currentAirline = null;
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    string airlineName = row["AirlineName"].ToString();
+                    string planeID = row["PlaneID"].ToString();
+                    string brandName = row["BrandName"].ToString();
+                    int capacity = Convert.ToInt32(row["capacity"]);
+
+                    // Crear un encabezado para la aerolínea si ha cambiado
+                    if (currentAirline != airlineName)
+                    {
+                        currentAirline = airlineName;
+
+                        Label airlineLabel = new Label
+                        {
+                            Text = airlineName,
+                            Font = new Font("Arial", 14, FontStyle.Bold),
+                            AutoSize = true,
+                            Margin = new Padding(10, 20, 10, 10)
+                        };
+                        flowLayoutPanel.Controls.Add(airlineLabel);
+
+                        // Añadir el subtítulo "Aviones"
+                        Label planesLabel = new Label
+                        {
+                            Text = "Aviones",
+                            Font = new Font("Arial", 12, FontStyle.Italic),
+                            AutoSize = true,
+                            Margin = new Padding(10, 5, 10, 10)
+                        };
+                        flowLayoutPanel.Controls.Add(planesLabel);
+                    }
+
+                    // Crear y añadir los controles para mostrar cada avión
+                    Panel planePanel = new Panel
+                    {
+                        Size = new Size(500, 80),
+                        BorderStyle = BorderStyle.FixedSingle,
+                        Margin = new Padding(10)
+                    };
+
+                    Label planeInfo = new Label
+                    {
+                        Text = $"{planeID} – {brandName}\nCapacity: {capacity} passengers",
+                        AutoSize = true,
+                        Location = new Point(10, 10)
+                    };
+
+                    Button editButton = new Button
+                    {
+                        Text = "Edit",
+                        Location = new Point(400, 10)
+                    };
+
+                    Button deleteButton = new Button
+                    {
+                        Text = "Delete",
+                        Location = new Point(400, 40)
+                    };
+
+                    planePanel.Controls.Add(planeInfo);
+                    planePanel.Controls.Add(editButton);
+                    planePanel.Controls.Add(deleteButton);
+
+                    flowLayoutPanel.Controls.Add(planePanel);
+                }
+            }
+        }
+    }
+}
