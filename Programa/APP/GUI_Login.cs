@@ -39,6 +39,7 @@ namespace PY03___Control_de_vuelos.Programa.APP
             if (tb_password.Text == "Ingresa tu contraseña")
             {
                 tb_password.Text = "";
+                tb_password.PasswordChar = '*';
             }
         }
 
@@ -54,6 +55,7 @@ namespace PY03___Control_de_vuelos.Programa.APP
         {
             if (tb_password.Text == "")
             {
+                tb_password.PasswordChar = '\0';
                 tb_password.Text = "Ingresa tu contraseña";
             }
         }
@@ -77,11 +79,13 @@ namespace PY03___Control_de_vuelos.Programa.APP
 
             usuario = cnx.GetUserByEmailAndPassword(correo, contrasena);
 
-            if (usuario != null) 
+            if (usuario == null)
             {
                 MessageBox.Show("Error al obtener la información del usuario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+            int idRole = (int)usuario["idRole"];
 
         }
     }

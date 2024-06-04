@@ -8,6 +8,12 @@ INSERT INTO Roles
 	(2, 'reservas')
 
 INSERT INTO AppUser
+	(email, password, idRole)
+	VALUES
+	('dylanmmz01@gmail.com', 'Dylan123', 1);
+	(2, 'reservas')
+
+INSERT INTO AppUser
     (email, password, idRole)
     VALUES
     ('1', '1', 1); -- for quick tests
