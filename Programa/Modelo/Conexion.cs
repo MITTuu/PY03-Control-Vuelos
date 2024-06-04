@@ -229,5 +229,44 @@ namespace PY03___Control_de_vuelos.Programa.Modelo
                 return null;
             }
         }
+
+        public int SaveAirlines(string name, string motto)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("SaveAirline", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@name", name);
+                        command.Parameters.AddWithValue("@motto", motto);
+                        connection.Open(); 
+
+                        int rowsaffected = command.ExecuteNonQuery(); 
+
+                        if (rowsaffected > 0)
+                        {
+                            MessageBox.Show("Aerolínea agregada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return 1;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error al agregar la aerolinea.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return -1;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
+                return -1;
+            }
+        }
+
+
+
+
     }
 }

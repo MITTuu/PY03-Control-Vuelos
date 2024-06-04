@@ -92,7 +92,7 @@
             // 
             this.comboBox_brand.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_brand.FormattingEnabled = true;
-            this.comboBox_brand.Location = new System.Drawing.Point(233, 100);
+            this.comboBox_brand.Location = new System.Drawing.Point(232, 170);
             this.comboBox_brand.Name = "comboBox_brand";
             this.comboBox_brand.Size = new System.Drawing.Size(139, 29);
             this.comboBox_brand.TabIndex = 5;
@@ -101,7 +101,7 @@
             // 
             this.text_resNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.text_resNumber.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.text_resNumber.Location = new System.Drawing.Point(232, 240);
+            this.text_resNumber.Location = new System.Drawing.Point(233, 100);
             this.text_resNumber.Name = "text_resNumber";
             this.text_resNumber.Size = new System.Drawing.Size(140, 29);
             this.text_resNumber.TabIndex = 6;
@@ -110,7 +110,7 @@
             // 
             this.numeric_capacity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.numeric_capacity.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numeric_capacity.Location = new System.Drawing.Point(233, 170);
+            this.numeric_capacity.Location = new System.Drawing.Point(232, 240);
             this.numeric_capacity.Maximum = new decimal(new int[] {
             10000,
             0,

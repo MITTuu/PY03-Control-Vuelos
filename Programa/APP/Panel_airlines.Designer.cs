@@ -30,12 +30,12 @@
         {
             this.PanelComponet = new System.Windows.Forms.Panel();
             this.PanelAdd = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.btn_AddAirline = new System.Windows.Forms.Button();
             this.btn_SavePlane = new System.Windows.Forms.Button();
             this.btn_SaveAirline = new System.Windows.Forms.Button();
             this.btn_AddPlane = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.PanelAdd.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,6 +53,16 @@
             this.PanelAdd.Name = "PanelAdd";
             this.PanelAdd.Size = new System.Drawing.Size(400, 465);
             this.PanelAdd.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(71, 218);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(241, 42);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "       Agrega una aerolínea o avión\r\n          para dezplegar la ventana\r\n";
             // 
             // btn_AddAirline
             // 
@@ -115,16 +125,6 @@
             this.label2.Size = new System.Drawing.Size(227, 25);
             this.label2.TabIndex = 13;
             this.label2.Text = "Buscar aerolínea (tal vez):";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(71, 218);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(241, 42);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "       Agrega una aerolínea o avión\r\n          para dezplegar la ventana\r\n";
             // 
             // Panel_airlines
             // 

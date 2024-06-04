@@ -18,6 +18,7 @@ namespace PY03___Control_de_vuelos.Programa.APP
         private Conexion conexion;
         Dialog_addAirlines PanelAddArlines;
         Dialog_addPlanes PanelAddPlanes;
+        airlineComponent PanelViewAP;
 
 
         public Panel_airlines()
@@ -26,19 +27,38 @@ namespace PY03___Control_de_vuelos.Programa.APP
             conexion = new Conexion();
             PanelAddArlines = new Dialog_addAirlines();
             PanelAddPlanes = new Dialog_addPlanes();
-            LoadNameAirlines();
-            LoadNameBrands();
+            PanelViewAP = new airlineComponent();
         }
 
         private void Panel_airlines_Load(object sender, EventArgs e)
         {
-            loadFormScroll(new airlineComponent());
+            loadFormScroll(PanelViewAP);
             btn_SaveAirline.Visible = false;
             btn_SavePlane.Visible = false;
+            LoadNameAirlines();
+            LoadNameBrands();
         }
 
         private void btn_SaveAirline_Click(object sender, EventArgs e)
         {
+            string name = PanelAddArlines.text_nameAirline.Text;
+            string motto = PanelAddArlines.text_motto.Text;
+
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(motto))
+            {
+                MessageBox.Show("Todos los campos son obligatorios y deben tener valores válidos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return;
+            }
+
+            int result = conexion.SaveAirlines(name, motto);
+
+            if (result ==  1)
+            {
+                LoadNameAirlines();
+                PanelAddArlines.text_nameAirline.Text = "";
+                PanelAddArlines.text_motto.Text = "";
+                PanelViewAP.LoadData();
+
+            } 
             
         }
 
@@ -79,8 +99,6 @@ namespace PY03___Control_de_vuelos.Programa.APP
 
             // Obtiene los nombres de las aerolíneas
             List<string> airlines = conexion.GetNameAirlines();
-
-           
 
             // Añade los nombres de las aerolíneas al comboBox
             foreach (string airline in airlines)

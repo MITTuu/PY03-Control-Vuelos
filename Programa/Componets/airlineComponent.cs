@@ -17,7 +17,7 @@ namespace PY03___Control_de_vuelos.Programa.Componets
             LoadData();
         }
 
-        private void LoadData()
+        public void LoadData()
         {
             DataTable dataTable = conexion.GetAirlinesWithPlanes();
 

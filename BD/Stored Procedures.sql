@@ -60,7 +60,7 @@ GO
 
 
 
-GO
+
 
 CREATE PROCEDURE GetAllCities
 AS
@@ -107,5 +107,29 @@ BEGIN
     FROM Passengers
     WHERE
         passportNumber LIKE @passportNumber
+END;
+GO
+
+CREATE PROCEDURE SaveAirline 
+    @name VARCHAR(255),
+    @motto VARCHAR(255)
+AS
+BEGIN 
+     INSERT INTO Airline (name, motto) VALUES (@name, @motto);
+END;
+GO
+
+USE AirlineControl;
+GO
+
+CREATE PROCEDURE SavePlane 
+    @registrationNumber VARCHAR(50),
+    @idAirline INT,
+    @idBrand INT,
+    @capacity INT
+
+AS
+BEGIN 
+     INSERT INTO Plane (registrationNumber, idAirline, idBrand, capacity) VALUES ( @registrationNumber, @idAirline, @idBrand, @capacity);
 END;
 GO
