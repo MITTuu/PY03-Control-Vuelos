@@ -101,6 +101,7 @@
             this.btn_menu.TabIndex = 1;
             this.btn_menu.TabStop = false;
             this.btn_menu.Click += new System.EventHandler(this.btn_menu_Click);
+            this.btn_menu.MouseHover += new System.EventHandler(this.btn_menu_MouseHover);
             // 
             // panel3
             // 
@@ -218,6 +219,7 @@
             // 
             // PanelAreaDeTrabajo
             // 
+            this.PanelAreaDeTrabajo.BackColor = System.Drawing.Color.White;
             this.PanelAreaDeTrabajo.Location = new System.Drawing.Point(65, 0);
             this.PanelAreaDeTrabajo.Name = "PanelAreaDeTrabajo";
             this.PanelAreaDeTrabajo.Size = new System.Drawing.Size(1069, 662);
@@ -238,6 +240,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "GUI_Main";
             this.Text = "Control de vuelos";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GUI_Main_FormClosing);
             this.sidebar.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

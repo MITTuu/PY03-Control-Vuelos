@@ -17,7 +17,7 @@ namespace PY03___Control_de_vuelos
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GUI_Main());
+            Application.Run(new GUI_Login());
         }
     }
 }
