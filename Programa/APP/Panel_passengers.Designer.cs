@@ -38,10 +38,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAddPassenger = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.tbPassport = new System.Windows.Forms.TextBox();
-            this.btnSearchPassenger = new System.Windows.Forms.Button();
+            this.btnConfirmPassport = new System.Windows.Forms.Button();
             this.tbName = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -81,6 +81,8 @@
             this.dgvPassengers.AllowUserToAddRows = false;
             this.dgvPassengers.AllowUserToDeleteRows = false;
             this.dgvPassengers.AllowUserToResizeRows = false;
+            this.dgvPassengers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvPassengers.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvPassengers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPassengers.Location = new System.Drawing.Point(565, 343);
             this.dgvPassengers.MultiSelect = false;
@@ -99,6 +101,8 @@
             this.dgvFlights.AllowUserToAddRows = false;
             this.dgvFlights.AllowUserToDeleteRows = false;
             this.dgvFlights.AllowUserToResizeRows = false;
+            this.dgvFlights.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvFlights.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvFlights.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFlights.Location = new System.Drawing.Point(49, 146);
             this.dgvFlights.MultiSelect = false;
@@ -122,14 +126,19 @@
             // 
             // cbOrigin
             // 
+            this.cbOrigin.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbOrigin.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbOrigin.FormattingEnabled = true;
             this.cbOrigin.Location = new System.Drawing.Point(153, 118);
             this.cbOrigin.Name = "cbOrigin";
             this.cbOrigin.Size = new System.Drawing.Size(176, 21);
             this.cbOrigin.TabIndex = 6;
+            this.cbOrigin.SelectedIndexChanged += new System.EventHandler(this.cbOrigin_SelectedIndexChanged);
             // 
             // cbDestination
             // 
+            this.cbDestination.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbDestination.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbDestination.FormattingEnabled = true;
             this.cbDestination.Location = new System.Drawing.Point(335, 118);
             this.cbDestination.Name = "cbDestination";
@@ -166,18 +175,19 @@
             this.label5.TabIndex = 10;
             this.label5.Text = "Fecha";
             // 
-            // button1
+            // btnAddPassenger
             // 
-            this.button1.BackColor = System.Drawing.Color.DodgerBlue;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.button1.Location = new System.Drawing.Point(565, 303);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(452, 34);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Añadir Pasajero";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnAddPassenger.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnAddPassenger.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddPassenger.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddPassenger.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.btnAddPassenger.Location = new System.Drawing.Point(565, 303);
+            this.btnAddPassenger.Name = "btnAddPassenger";
+            this.btnAddPassenger.Size = new System.Drawing.Size(452, 34);
+            this.btnAddPassenger.TabIndex = 11;
+            this.btnAddPassenger.Text = "Añadir Pasajero";
+            this.btnAddPassenger.UseVisualStyleBackColor = false;
+            this.btnAddPassenger.Click += new System.EventHandler(this.btnAddPassenger_Click);
             // 
             // label6
             // 
@@ -196,23 +206,25 @@
             this.tbPassport.Size = new System.Drawing.Size(245, 22);
             this.tbPassport.TabIndex = 13;
             // 
-            // btnSearchPassenger
+            // btnConfirmPassport
             // 
-            this.btnSearchPassenger.BackColor = System.Drawing.Color.DodgerBlue;
-            this.btnSearchPassenger.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearchPassenger.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearchPassenger.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.btnSearchPassenger.Location = new System.Drawing.Point(828, 118);
-            this.btnSearchPassenger.Name = "btnSearchPassenger";
-            this.btnSearchPassenger.Size = new System.Drawing.Size(189, 23);
-            this.btnSearchPassenger.TabIndex = 14;
-            this.btnSearchPassenger.Text = "Buscar y Rellenar";
-            this.btnSearchPassenger.UseVisualStyleBackColor = false;
+            this.btnConfirmPassport.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnConfirmPassport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConfirmPassport.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfirmPassport.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.btnConfirmPassport.Location = new System.Drawing.Point(828, 118);
+            this.btnConfirmPassport.Name = "btnConfirmPassport";
+            this.btnConfirmPassport.Size = new System.Drawing.Size(189, 23);
+            this.btnConfirmPassport.TabIndex = 14;
+            this.btnConfirmPassport.Text = "Buscar y Rellenar";
+            this.btnConfirmPassport.UseVisualStyleBackColor = false;
+            this.btnConfirmPassport.Click += new System.EventHandler(this.btnConfirmPassport_Click);
             // 
             // tbName
             // 
             this.tbName.Location = new System.Drawing.Point(565, 184);
             this.tbName.Name = "tbName";
+            this.tbName.ReadOnly = true;
             this.tbName.Size = new System.Drawing.Size(156, 22);
             this.tbName.TabIndex = 16;
             // 
@@ -240,6 +252,7 @@
             // 
             this.tbLastname1.Location = new System.Drawing.Point(741, 184);
             this.tbLastname1.Name = "tbLastname1";
+            this.tbLastname1.ReadOnly = true;
             this.tbLastname1.Size = new System.Drawing.Size(130, 22);
             this.tbLastname1.TabIndex = 18;
             // 
@@ -247,6 +260,7 @@
             // 
             this.tbLastname2.Location = new System.Drawing.Point(889, 184);
             this.tbLastname2.Name = "tbLastname2";
+            this.tbLastname2.ReadOnly = true;
             this.tbLastname2.Size = new System.Drawing.Size(128, 22);
             this.tbLastname2.TabIndex = 19;
             // 
@@ -264,6 +278,7 @@
             // 
             this.tbEmail.Location = new System.Drawing.Point(565, 248);
             this.tbEmail.Name = "tbEmail";
+            this.tbEmail.ReadOnly = true;
             this.tbEmail.Size = new System.Drawing.Size(245, 22);
             this.tbEmail.TabIndex = 22;
             // 
@@ -281,6 +296,7 @@
             // 
             this.tbPhoneNumber.Location = new System.Drawing.Point(828, 248);
             this.tbPhoneNumber.Name = "tbPhoneNumber";
+            this.tbPhoneNumber.ReadOnly = true;
             this.tbPhoneNumber.Size = new System.Drawing.Size(189, 22);
             this.tbPhoneNumber.TabIndex = 24;
             // 
@@ -310,10 +326,10 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.btnSearchPassenger);
+            this.Controls.Add(this.btnConfirmPassport);
             this.Controls.Add(this.tbPassport);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnAddPassenger);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -346,10 +362,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAddPassenger;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbPassport;
-        private System.Windows.Forms.Button btnSearchPassenger;
+        private System.Windows.Forms.Button btnConfirmPassport;
         private System.Windows.Forms.TextBox tbName;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
