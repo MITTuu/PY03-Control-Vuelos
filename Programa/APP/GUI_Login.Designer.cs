@@ -34,7 +34,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(926, 748);
             this.Name = "GUI_Login";
             this.Text = "GUI_Login";
             this.Load += new System.EventHandler(this.GUI_Login_Load);
