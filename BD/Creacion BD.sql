@@ -52,14 +52,14 @@ CREATE TABLE Pilots (
 
 CREATE TABLE Flight (
     idFlight INT PRIMARY KEY NOT NULL IDENTITY(1,1),
-    idAirline INT NOT NULL,
+    registrationNumber VARCHAR(50) NOT NULL,
     idPilot INT NOT NULL,
     departureDateTime DATETIME NOT NULL,
     arrivalDateTime DATETIME NOT NULL,
     departureCityCode VARCHAR(3) NOT NULL,
     arrivalCityCode VARCHAR(3) NOT NULL,
     cancelled BIT NOT NULL,
-    FOREIGN KEY (idAirline) REFERENCES Airline(idAirline),
+    FOREIGN KEY (registrationNumber) REFERENCES Plane(registrationNumber),
     FOREIGN KEY (idPilot) REFERENCES Pilots(idPilot),
     FOREIGN KEY (departureCityCode) REFERENCES City(cityCode),
     FOREIGN KEY (arrivalCityCode) REFERENCES City(cityCode)
@@ -86,3 +86,21 @@ CREATE TABLE AppUser (
     idRole INT NOT NULL,
     FOREIGN KEY (idRole) REFERENCES Roles(idRole)
 );
+
+
+-- Arreglo tabla Vuelo
+
+ALTER TABLE Flight
+DROP CONSTRAINT FK__Flight__idAirlin__48CFD27E;
+
+ALTER TABLE Flight
+DROP COLUMN idAirline;
+GO
+
+ALTER TABLE Flight
+ADD registrationNumber VARCHAR(50) NOT NULL;
+
+ALTER TABLE Flight
+ADD CONSTRAINT FK_Flight_Plane
+FOREIGN KEY (registrationNumber) REFERENCES Plane(registrationNumber);
+GO
