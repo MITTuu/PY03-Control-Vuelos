@@ -15,6 +15,7 @@ namespace PY03___Control_de_vuelos.Programa.APP
     {
         private Conexion cnx;
         private DataRow usuario;
+
         public GUI_Login()
         {
             InitializeComponent(); 
@@ -87,6 +88,17 @@ namespace PY03___Control_de_vuelos.Programa.APP
 
             int idRole = (int)usuario["idRole"];
 
+            this.Hide();
+
+            GUI_Main secondaryForm = new GUI_Main(this, idRole);
+
+            secondaryForm.Show();
+
+        }
+
+        private void GUI_Login_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
