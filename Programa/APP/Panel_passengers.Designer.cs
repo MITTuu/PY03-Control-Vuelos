@@ -123,6 +123,7 @@
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.Size = new System.Drawing.Size(98, 22);
             this.dtpDate.TabIndex = 5;
+            this.dtpDate.ValueChanged += new System.EventHandler(this.dtpDate_ValueChanged);
             // 
             // cbOrigin
             // 
@@ -144,6 +145,7 @@
             this.cbDestination.Name = "cbDestination";
             this.cbDestination.Size = new System.Drawing.Size(176, 21);
             this.cbDestination.TabIndex = 7;
+            this.cbDestination.SelectedIndexChanged += new System.EventHandler(this.cbDestination_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -202,6 +204,7 @@
             // tbPassport
             // 
             this.tbPassport.Location = new System.Drawing.Point(565, 118);
+            this.tbPassport.MaxLength = 32;
             this.tbPassport.Name = "tbPassport";
             this.tbPassport.Size = new System.Drawing.Size(245, 22);
             this.tbPassport.TabIndex = 13;
@@ -223,6 +226,7 @@
             // tbName
             // 
             this.tbName.Location = new System.Drawing.Point(565, 184);
+            this.tbName.MaxLength = 255;
             this.tbName.Name = "tbName";
             this.tbName.ReadOnly = true;
             this.tbName.Size = new System.Drawing.Size(156, 22);
@@ -251,6 +255,7 @@
             // tbLastname1
             // 
             this.tbLastname1.Location = new System.Drawing.Point(741, 184);
+            this.tbLastname1.MaxLength = 255;
             this.tbLastname1.Name = "tbLastname1";
             this.tbLastname1.ReadOnly = true;
             this.tbLastname1.Size = new System.Drawing.Size(130, 22);
@@ -259,6 +264,7 @@
             // tbLastname2
             // 
             this.tbLastname2.Location = new System.Drawing.Point(889, 184);
+            this.tbLastname2.MaxLength = 255;
             this.tbLastname2.Name = "tbLastname2";
             this.tbLastname2.ReadOnly = true;
             this.tbLastname2.Size = new System.Drawing.Size(128, 22);
@@ -277,6 +283,7 @@
             // tbEmail
             // 
             this.tbEmail.Location = new System.Drawing.Point(565, 248);
+            this.tbEmail.MaxLength = 255;
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.ReadOnly = true;
             this.tbEmail.Size = new System.Drawing.Size(245, 22);
@@ -295,10 +302,13 @@
             // tbPhoneNumber
             // 
             this.tbPhoneNumber.Location = new System.Drawing.Point(828, 248);
+            this.tbPhoneNumber.MaxLength = 50;
             this.tbPhoneNumber.Name = "tbPhoneNumber";
             this.tbPhoneNumber.ReadOnly = true;
             this.tbPhoneNumber.Size = new System.Drawing.Size(189, 22);
             this.tbPhoneNumber.TabIndex = 24;
+            this.tbPhoneNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPhoneNumber_KeyPress);
+            this.tbPhoneNumber.Leave += new System.EventHandler(this.tbPhoneNumber_Leave);
             // 
             // label11
             // 
