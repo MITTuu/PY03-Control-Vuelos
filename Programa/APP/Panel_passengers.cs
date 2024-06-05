@@ -218,6 +218,55 @@ namespace PY03___Control_de_vuelos.Programa.APP
         }
 
         /// <summary>
+        /// Validates and returns the selected flight ID
+        /// </summary>
+        /// <returns>the selected flight ID from the DataGridView</returns>
+        private int GetValidatedFlightId()
+        {
+            int passengersToRegister = dgvPassengers.RowCount;
+
+            // one flight selected validation
+            if (dgvFlights.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Debe seleecionar vuelo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return -1;
+            }
+            
+            int idFlight = (int)dgvFlights.SelectedRows[0].Cells["Num"].Value;
+            int availableSeats = Conexion.GetAvailableSeats(idFlight);
+
+            // check if there is enough space left in the plane
+            if (availableSeats < passengersToRegister)
+            {
+                MessageBox.Show("No hay sufucientes espacios para registrar todos los pasajeros\n" +
+                    $"Se quieren registrar {passengersToRegister} pasajeros, pero solo hay {availableSeats} asientos disponibles",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return -1;
+            }
+
+            return idFlight;
+        }
+
+        /// <summary>
+        /// Takes all the passengers from the DataGridView an associates them with the selected flight
+        /// </summary>
+        /// <returns></returns>
+        private int RegisterPassengerListInFlight()
+        {
+            int idFlight = GetValidatedFlightId();
+            if (idFlight == 1) return -1;
+
+            for (int i = 0; i < dgvPassengers.RowCount; i++)
+            {
+                string passengerPassport = dgvPassengers.Rows[i].Cells["Pasaporte"].Value.ToString();
+                Conexion.RegisterPassengerInFlightByPassport(idFlight, passengerPassport);
+            }
+
+
+            return 1;
+        }
+
+        /// <summary>
         /// Bloquea la escritura de datos no decimales positivos en un TextBox
         /// </summary>
         /// <param name="sender"></param>
@@ -311,6 +360,14 @@ namespace PY03___Control_de_vuelos.Programa.APP
         private void dtpDate_ValueChanged(object sender, EventArgs e)
         {
             LoadFlights();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (RegisterPassengerListInFlight() != -1)
+            {
+                MessageBox.Show("Los pasajeros han sido registrados al vuelo", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }
