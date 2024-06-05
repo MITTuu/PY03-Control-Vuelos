@@ -91,7 +91,7 @@ CREATE TABLE AppUser (
 -- Arreglo tabla Vuelo
 
 ALTER TABLE Flight
-DROP CONSTRAINT FK__Flight__idAirlin__48CFD27E;
+DROP CONSTRAINT [FK__Flight__idAirlin__59FA5E80];
 
 ALTER TABLE Flight
 DROP COLUMN idAirline;
@@ -104,3 +104,4 @@ ALTER TABLE Flight
 ADD CONSTRAINT FK_Flight_Plane
 FOREIGN KEY (registrationNumber) REFERENCES Plane(registrationNumber);
 GO
+

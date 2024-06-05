@@ -140,3 +140,23 @@ INSERT INTO Plane
     ('N987JJ', 9, 7, 110),  -- Allegiant Air, Dassault
     ('N321KK', 10, 8, 130); -- Hawaiian Airlines, Mitsubishi
 GO
+
+INSERT INTO Pilots 
+	(name, lastName1, lastName2, email, phoneNumber, idAirline)
+VALUES 
+	('John', 'Doe', 'Smith', 'john.doe@gmail.com', '12345678', 1),
+	('Jane', 'Roe', 'Johnson', 'jane.roe@gmail.com', '87654321', 2),
+	('Mike', 'Brown', 'Williams', 'mike.brown@gmail.com', '23456789', 3),
+	('Emily', 'Davis', 'Jones', 'emily.davis@gmail.com', '98765432', 4),
+	('David', 'Garcia', 'Miller', 'david.garcia@gmail.com', '34567890', 5),
+	('Sophia', 'Martinez', 'Rodriguez', 'sophia.martinez@gmail.com', '76543210', 6),
+	('Chris', 'Hernandez', 'Martinez', 'chris.hernandez@gmail.com', '45678901', 7),
+	('Anna', 'Lopez', 'Gonzalez', 'anna.lopez@gmail.com', '65432109', 8),
+	('James', 'Wilson', 'Perez', 'james.wilson@gmail.com', '56789012', 9),
+	('Linda', 'Anderson', 'Sanchez', 'linda.anderson@gmail.com', '54321098', 10),
+	('Robert', 'Thomas', 'Ramirez', 'robert.thomas@gmail.com', '67890123', 1),
+	('Patricia', 'Taylor', 'Flores', 'patricia.taylor@gmail.com', '43210987', 2),
+	('Michael', 'Moore', 'Gonzales', 'michael.moore@gmail.com', '78901234', 3),
+	('Barbara', 'Jackson', 'Hernandez', 'barbara.jackson@gmail.com', '32109876', 4),
+	('William', 'Martin', 'Robinson', 'william.martin@gmail.com', '89012345', 5);
+
