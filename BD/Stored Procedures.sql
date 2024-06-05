@@ -50,6 +50,24 @@ BEGIN
 END;
 GO
 
+CREATE PROCEDURE InsertPassenger
+    @passportNumber VARCHAR(32),
+    @name VARCHAR(255),
+    @lastName1 VARCHAR(255),
+    @lastName2 VARCHAR(255),
+    @email VARCHAR(255),
+    @phoneNumber VARCHAR(50)
+AS
+BEGIN
+    INSERT INTO Passengers
+    (passportNumber, name, lastName1, lastName2, email, phoneNumber)
+    VALUES
+    (@passportNumber, @name, @lastName1, @lastName2, @email, @phoneNumber);
+
+    SELECT SCOPE_IDENTITY() FROM Passengers
+END;
+GO
+
 CREATE PROCEDURE GetPassengerByPassport
     @passportNumber VARCHAR(32)
 AS

@@ -5,7 +5,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -22,6 +24,9 @@ namespace PY03___Control_de_vuelos.Programa.APP
             initializePassengersDataGridView();
         }
 
+        /// <summary>
+        /// Carga las cuidades de la BD en los comboBox para seleccionar el origen y el destino
+        /// </summary>
         private void LoadCitiesIntoComboBoxes()
         {
 
@@ -40,11 +45,20 @@ namespace PY03___Control_de_vuelos.Programa.APP
             }
         }
 
+        /// <summary>
+        /// Carga los vuelos disponibles según los filtros seleccionados de fecha y cuidades en la interfaz
+        /// </summary>
         private void LoadFlights()
         {
             DateTime selectedDate = dtpDate.Value;
-            string selectedOrigin = cbOrigin.Text.Split('(')[1].TrimEnd(')');
-            string selectedDestination = cbDestination.Text.Split('(')[1].TrimEnd(')');
+
+            string selectedOrigin = cbOrigin.Text;
+            string selectedDestination = cbDestination.Text;
+
+            if (selectedOrigin == "" || selectedDestination == "") return;
+
+            selectedOrigin = selectedOrigin.Split('(')[1].TrimEnd(')');
+            selectedDestination = selectedDestination.Split('(')[1].TrimEnd(')');
 
             Console.WriteLine(selectedDate.ToString() + " - " + selectedOrigin + " - " + selectedDestination);
 
@@ -55,6 +69,10 @@ namespace PY03___Control_de_vuelos.Programa.APP
             }
         }
 
+        /// <summary>
+        /// Cargar la información de los pasajeros en los campos para rellenar y bloquea los campos.
+        /// En caso de no poder, se habilitan los campos para la inserción de la nueva info.
+        /// </summary>
         private void LoadPassengerInfo()
         {
             string passportNumber = tbPassport.Text;
@@ -102,17 +120,37 @@ namespace PY03___Control_de_vuelos.Programa.APP
             }
         }
 
+        /// <summary>
+        /// inicializa las columnas de la lista de los pasajeros
+        /// </summary>
         private void initializePassengersDataGridView()
         {
             dgvPassengers.Columns.Clear();
-            dgvPassengers.ColumnCount = 3;
+            dgvPassengers.ColumnCount = 2;
             dgvPassengers.Columns[0].Name = "Pasaporte";
             dgvPassengers.Columns[1].Name = "Nombre";
-            dgvPassengers.Columns[2].Name = "ID";
-            dgvPassengers.Columns[2].Visible = false;
         }
 
-        // TODO: make all the validations
+        /// <summary>
+        /// Itera en la lista de pasajeros de la interfaz para verifica la existencia del numero de pasaporte
+        /// </summary>
+        /// <param name="passportNumber">numero de pasaporte a buscar</param>
+        /// <returns><c>true</c> si está en la lista, <c>false</c> de lo contrario</returns>
+        private bool PassportAlreadyInList(string passportNumber)
+        {
+            for (int i = 0; i < dgvPassengers.RowCount; i++)
+            {
+                string listPassportNumber = dgvPassengers.Rows[i].Cells["Pasaporte"].Value.ToString();
+
+                if (passportNumber == listPassportNumber) return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Añade el pasajero a la lista de la interfaz, 
+        /// </summary>
         private void AddPassengerToList()
         {
             string passportNumber = tbPassport.Text;
@@ -120,6 +158,104 @@ namespace PY03___Control_de_vuelos.Programa.APP
 
             dgvPassengers.Rows.Add(passportNumber, name);
         }
+
+        /// <summary>
+        /// Verifica si el passaporte ingresado en la interfaz existe en la base de datos
+        /// </summary>
+        /// <returns><c>true</c> si está en la BD, <c>fasle</c> de lo contrario</returns>
+        private bool PassportIsRegistrated()
+        {
+            Console.WriteLine("PassportIsRegistrated()");
+            string passportNumber = tbPassport.Text;
+            DataRow dataRow = Conexion.GetPassengerByPassport(passportNumber);
+
+            if (dataRow == null) return false;
+            return true;
+        }
+
+        /// <summary>
+        /// Valida que los campos de información de pasajero tengan información
+        /// </summary>
+        /// <returns></returns>
+        private bool ValidatePassengerInfo(string passport, string name, string lastName1, string lastName2, string email, string phoneNumber)
+        {
+            bool valid = true;
+
+            if (passport == "") valid = false;
+            if (name == "") valid = false;
+            if (lastName1 == "") valid = false;
+            if (lastName2 == "") valid = false;
+            if (email == "") valid = false;
+            if (phoneNumber == "") valid = false;
+            
+            if (!valid)
+            {
+                MessageBox.Show("Debe rellenar todos los campos de información para agregar un pasajero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Registra un nuevo pasajero en la base de datos
+        /// </summary>
+        /// <returns>el id del nuevo pasajero</returns>
+        private int RegisterPassengerIntoBD()
+        {
+            string passport = tbPassport.Text;
+            string name = tbName.Text;
+            string lastName1 = tbLastname1.Text;
+            string lastName2= tbLastname2.Text;
+            string email = tbEmail.Text;
+            string phoneNumber = tbPhoneNumber.Text;
+
+            if (!ValidatePassengerInfo(passport, name, lastName1, lastName2, email, phoneNumber)) return -1;
+
+            int id = Conexion.InsertPassenger(passport, name, lastName1, lastName2, email, phoneNumber);
+
+            return id;
+        }
+
+        /// <summary>
+        /// Bloquea la escritura de datos no decimales positivos en un TextBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckOnlyDecimalKeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // para aceptar solo un punto decimal!
+            if ((e.KeyChar == '.') && ((sender as System.Windows.Forms.TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        /// <summary>
+        /// Arregla un numero escrito en un TextBox para no sobrepasar <c>max</c>
+        /// y no tener más de 2 decimales
+        /// </summary>
+        /// <param name="tb">Textbox que ajustar</param>
+        /// <param name="max">valor maximo que puede tener el número</param>
+        /// <param name="decimalDigits">cantidad de digitos decimales</param>
+        private void FixDecimalTextBox(System.Windows.Forms.TextBox tb, double max, int decimalDigits)
+        {
+            Double.TryParse(tb.Text, out Double value);
+            if (value > max) tb.Text = max.ToString();
+            else
+            {
+                tb.Text = value.ToString("0." + new string('#', decimalDigits));
+            }
+        }
+
+        // Event Handlers
+
 
         private void cbOrigin_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -133,7 +269,48 @@ namespace PY03___Control_de_vuelos.Programa.APP
 
         private void btnAddPassenger_Click(object sender, EventArgs e)
         {
+            Console.WriteLine('0');
+            // register the passenger if it isn't already created in the DB
+            if (!PassportIsRegistrated())
+            {
+                Console.WriteLine('1');
+                if (RegisterPassengerIntoBD() == -1) return;
+            }
+
+            Console.WriteLine('2');
+
+            // now that we are sure that it exist in the database, we load the information
+            LoadPassengerInfo();
+
+            // we check for the existance in the list
+            if (PassportAlreadyInList(tbPassport.Text))
+            {
+                MessageBox.Show("El pasajero ya está en la lista", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // finally, we add the passanger to the list of passengers of the flight to later add to the DB
             AddPassengerToList();
+        }
+
+        private void tbPhoneNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            CheckOnlyDecimalKeyPress(sender, e);
+        }
+
+        private void tbPhoneNumber_Leave(object sender, EventArgs e)
+        {
+            FixDecimalTextBox(sender as System.Windows.Forms.TextBox, 999999999999999, 0);
+        }
+
+        private void cbDestination_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadFlights();
+        }
+
+        private void dtpDate_ValueChanged(object sender, EventArgs e)
+        {
+            LoadFlights();
         }
     }
 }
