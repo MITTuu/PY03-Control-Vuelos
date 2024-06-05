@@ -44,7 +44,7 @@
             this.label2.Location = new System.Drawing.Point(123, 262);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 20);
+            this.label2.Size = new System.Drawing.Size(70, 25);
             this.label2.TabIndex = 2;
             this.label2.Text = "Correo";
             // 
@@ -55,7 +55,7 @@
             this.tb_email.Location = new System.Drawing.Point(126, 297);
             this.tb_email.Margin = new System.Windows.Forms.Padding(2);
             this.tb_email.Name = "tb_email";
-            this.tb_email.Size = new System.Drawing.Size(313, 29);
+            this.tb_email.Size = new System.Drawing.Size(313, 34);
             this.tb_email.TabIndex = 3;
             this.tb_email.Text = "Ingresa tu correo";
             this.tb_email.Click += new System.EventHandler(this.tb_email_Click);
@@ -68,7 +68,7 @@
             this.label3.Location = new System.Drawing.Point(123, 345);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 20);
+            this.label3.Size = new System.Drawing.Size(108, 25);
             this.label3.TabIndex = 4;
             this.label3.Text = "Contraseña";
             // 
@@ -79,7 +79,7 @@
             this.tb_password.Location = new System.Drawing.Point(127, 376);
             this.tb_password.Margin = new System.Windows.Forms.Padding(2);
             this.tb_password.Name = "tb_password";
-            this.tb_password.Size = new System.Drawing.Size(313, 29);
+            this.tb_password.Size = new System.Drawing.Size(313, 34);
             this.tb_password.TabIndex = 5;
             this.tb_password.Text = "Ingresa tu contraseña";
             this.tb_password.Click += new System.EventHandler(this.tb_password_Click);
@@ -110,7 +110,7 @@
             // 
             // GUI_Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(584, 561);
@@ -127,6 +127,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inicio se sesión";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GUI_Login_FormClosed);
+            this.Load += new System.EventHandler(this.GUI_Login_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
