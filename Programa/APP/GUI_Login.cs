@@ -95,5 +95,10 @@ namespace PY03___Control_de_vuelos.Programa.APP
         {
             Application.Exit();
         }
+
+        private void GUI_Login_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

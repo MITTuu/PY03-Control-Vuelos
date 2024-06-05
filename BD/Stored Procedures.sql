@@ -224,3 +224,16 @@ BEGIN
     INSERT INTO Flight (idPilot, departureDateTime, arrivalDateTime, departureCityCode, arrivalCityCode, cancelled, registrationNumber)
     VALUES (@idPilot, @departureDateTime, @arrivalDateTime, @departureCityCode, @arrivalCityCode, @cancelled, @registrationNumber);
 END;
+
+CREATE PROCEDURE InsertPilot
+    @nombre VARCHAR(255),
+    @apellido1 VARCHAR(255),
+    @apellido2 VARCHAR(255),
+    @correo VARCHAR(255),
+    @telefono VARCHAR(50),
+    @idAerolinea INT
+AS
+BEGIN
+    INSERT INTO Pilots (name, lastName1, lastName2, email, phoneNumber, idAirline)
+    VALUES (@nombre, @apellido1, @apellido2, @correo, @telefono, @idAerolinea);
+END;

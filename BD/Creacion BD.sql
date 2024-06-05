@@ -113,4 +113,3 @@ ALTER TABLE Flight
 ADD CONSTRAINT FK_Flight_Plane
 FOREIGN KEY (registrationNumber) REFERENCES Plane(registrationNumber);
 GO
-
