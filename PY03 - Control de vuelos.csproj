@@ -78,6 +78,12 @@
     <Compile Include="Programa\APP\Panel_passengers.Designer.cs">
       <DependentUpon>Panel_passengers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Programa\APP\Panel_Pilots.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_Pilots.Designer.cs">
+      <DependentUpon>Panel_Pilots.cs</DependentUpon>
+    </Compile>
     <Compile Include="Programa\APP\Panel_viewData.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Programa\APP\Panel_passengers.resx">
       <DependentUpon>Panel_passengers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\APP\Panel_Pilots.resx">
+      <DependentUpon>Panel_Pilots.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Programa\APP\Panel_viewData.resx">
       <DependentUpon>Panel_viewData.cs</DependentUpon>

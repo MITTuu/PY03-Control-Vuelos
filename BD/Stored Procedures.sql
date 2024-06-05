@@ -138,6 +138,31 @@ GO
 USE AirlineControl;
 GO
 
+CREATE OR ALTER PROCEDURE GetAvailableSeats
+    @idFlight INT
+AS
+BEGIN
+    SELECT p.capacity - COUNT(fp.idPassenger) AS [Available Seats]
+    FROM Flight AS f
+    INNER JOIN Plane AS p ON f.registrationNumber = p.registrationNumber
+    LEFT JOIN FlightPassengers AS fp ON f.idFlight = fp.idFlight
+    WHERE f.idFlight = @idFlight
+    GROUP BY p.capacity;
+END;
+GO
+
+CREATE OR ALTER PROCEDURE RegisterPassengerInFlightByPassport
+    @idFlight INT,
+    @passportNumber VARCHAR(32)
+AS
+BEGIN
+    INSERT INTO FlightPassengers
+        (idFlight, idPassenger, confirmed)
+        VALUES
+        (@idFlight, (SELECT idPassenger FROM Passengers WHERE passportNumber = @passportNumber), 0)
+END;
+GO
+
 CREATE PROCEDURE SavePlane 
     @registrationNumber VARCHAR(50),
     @idAirline INT,
@@ -226,6 +251,20 @@ BEGIN
 
     INSERT INTO Flight (idPilot, departureDateTime, arrivalDateTime, departureCityCode, arrivalCityCode, cancelled, registrationNumber)
     VALUES (@idPilot, @departureDateTime, @arrivalDateTime, @departureCityCode, @arrivalCityCode, @cancelled, @registrationNumber);
+END;
+
+CREATE PROCEDURE InsertPilot
+    @nombre VARCHAR(255),
+    @apellido1 VARCHAR(255),
+    @apellido2 VARCHAR(255),
+    @correo VARCHAR(255),
+    @telefono VARCHAR(50),
+    @idAerolinea INT
+AS
+BEGIN
+    INSERT INTO Pilots (name, lastName1, lastName2, email, phoneNumber, idAirline)
+    VALUES (@nombre, @apellido1, @apellido2, @correo, @telefono, @idAerolinea);
+END;
 END;
 GO
 

@@ -37,12 +37,8 @@ namespace PY03___Control_de_vuelos.Programa.APP
         private void Panel_flight_Load(object sender, EventArgs e)
         {
             cargarAerolineas();
-
-            cb_aerolineas.SelectedIndex = 0;
-            cb_aviones.SelectedIndex = 0;
-            cb_pilotos.SelectedIndex = 0;
-            cb_ciudadSalida.SelectedIndex = 0;
-            cb_ciudadLlegada.SelectedIndex = 0;
+            setIndexCB();
+            setVisibilityCBFalse();
         }
 
         private void setIndexCB()
@@ -58,6 +54,7 @@ namespace PY03___Control_de_vuelos.Programa.APP
         {
             cb_aviones.Enabled = false;
             cb_pilotos.Enabled = false;
+            btn_registrar.Enabled = false;
             cb_ciudadSalida.Enabled = false;
             cb_ciudadLlegada.Enabled = false;
             dtp_fechaSalida.Enabled = false;
@@ -70,6 +67,7 @@ namespace PY03___Control_de_vuelos.Programa.APP
         {
             cb_aviones.Enabled = true;
             cb_pilotos.Enabled = true;
+            btn_registrar.Enabled = true;
             cb_ciudadSalida.Enabled = true;
             cb_ciudadLlegada.Enabled = true;
             dtp_fechaSalida.Enabled = true;
@@ -261,6 +259,12 @@ namespace PY03___Control_de_vuelos.Programa.APP
             }
             cb_ciudadSalida.SelectedIndex = 0;
             cb_ciudadLlegada.SelectedIndex = 0;
+        }
+
+        private void btn_registrarPiloto_Click(object sender, EventArgs e)
+        {
+            Panel_Pilots panelPilots = new Panel_Pilots();
+            panelPilots.Show();
         }
     }
 }

@@ -49,6 +49,8 @@
             this.btn_registrar = new System.Windows.Forms.Button();
             this.dtp_horaSalida = new System.Windows.Forms.DateTimePicker();
             this.dtp_horaLlegada = new System.Windows.Forms.DateTimePicker();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.btn_registrarPiloto = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label_Title
@@ -104,7 +106,7 @@
             "Seleccione un piloto"});
             this.cb_pilotos.Location = new System.Drawing.Point(18, 242);
             this.cb_pilotos.Name = "cb_pilotos";
-            this.cb_pilotos.Size = new System.Drawing.Size(452, 31);
+            this.cb_pilotos.Size = new System.Drawing.Size(411, 31);
             this.cb_pilotos.TabIndex = 7;
             // 
             // label3
@@ -274,12 +276,26 @@
             this.dtp_horaLlegada.Size = new System.Drawing.Size(138, 30);
             this.dtp_horaLlegada.TabIndex = 22;
             // 
+            // btn_registrarPiloto
+            // 
+            this.btn_registrarPiloto.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btn_registrarPiloto.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_registrarPiloto.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btn_registrarPiloto.Location = new System.Drawing.Point(435, 240);
+            this.btn_registrarPiloto.Name = "btn_registrarPiloto";
+            this.btn_registrarPiloto.Size = new System.Drawing.Size(35, 35);
+            this.btn_registrarPiloto.TabIndex = 23;
+            this.btn_registrarPiloto.Text = "+";
+            this.btn_registrarPiloto.UseVisualStyleBackColor = false;
+            this.btn_registrarPiloto.Click += new System.EventHandler(this.btn_registrarPiloto_Click);
+            // 
             // Panel_flight
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1069, 662);
+            this.Controls.Add(this.btn_registrarPiloto);
             this.Controls.Add(this.dtp_horaLlegada);
             this.Controls.Add(this.dtp_horaSalida);
             this.Controls.Add(this.btn_registrar);
@@ -334,5 +350,7 @@
         private System.Windows.Forms.Button btn_registrar;
         private System.Windows.Forms.DateTimePicker dtp_horaSalida;
         private System.Windows.Forms.DateTimePicker dtp_horaLlegada;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button btn_registrarPiloto;
     }
 }

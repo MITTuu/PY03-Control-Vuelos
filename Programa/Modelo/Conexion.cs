@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using System.Xml.Linq;
 
 namespace PY03___Control_de_vuelos.Programa.Modelo
 {
@@ -143,7 +145,37 @@ namespace PY03___Control_de_vuelos.Programa.Modelo
             return brands;
         }
 
+        public static int GetAvailableSeats(int idFlight)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand("GetAvailableSeats", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@idFlight", idFlight);
 
+                        object result = command.ExecuteScalar();
+
+                        if (result != DBNull.Value && result != null)
+                        {
+                            return Convert.ToInt32(result);
+                        }
+                        else
+                        {
+                            return -1;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
+                return -1;
+            }
+        }
 
         public static DataTable GetAllCities()
         {
@@ -225,6 +257,32 @@ namespace PY03___Control_de_vuelos.Programa.Modelo
                             // Si no se encontró ningún idDocumento en la tabla
                             return -1;
                         }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
+                return -1;
+            }
+        }
+
+        public static int RegisterPassengerInFlightByPassport(int idFlight ,string passportNumber)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("RegisterPassengerInFlightByPassport", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@idFlight", idFlight);
+                        command.Parameters.AddWithValue("@passportNumber", passportNumber);
+                        connection.Open();
+
+                        int rowsaffected = command.ExecuteNonQuery();
+
+                        return 1;
                     }
                 }
             }
