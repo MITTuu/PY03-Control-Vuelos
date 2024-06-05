@@ -64,9 +64,40 @@ namespace PY03___Control_de_vuelos.Programa.APP
 
         private void btn_SavePlane_Click(object sender, EventArgs e)
         {
+            string airline = PanelAddPlanes.comboBox_Arlines.Text;
+            string brand = PanelAddPlanes.comboBox_brand.Text;
+            string number = PanelAddPlanes.text_resNumber.Text;
+            int capacity = (int)PanelAddPlanes.numeric_capacity.Value;
 
+            if (string.IsNullOrWhiteSpace(airline) || string.IsNullOrWhiteSpace(brand) || string.IsNullOrWhiteSpace(number) || capacity <= 0)
+            {
+                MessageBox.Show("Todos los campos son obligatorios y deben tener valores válidos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
+            // Obtén los IDs correspondientes de las aerolíneas y marcas
+            int idAirline = conexion.GetAirlineIdByName(airline);
+            int idBrand = conexion.GetBrandIdByName(brand);
+
+            if (idAirline == 0 || idBrand == 0)
+            {
+                MessageBox.Show("Aerolínea o marca no válida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int result = conexion.SavePlane(number, idAirline, idBrand, capacity);
+
+            if (result == 1)
+            {
+                MessageBox.Show("Avión guardado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadNameAirlines();
+                LoadNameBrands();
+                PanelAddPlanes.text_resNumber.Text = "";
+                PanelAddPlanes.numeric_capacity.Value = 1;
+                PanelViewAP.LoadData(); // Actualiza el componente
+            }
         }
+
 
         private void btn_AddAirline_Click(object sender, EventArgs e)
         {

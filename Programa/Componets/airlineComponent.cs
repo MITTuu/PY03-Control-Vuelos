@@ -19,6 +19,8 @@ namespace PY03___Control_de_vuelos.Programa.Componets
 
         public void LoadData()
         {
+            flowLayoutPanel.Controls.Clear(); // Clear previous content
+
             DataTable dataTable = conexion.GetAirlinesWithPlanes();
 
             if (dataTable != null)
@@ -34,17 +36,32 @@ namespace PY03___Control_de_vuelos.Programa.Componets
                 flowLayoutPanel.Controls.Add(titleLabel);
 
                 string currentAirline = null;
+                bool hasPlanes = false;
+
                 foreach (DataRow row in dataTable.Rows)
                 {
                     string airlineName = row["AirlineName"].ToString();
                     string planeID = row["PlaneID"].ToString();
                     string brandName = row["BrandName"].ToString();
-                    int capacity = Convert.ToInt32(row["capacity"]);
+                    int capacity = row["capacity"] != DBNull.Value ? Convert.ToInt32(row["capacity"]) : 0;
 
                     // Crear un encabezado para la aerolínea si ha cambiado
                     if (currentAirline != airlineName)
                     {
+                        if (currentAirline != null && !hasPlanes)
+                        {
+                            Label noPlanesLabel = new Label
+                            {
+                                Text = "Sin aviones",
+                                Font = new Font("Arial", 12, FontStyle.Italic),
+                                AutoSize = true,
+                                Margin = new Padding(20, 0, 10, 10)
+                            };
+                            flowLayoutPanel.Controls.Add(noPlanesLabel);
+                        }
+
                         currentAirline = airlineName;
+                        hasPlanes = false;
 
                         Label airlineLabel = new Label
                         {
@@ -66,38 +83,55 @@ namespace PY03___Control_de_vuelos.Programa.Componets
                         flowLayoutPanel.Controls.Add(planesLabel);
                     }
 
-                    // Crear y añadir los controles para mostrar cada avión
-                    Panel planePanel = new Panel
+                    if (!string.IsNullOrEmpty(planeID))
                     {
-                        Size = new Size(500, 80),
-                        BorderStyle = BorderStyle.FixedSingle,
-                        Margin = new Padding(10)
-                    };
+                        hasPlanes = true;
 
-                    Label planeInfo = new Label
+                        // Crear y añadir los controles para mostrar cada avión
+                        Panel planePanel = new Panel
+                        {
+                            Size = new Size(500, 80),
+                            BorderStyle = BorderStyle.FixedSingle,
+                            Margin = new Padding(10)
+                        };
+
+                        Label planeInfo = new Label
+                        {
+                            Text = $"{planeID} – {brandName}\nCapacity: {capacity} passengers",
+                            AutoSize = true,
+                            Location = new Point(10, 10)
+                        };
+
+                        Button editButton = new Button
+                        {
+                            Text = "Edit",
+                            Location = new Point(400, 10)
+                        };
+
+                        Button deleteButton = new Button
+                        {
+                            Text = "Delete",
+                            Location = new Point(400, 40)
+                        };
+
+                        planePanel.Controls.Add(planeInfo);
+                        planePanel.Controls.Add(editButton);
+                        planePanel.Controls.Add(deleteButton);
+
+                        flowLayoutPanel.Controls.Add(planePanel);
+                    }
+                }
+
+                if (currentAirline != null && !hasPlanes)
+                {
+                    Label noPlanesLabel = new Label
                     {
-                        Text = $"{planeID} – {brandName}\nCapacity: {capacity} passengers",
+                        Text = "Sin aviones",
+                        Font = new Font("Arial", 12, FontStyle.Italic),
                         AutoSize = true,
-                        Location = new Point(10, 10)
+                        Margin = new Padding(20, 0, 10, 10)
                     };
-
-                    Button editButton = new Button
-                    {
-                        Text = "Edit",
-                        Location = new Point(400, 10)
-                    };
-
-                    Button deleteButton = new Button
-                    {
-                        Text = "Delete",
-                        Location = new Point(400, 40)
-                    };
-
-                    planePanel.Controls.Add(planeInfo);
-                    planePanel.Controls.Add(editButton);
-                    planePanel.Controls.Add(deleteButton);
-
-                    flowLayoutPanel.Controls.Add(planePanel);
+                    flowLayoutPanel.Controls.Add(noPlanesLabel);
                 }
             }
         }
