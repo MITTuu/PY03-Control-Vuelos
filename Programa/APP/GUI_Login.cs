@@ -22,11 +22,6 @@ namespace PY03___Control_de_vuelos.Programa.APP
             cnx = new Conexion();
         }
 
-        private void GUI_Login_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void tb_email_Click(object sender, EventArgs e)
         {
             if (tb_email.Text == "Ingresa tu correo")

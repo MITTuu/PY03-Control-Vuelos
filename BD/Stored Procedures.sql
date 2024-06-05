@@ -20,6 +20,48 @@ BEGIN
 END;
 GO
 
+CREATE PROCEDURE GetAirlinesWithPlanes
+AS
+BEGIN
+    SELECT 
+        A.name AS AirlineName,
+        P.registrationNumber AS PlaneID,
+        B.name AS BrandName,
+        P.capacity
+    FROM 
+        Airline A
+    JOIN 
+        Plane P ON A.idAirline = P.idAirline
+    JOIN 
+        Brand B ON P.idBrand = B.idBrand
+    ORDER BY 
+        A.name, P.registrationNumber;
+END
+GO
+
+-- Stored Procedure para seleccionar todas las aerolíneas sin duplicados
+CREATE PROCEDURE GetNameAirlines
+AS
+BEGIN
+    SELECT DISTINCT  name
+    FROM Airline;
+END
+GO
+
+-- Stored Procedure para seleccionar todas las marcas
+CREATE PROCEDURE GetNameBrands
+AS
+BEGIN
+    SELECT DISTINCT name
+    FROM Brand;
+END
+GO
+
+
+
+
+
+
 CREATE PROCEDURE GetAllCities
 AS
 BEGIN
@@ -83,5 +125,29 @@ BEGIN
     FROM Passengers
     WHERE
         passportNumber LIKE @passportNumber
+END;
+GO
+
+CREATE PROCEDURE SaveAirline 
+    @name VARCHAR(255),
+    @motto VARCHAR(255)
+AS
+BEGIN 
+     INSERT INTO Airline (name, motto) VALUES (@name, @motto);
+END;
+GO
+
+USE AirlineControl;
+GO
+
+CREATE PROCEDURE SavePlane 
+    @registrationNumber VARCHAR(50),
+    @idAirline INT,
+    @idBrand INT,
+    @capacity INT
+
+AS
+BEGIN 
+     INSERT INTO Plane (registrationNumber, idAirline, idBrand, capacity) VALUES ( @registrationNumber, @idAirline, @idBrand, @capacity);
 END;
 GO
