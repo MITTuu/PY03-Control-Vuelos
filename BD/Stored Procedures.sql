@@ -20,13 +20,13 @@ BEGIN
 END;
 GO
 
-
-
 CREATE PROCEDURE GetAirlinesWithPlanes
 AS
 BEGIN
     SELECT 
+        A.idAirline,
         A.name AS AirlineName,
+        A.motto,
         P.registrationNumber AS PlaneID,
         B.name AS BrandName,
         P.capacity
@@ -59,11 +59,6 @@ BEGIN
     FROM Brand;
 END
 GO
-
-
-
-
-
 
 CREATE PROCEDURE GetAllCities
 AS
@@ -162,6 +157,7 @@ BEGIN
 	SELECT idAirline, name, motto
 	FROM Airline
 END;
+GO
 
 CREATE PROCEDURE GetPlaneByIdAirline
 	@idAirline INT
@@ -172,6 +168,7 @@ BEGIN
 	INNER JOIN Brand b ON b.idBrand = p.idBrand
 	WHERE p.idAirline = @idAirline
 END;
+GO
 
 CREATE PROCEDURE GetPilotsByIdAirline
 	@idAirline INT
@@ -181,6 +178,7 @@ BEGIN
 	FROM Pilots
 	WHERE idAirline = @idAirline
 END;
+GO
 
 CREATE PROCEDURE GetCities
 AS
@@ -188,6 +186,7 @@ BEGIN
 	SELECT cityCode, name
 	FROM City
 END;
+GO
 
 CREATE PROCEDURE isPilotAvailable
     @idPilot INT,
@@ -211,6 +210,7 @@ BEGIN
         SELECT 0 AS IsPilotBusy; -- El piloto no está ocupado en ese rango de fechas
     END
 END;
+GO
 
 CREATE PROCEDURE InsertFlight
     @idPilot INT,
@@ -227,3 +227,67 @@ BEGIN
     INSERT INTO Flight (idPilot, departureDateTime, arrivalDateTime, departureCityCode, arrivalCityCode, cancelled, registrationNumber)
     VALUES (@idPilot, @departureDateTime, @arrivalDateTime, @departureCityCode, @arrivalCityCode, @cancelled, @registrationNumber);
 END;
+GO
+
+
+
+CREATE PROCEDURE GetAirlineById
+    @idAirline INT
+AS
+BEGIN
+
+    SELECT idAirline, [name],  motto
+    FROM  Airline
+    WHERE idAirline = @idAirline;
+END;
+GO
+
+
+CREATE PROCEDURE UpdateAirline
+    @idAirline INT,
+    @name VARCHAR(255),
+    @motto VARCHAR(255)
+AS 
+BEGIN
+    UPDATE Airline
+    SET [name] = @name, motto = @motto
+    WHERE idAirline = @idAirline
+END;
+GO  
+
+CREATE PROCEDURE UpdatePlane
+    @registrationNumber VARCHAR(50),
+    @idAirline INT,
+    @idBrand INT,
+    @capacity INT
+AS 
+BEGIN
+    BEGIN TRY
+        BEGIN TRANSACTION;
+        
+        UPDATE Plane
+        SET idAirline = @idAirline, idBrand = @idBrand, capacity = @capacity
+        WHERE registrationNumber = @registrationNumber;
+
+        COMMIT TRANSACTION;
+        SELECT @@ROWCOUNT AS RowsAffected;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END;
+
+
+
+CREATE PROCEDURE GetPlaneByRegistrationNumber
+    @registrationNumber VARCHAR(50)
+AS 
+BEGIN
+    SELECT p.registrationNumber, a.name AS Airline, b.name AS Brand, p.capacity
+    FROM Plane p
+    INNER JOIN Airline a ON p.idAirline = a.idAirline
+    INNER JOIN Brand b ON p.idBrand = b.idBrand
+    WHERE p.registrationNumber = @registrationNumber;
+END;
+GO

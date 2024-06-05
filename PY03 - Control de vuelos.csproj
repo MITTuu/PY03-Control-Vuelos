@@ -102,6 +102,18 @@
     <Compile Include="Programa\Componets\Dialog_addPlanes.Designer.cs">
       <DependentUpon>Dialog_addPlanes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Programa\Componets\Dialog_editAirline.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\Componets\Dialog_editAirline.Designer.cs">
+      <DependentUpon>Dialog_editAirline.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Programa\Componets\Dialog_editPlane.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\Componets\Dialog_editPlane.Designer.cs">
+      <DependentUpon>Dialog_editPlane.cs</DependentUpon>
+    </Compile>
     <Compile Include="Programa\Modelo\Conexion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Programa\APP\GUI_Login.resx">
@@ -130,6 +142,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Programa\Componets\Dialog_addPlanes.resx">
       <DependentUpon>Dialog_addPlanes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\Componets\Dialog_editAirline.resx">
+      <DependentUpon>Dialog_editAirline.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\Componets\Dialog_editPlane.resx">
+      <DependentUpon>Dialog_editPlane.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

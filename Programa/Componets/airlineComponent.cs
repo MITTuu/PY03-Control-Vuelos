@@ -36,11 +36,14 @@ namespace PY03___Control_de_vuelos.Programa.Componets
                 flowLayoutPanel.Controls.Add(titleLabel);
 
                 string currentAirline = null;
-                bool hasPlanes = false;
+                Panel currentAirlinePanel = null;
+                FlowLayoutPanel currentPlanesPanel = null;
 
                 foreach (DataRow row in dataTable.Rows)
                 {
+                    int airlineId = Convert.ToInt32(row["idAirline"]);
                     string airlineName = row["AirlineName"].ToString();
+                    string motto = row["motto"].ToString();
                     string planeID = row["PlaneID"].ToString();
                     string brandName = row["BrandName"].ToString();
                     int capacity = row["capacity"] != DBNull.Value ? Convert.ToInt32(row["capacity"]) : 0;
@@ -48,29 +51,66 @@ namespace PY03___Control_de_vuelos.Programa.Componets
                     // Crear un encabezado para la aerolínea si ha cambiado
                     if (currentAirline != airlineName)
                     {
-                        if (currentAirline != null && !hasPlanes)
-                        {
-                            Label noPlanesLabel = new Label
-                            {
-                                Text = "Sin aviones",
-                                Font = new Font("Arial", 12, FontStyle.Italic),
-                                AutoSize = true,
-                                Margin = new Padding(20, 0, 10, 10)
-                            };
-                            flowLayoutPanel.Controls.Add(noPlanesLabel);
-                        }
-
                         currentAirline = airlineName;
-                        hasPlanes = false;
+
+                        currentAirlinePanel = new Panel
+                        {
+                            AutoSize = true,
+                            BorderStyle = BorderStyle.FixedSingle,
+                            Margin = new Padding(10),
+                            Padding = new Padding(5)
+                            //Width = 50
+                            //MaximumSize = new Size(450) // Ajustar el tamaño máximo del panel
+                        };
+
+                        // Usar TableLayoutPanel para organizar mejor los controles
+                        TableLayoutPanel tableLayout = new TableLayoutPanel
+                        {
+                            ColumnCount = 2,
+                            RowCount = 3,
+                            AutoSize = true,
+                            Dock = DockStyle.Fill
+                        };
+                        tableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80F));
+                        tableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+                        tableLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+                        tableLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+                        tableLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
                         Label airlineLabel = new Label
                         {
                             Text = airlineName,
                             Font = new Font("Arial", 14, FontStyle.Bold),
                             AutoSize = true,
-                            Margin = new Padding(10, 20, 10, 10)
+                            Margin = new Padding(10)
                         };
-                        flowLayoutPanel.Controls.Add(airlineLabel);
+                        tableLayout.Controls.Add(airlineLabel, 0, 0);
+                        //tableLayout.SetColumnSpan(airlineLabel, 2);
+
+                        Label mottoLabel = new Label
+                        {
+                            Text = motto,
+                            Font = new Font("Arial", 9, FontStyle.Regular),
+                            AutoSize = true,
+                            Margin = new Padding(5)
+                        };
+                        tableLayout.Controls.Add(mottoLabel, 0, 1);
+
+                        Button editAirlineButton = new Button
+                        {
+                            Text = "Modificar",
+                            Tag = airlineId // Almacenar el idAirline en la propiedad Tag
+                        };
+                        editAirlineButton.Click += EditAirlineButton_Click;
+                        tableLayout.Controls.Add(editAirlineButton, 1, 0);
+
+                        Button deleteAirlineButton = new Button
+                        {
+                            Text = "Eliminar",
+                            Tag = airlineId // Almacenar el idAirline en la propiedad Tag
+                        };
+                        deleteAirlineButton.Click += DeleteAirlineButton_Click;
+                        tableLayout.Controls.Add(deleteAirlineButton, 1, 1);
 
                         // Añadir el subtítulo "Aviones"
                         Label planesLabel = new Label
@@ -78,21 +118,33 @@ namespace PY03___Control_de_vuelos.Programa.Componets
                             Text = "Aviones",
                             Font = new Font("Arial", 12, FontStyle.Italic),
                             AutoSize = true,
-                            Margin = new Padding(10, 5, 10, 10)
+                            Margin = new Padding(10)
                         };
-                        flowLayoutPanel.Controls.Add(planesLabel);
+                        tableLayout.Controls.Add(planesLabel, 0, 2);
+                        //tableLayout.SetColumnSpan(planesLabel, 2);
+
+                        currentPlanesPanel = new FlowLayoutPanel
+                        {
+                            AutoSize = true,
+                            FlowDirection = FlowDirection.TopDown,
+                            WrapContents = false,
+                            Margin = new Padding(5)
+                        };
+                        tableLayout.Controls.Add(currentPlanesPanel, 0, 3);
+                        //tableLayout.SetColumnSpan(currentPlanesPanel, 2);
+
+                        currentAirlinePanel.Controls.Add(tableLayout);
+                        flowLayoutPanel.Controls.Add(currentAirlinePanel);
                     }
 
                     if (!string.IsNullOrEmpty(planeID))
                     {
-                        hasPlanes = true;
-
                         // Crear y añadir los controles para mostrar cada avión
                         Panel planePanel = new Panel
                         {
-                            Size = new Size(500, 80),
+                            Size = new Size(430, 80),
                             BorderStyle = BorderStyle.FixedSingle,
-                            Margin = new Padding(10)
+                            Margin = new Padding(5)
                         };
 
                         Label planeInfo = new Label
@@ -102,36 +154,105 @@ namespace PY03___Control_de_vuelos.Programa.Componets
                             Location = new Point(10, 10)
                         };
 
-                        Button editButton = new Button
+                        Button editPlaneButton = new Button
                         {
-                            Text = "Edit",
-                            Location = new Point(400, 10)
+                            Text = "Modificar",
+                            Location = new Point(330, 10),
+                            Tag = planeID // Almacenar el idPlane en la propiedad Tag
                         };
+                        editPlaneButton.Click += EditPlaneButton_Click;
+                        planePanel.Controls.Add(editPlaneButton);
 
-                        Button deleteButton = new Button
+                        Button deletePlaneButton = new Button
                         {
-                            Text = "Delete",
-                            Location = new Point(400, 40)
+                            Text = "Eliminar",
+                            Location = new Point(330, 40),
+                            Tag = planeID // Almacenar el idPlane en la propiedad Tag
                         };
+                        deletePlaneButton.Click += DeletePlaneButton_Click;
+                        planePanel.Controls.Add(deletePlaneButton);
 
                         planePanel.Controls.Add(planeInfo);
-                        planePanel.Controls.Add(editButton);
-                        planePanel.Controls.Add(deleteButton);
-
-                        flowLayoutPanel.Controls.Add(planePanel);
+                        currentPlanesPanel.Controls.Add(planePanel);
                     }
                 }
+            }
+        }
 
-                if (currentAirline != null && !hasPlanes)
+        private void EditAirlineButton_Click(object sender, EventArgs e)
+        {
+            Button editButton = sender as Button;
+            int idAirline = (int)editButton.Tag;
+
+            // Mostrar un formulario de edición (puede ser un nuevo formulario o un diálogo)
+            // Aquí puedes crear un nuevo formulario de edición y pasarle los datos de la aerolínea para editar
+            using (var form = new Dialog_editAirline(idAirline))
+            {
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-                    Label noPlanesLabel = new Label
-                    {
-                        Text = "Sin aviones",
-                        Font = new Font("Arial", 12, FontStyle.Italic),
-                        AutoSize = true,
-                        Margin = new Padding(20, 0, 10, 10)
-                    };
-                    flowLayoutPanel.Controls.Add(noPlanesLabel);
+                    LoadData(); // Recargar los datos después de editar
+                }
+            }
+        }
+
+        private void DeleteAirlineButton_Click(object sender, EventArgs e)
+        {
+            Button deleteButton = sender as Button;
+            int idAirline = (int)deleteButton.Tag;
+
+            var confirmResult = MessageBox.Show("¿Estás seguro de que quieres eliminar esta aerolínea?",
+                                                 "Confirmar eliminación",
+                                                 MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                int result = conexion.DeleteAirline(idAirline);
+                if (result > 0)
+                {
+                    MessageBox.Show("Aerolínea eliminada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadData(); // Recargar los datos después de eliminar
+                }
+                else
+                {
+                    MessageBox.Show("Error al eliminar la aerolínea.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void EditPlaneButton_Click(object sender, EventArgs e)
+        {
+            Button editButton = sender as Button;
+            string planeId = editButton.Tag.ToString();
+
+            // Mostrar un formulario de edición (puede ser un nuevo formulario o un diálogo)
+            // Aquí puedes crear un nuevo formulario de edición y pasarle los datos del avión para editar
+            using (var form = new Dialog_editPlane(planeId))
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    LoadData(); // Recargar los datos después de editar
+                }
+            }
+        }
+
+        private void DeletePlaneButton_Click(object sender, EventArgs e)
+        {
+            Button deleteButton = sender as Button;
+            string planeId = deleteButton.Tag.ToString();
+
+            var confirmResult = MessageBox.Show("¿Estás seguro de que quieres eliminar este avión?",
+                                                 "Confirmar eliminación",
+                                                 MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                int result = conexion.DeletePlane(planeId);
+                if (result > 0)
+                {
+                    MessageBox.Show("Avión eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadData(); // Recargar los datos después de eliminar
+                }
+                else
+                {
+                    MessageBox.Show("Error al eliminar el avión.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
