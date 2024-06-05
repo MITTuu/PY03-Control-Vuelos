@@ -265,7 +265,98 @@ namespace PY03___Control_de_vuelos.Programa.Modelo
             }
         }
 
+        public int SavePlane(string registrationNumber, int idAirline, int idBrand, int capacity)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("SavePlane", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@registrationNumber", registrationNumber);
+                        command.Parameters.AddWithValue("@idAirline", idAirline);
+                        command.Parameters.AddWithValue("@idBrand", idBrand);
+                        command.Parameters.AddWithValue("@capacity", capacity);
 
+                        connection.Open();
+                        int rowsAffected = command.ExecuteNonQuery();
+                        connection.Close();
+
+                        return rowsAffected;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
+                return 0;
+            }
+        }
+
+        public int GetAirlineIdByName(string name)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("SELECT idAirline FROM Airline WHERE name = @name", connection))
+                    {
+                        command.Parameters.AddWithValue("@name", name);
+
+                        connection.Open();
+                        object result = command.ExecuteScalar();
+                        connection.Close();
+
+                        if (result != null)
+                        {
+                            return Convert.ToInt32(result);
+                        }
+                        else
+                        {
+                            return 0;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
+                return 0;
+            }
+        }
+
+        public int GetBrandIdByName(string name)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("SELECT idBrand FROM Brand WHERE name = @name", connection))
+                    {
+                        command.Parameters.AddWithValue("@name", name);
+
+                        connection.Open();
+                        object result = command.ExecuteScalar();
+                        connection.Close();
+
+                        if (result != null)
+                        {
+                            return Convert.ToInt32(result);
+                        }
+                        else
+                        {
+                            return 0;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
+                return 0;
+            }
+        }
 
 
     }

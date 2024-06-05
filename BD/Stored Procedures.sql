@@ -20,6 +20,8 @@ BEGIN
 END;
 GO
 
+
+
 CREATE PROCEDURE GetAirlinesWithPlanes
 AS
 BEGIN
@@ -30,14 +32,15 @@ BEGIN
         P.capacity
     FROM 
         Airline A
-    JOIN 
+    LEFT JOIN 
         Plane P ON A.idAirline = P.idAirline
-    JOIN 
+    LEFT JOIN 
         Brand B ON P.idBrand = B.idBrand
     ORDER BY 
         A.name, P.registrationNumber;
 END
 GO
+
 
 -- Stored Procedure para seleccionar todas las aerolíneas sin duplicados
 CREATE PROCEDURE GetNameAirlines
