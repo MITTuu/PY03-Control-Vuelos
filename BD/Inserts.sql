@@ -11,7 +11,6 @@ INSERT INTO AppUser
 	(email, password, idRole)
 	VALUES
 	('dylanmmz01@gmail.com', 'Dylan123', 1);
-	(2, 'reservas')
 
 INSERT INTO AppUser
     (email, password, idRole)
@@ -139,6 +138,26 @@ INSERT INTO Plane
     ('N654II', 8, 6, 90),   -- Frontier Airlines, Gulfstream
     ('N987JJ', 9, 7, 110),  -- Allegiant Air, Dassault
     ('N321KK', 10, 8, 130); -- Hawaiian Airlines, Mitsubishi
+GO
+
+-- testeando unas cosillas del modulo de pasajero
+INSERT INTO Pilots
+    (name, lastName1, lastName2, email, phoneNumber, idAirline)
+    VALUES
+    ('Pedro', 'Pascal', 'Hernandez', 'email@email.com', '88882288', 9)
+
+INSERT INTO Flight
+    (registrationNumber, idPilot, departureDateTime, arrivalDateTime, departureCityCode, arrivalCityCode, cancelled)
+    VALUES
+    ('N987G4', 1, DATEADD(HOUR, 2, CURRENT_TIMESTAMP), DATEADD(HOUR, 5, CURRENT_TIMESTAMP), 'SJO', 'GUA', 0),
+    ('N987G3', 1, DATEADD(HOUR, 6, CURRENT_TIMESTAMP), DATEADD(HOUR, 8, CURRENT_TIMESTAMP), 'SJO', 'GUA', 0),
+    ('N987JJ', 1, DATEADD(HOUR, 32, CURRENT_TIMESTAMP), DATEADD(HOUR, 36, CURRENT_TIMESTAMP), 'SJO', 'GUA', 0)
+
+INSERT INTO Passengers
+    (passportNumber, name, lastName1, lastName2, email, phoneNumber)
+    VALUES
+    ('PS1234', 'John', 'Walker', 'Espinoza', 'mail@mail.com', '87676556')
+
 GO
 
 INSERT INTO Pilots 

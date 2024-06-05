@@ -17,7 +17,11 @@ namespace PY03___Control_de_vuelos
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GUI_Main());
+            // Crear un objeto de GUI_Main y pasar directamente el idRol 1
+            GUI_Main mainForm = new GUI_Main(null, 1);
+
+            // Mostrar el formulario GUI_Main
+            Application.Run(mainForm);
         }
     }
 }
