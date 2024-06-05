@@ -2,7 +2,7 @@ USE AirlineControl;
 GO
 
 -- Stored Procedures AppUSers
-CREATE PROCEDURE GetUserByEmailAndPassword
+CREATE OR ALTER PROCEDURE GetUserByEmailAndPassword
     @Email VARCHAR(255),
     @Password VARCHAR(255)
 AS
@@ -20,7 +20,7 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE GetAirlinesWithPlanes
+CREATE OR ALTER PROCEDURE GetAirlinesWithPlanes
 AS
 BEGIN
     SELECT 
@@ -43,7 +43,7 @@ GO
 
 
 -- Stored Procedure para seleccionar todas las aerolíneas sin duplicados
-CREATE PROCEDURE GetNameAirlines
+CREATE OR ALTER PROCEDURE GetNameAirlines
 AS
 BEGIN
     SELECT DISTINCT  name
@@ -52,7 +52,7 @@ END
 GO
 
 -- Stored Procedure para seleccionar todas las marcas
-CREATE PROCEDURE GetNameBrands
+CREATE OR ALTER PROCEDURE GetNameBrands
 AS
 BEGIN
     SELECT DISTINCT name
@@ -60,7 +60,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE GetAllCities
+CREATE OR ALTER PROCEDURE GetAllCities
 AS
 BEGIN
     SELECT
@@ -70,7 +70,7 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE GetFlights
+CREATE OR ALTER PROCEDURE GetFlights
     @selectedDate DATE,
     @selectedOrigin VARCHAR(3),
     @selectedDestination VARCHAR(3)
@@ -90,7 +90,7 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE InsertPassenger
+CREATE OR ALTER PROCEDURE InsertPassenger
     @passportNumber VARCHAR(32),
     @name VARCHAR(255),
     @lastName1 VARCHAR(255),
@@ -108,7 +108,7 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE GetPassengerByPassport
+CREATE OR ALTER PROCEDURE GetPassengerByPassport
     @passportNumber VARCHAR(32)
 AS
 BEGIN
@@ -126,7 +126,7 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE SaveAirline 
+CREATE OR ALTER PROCEDURE SaveAirline 
     @name VARCHAR(255),
     @motto VARCHAR(255)
 AS
@@ -163,7 +163,7 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE SavePlane 
+CREATE OR ALTER PROCEDURE SavePlane 
     @registrationNumber VARCHAR(50),
     @idAirline INT,
     @idBrand INT,
@@ -176,7 +176,7 @@ END;
 GO
 
 -- Stored procedures Flights
-CREATE PROCEDURE GetAirlines
+CREATE OR ALTER PROCEDURE GetAirlines
 AS
 BEGIN
 	SELECT idAirline, name, motto
@@ -184,7 +184,7 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE GetPlaneByIdAirline
+CREATE OR ALTER PROCEDURE GetPlaneByIdAirline
 	@idAirline INT
 AS
 BEGIN
@@ -195,7 +195,7 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE GetPilotsByIdAirline
+CREATE OR ALTER PROCEDURE GetPilotsByIdAirline
 	@idAirline INT
 AS
 BEGIN
@@ -205,7 +205,7 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE GetCities
+CREATE OR ALTER PROCEDURE GetCities
 AS
 BEGIN
 	SELECT cityCode, name
@@ -213,7 +213,7 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE isPilotAvailable
+CREATE OR ALTER PROCEDURE isPilotAvailable
     @idPilot INT,
     @departureDate DATETIME,
     @arrivalDate DATETIME
@@ -237,7 +237,7 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE InsertFlight
+CREATE OR ALTER PROCEDURE InsertFlight
     @idPilot INT,
     @departureDateTime DATETIME,
     @arrivalDateTime DATETIME,
@@ -252,8 +252,9 @@ BEGIN
     INSERT INTO Flight (idPilot, departureDateTime, arrivalDateTime, departureCityCode, arrivalCityCode, cancelled, registrationNumber)
     VALUES (@idPilot, @departureDateTime, @arrivalDateTime, @departureCityCode, @arrivalCityCode, @cancelled, @registrationNumber);
 END;
+GO
 
-CREATE PROCEDURE InsertPilot
+CREATE OR ALTER PROCEDURE InsertPilot
     @nombre VARCHAR(255),
     @apellido1 VARCHAR(255),
     @apellido2 VARCHAR(255),
@@ -265,12 +266,11 @@ BEGIN
     INSERT INTO Pilots (name, lastName1, lastName2, email, phoneNumber, idAirline)
     VALUES (@nombre, @apellido1, @apellido2, @correo, @telefono, @idAerolinea);
 END;
-END;
 GO
 
 
 
-CREATE PROCEDURE GetAirlineById
+CREATE OR ALTER PROCEDURE GetAirlineById
     @idAirline INT
 AS
 BEGIN
@@ -282,7 +282,7 @@ END;
 GO
 
 
-CREATE PROCEDURE UpdateAirline
+CREATE OR ALTER PROCEDURE UpdateAirline
     @idAirline INT,
     @name VARCHAR(255),
     @motto VARCHAR(255)
@@ -294,7 +294,7 @@ BEGIN
 END;
 GO  
 
-CREATE PROCEDURE UpdatePlane
+CREATE OR ALTER PROCEDURE UpdatePlane
     @registrationNumber VARCHAR(50),
     @idAirline INT,
     @idBrand INT,
@@ -316,10 +316,10 @@ BEGIN
         THROW;
     END CATCH
 END;
+GO
 
 
-
-CREATE PROCEDURE GetPlaneByRegistrationNumber
+CREATE OR ALTER PROCEDURE GetPlaneByRegistrationNumber
     @registrationNumber VARCHAR(50)
 AS 
 BEGIN
