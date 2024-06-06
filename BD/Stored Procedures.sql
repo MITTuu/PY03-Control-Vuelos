@@ -252,6 +252,7 @@ BEGIN
     INSERT INTO Flight (idPilot, departureDateTime, arrivalDateTime, departureCityCode, arrivalCityCode, cancelled, registrationNumber)
     VALUES (@idPilot, @departureDateTime, @arrivalDateTime, @departureCityCode, @arrivalCityCode, @cancelled, @registrationNumber);
 END;
+GO
 
 CREATE PROCEDURE InsertPilot
     @nombre VARCHAR(255),
@@ -264,7 +265,6 @@ AS
 BEGIN
     INSERT INTO Pilots (name, lastName1, lastName2, email, phoneNumber, idAirline)
     VALUES (@nombre, @apellido1, @apellido2, @correo, @telefono, @idAerolinea);
-END;
 END;
 GO
 
@@ -316,7 +316,7 @@ BEGIN
         THROW;
     END CATCH
 END;
-
+GO
 
 
 CREATE PROCEDURE GetPlaneByRegistrationNumber
@@ -330,3 +330,41 @@ BEGIN
     WHERE p.registrationNumber = @registrationNumber;
 END;
 GO
+
+CREATE PROCEDURE GetPlanesByAirline
+AS
+BEGIN
+    SELECT a.name AS AirlineName, COUNT(p.registrationNumber) AS PlaneCount
+    FROM Airline a
+    LEFT JOIN Plane p ON a.idAirline = p.idAirline
+    GROUP BY a.name
+    ORDER BY PlaneCount DESC;
+END;
+GO
+
+GO
+
+CREATE PROCEDURE GetPlanesByCity
+    @AirlineId INT = NULL
+AS
+BEGIN
+    SELECT 
+        C.name AS CityName,
+        COUNT(DISTINCT F.registrationNumber) AS PlaneCount
+    FROM 
+        Flight F
+    JOIN 
+        City C ON F.arrivalCityCode = C.cityCode
+    JOIN 
+        Plane P ON F.registrationNumber = P.registrationNumber
+    LEFT JOIN 
+        Airline A ON P.idAirline = A.idAirline
+    WHERE 
+        (@AirlineId IS NULL OR A.idAirline = @AirlineId)
+    GROUP BY 
+        C.name
+    ORDER BY 
+        C.name;
+END
+
+
