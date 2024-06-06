@@ -130,7 +130,11 @@ namespace PY03___Control_de_vuelos.Programa.APP
             string apellido2 = tb_apellido2.Text;
             string correo = tb_correo.Text;
             string telefono = tb_telefono.Text;
-            int idAirline = cb_aerolineas.SelectedIndex;
+
+            string aerolineaSeleccionada = cb_aerolineas.SelectedItem.ToString();
+            DataRow[] resultado = dataTableAerolineas.Select($"name = '{aerolineaSeleccionada}'");
+            int idAirline = (int)resultado[0]["idAirline"];
+
 
             if (nombre == "Ingrese el nombre" || nombre == "" ||
                 apellido1 == "Ingrese el primer apellido" || apellido1 == "" ||

@@ -368,3 +368,107 @@ BEGIN
 END
 
 
+GO
+
+-- Visualización de datos
+CREATE VIEW ActiveFlightsInfo AS
+SELECT 
+    A.name AS AirlineName,
+    F.registrationNumber AS RegistrationNumber,
+    CONCAT(P.name, ' ', P.lastName1, ' ', P.lastName2) AS PilotFullName,
+    F.departureDateTime AS DepartureDate,
+    F.arrivalDateTime AS ArrivalDate,
+    CONCAT('(', DC.cityCode, ') ', DC.name) AS DepartureCity,
+    CONCAT('(', AC.cityCode, ') ', AC.name) AS ArrivalCity
+FROM 
+    Flight F
+    INNER JOIN Plane PL ON F.registrationNumber = PL.registrationNumber
+    INNER JOIN Pilots P ON F.idPilot = P.idPilot
+    INNER JOIN City DC ON F.departureCityCode = DC.cityCode
+    INNER JOIN City AC ON F.arrivalCityCode = AC.cityCode
+    INNER JOIN Airline A ON PL.idAirline = A.idAirline
+WHERE 
+    F.cancelled = 0;
+
+CREATE PROCEDURE GetActiveFlightsByDateRange
+    @StartDate DATETIME,
+    @EndDate DATETIME
+AS
+BEGIN
+    SELECT 
+        AirlineName,
+        RegistrationNumber,
+        PilotFullName,
+        DepartureDate,
+        ArrivalDate,
+        DepartureCity,
+        ArrivalCity
+    FROM 
+        ActiveFlightsInfo
+    WHERE 
+        DepartureDate BETWEEN @StartDate AND @EndDate
+        AND ArrivalDate BETWEEN @StartDate AND @EndDate;
+END;
+
+CREATE PROCEDURE GetCancelledFlights
+AS
+BEGIN
+	SELECT 
+		A.name AS AirlineName,
+		F.registrationNumber AS RegistrationNumber,
+		CONCAT(P.name, ' ', P.lastName1, ' ', P.lastName2) AS PilotFullName,
+		F.departureDateTime AS DepartureDate,
+		F.arrivalDateTime AS ArrivalDate,
+		CONCAT('(', DC.cityCode, ') ', DC.name) AS DepartureCity,
+		CONCAT('(', AC.cityCode, ') ', AC.name) AS ArrivalCity
+	FROM 
+		Flight F
+		INNER JOIN Plane PL ON F.registrationNumber = PL.registrationNumber
+		INNER JOIN Pilots P ON F.idPilot = P.idPilot
+		INNER JOIN City DC ON F.departureCityCode = DC.cityCode
+		INNER JOIN City AC ON F.arrivalCityCode = AC.cityCode
+		INNER JOIN Airline A ON PL.idAirline = A.idAirline
+	WHERE 
+		F.cancelled = 1;
+END;
+
+CREATE FUNCTION GetAirlineFlightInfoById
+(
+    @idAirline INT
+)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT 
+        A.name,
+        F.idFlight,
+        (
+            SELECT CONCAT('(', DC.cityCode, ') ', DC.name)
+            FROM City DC
+            WHERE DC.cityCode = F.departureCityCode
+        ) AS DepartureCity,
+        (
+            SELECT CONCAT('(', AC.cityCode, ') ', AC.name)
+            FROM City AC
+            WHERE AC.cityCode = F.arrivalCityCode
+        ) AS ArrivalCity,
+        F.departureDateTime,
+        F.arrivalDateTime
+    FROM 
+        Flight F
+    INNER JOIN 
+        Plane P ON F.registrationNumber = P.registrationNumber
+    INNER JOIN 
+        Airline A ON P.idAirline = A.idAirline
+    WHERE 
+        A.idAirline = @idAirline
+);
+
+CREATE PROCEDURE GetFlightInfo
+    @idAirline INT
+AS
+BEGIN
+    SELECT name, idFlight, DepartureCity, ArrivalCity, DepartureDateTime, ArrivalDateTime  
+    FROM GetAirlineFlightInfoById(@idAirline);
+END;
