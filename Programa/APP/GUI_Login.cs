@@ -21,7 +21,11 @@ namespace PY03___Control_de_vuelos.Programa.APP
             InitializeComponent(); 
             cnx = new Conexion();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tb_email_Click(object sender, EventArgs e)
         {
             if (tb_email.Text == "Ingresa tu correo")
@@ -29,7 +33,11 @@ namespace PY03___Control_de_vuelos.Programa.APP
                 tb_email.Text = "";
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tb_password_Click(object sender, EventArgs e)
         {
             if (tb_password.Text == "Ingresa tu contraseña")
@@ -38,7 +46,11 @@ namespace PY03___Control_de_vuelos.Programa.APP
                 tb_password.PasswordChar = '*';
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tb_email_Leave(object sender, EventArgs e)
         {
             if (tb_email.Text == "")
@@ -46,7 +58,11 @@ namespace PY03___Control_de_vuelos.Programa.APP
                 tb_email.Text = "Ingresa tu correo";
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tb_password_Leave(object sender, EventArgs e)
         {
             if (tb_password.Text == "")
@@ -55,7 +71,11 @@ namespace PY03___Control_de_vuelos.Programa.APP
                 tb_password.Text = "Ingresa tu contraseña";
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_login_Click(object sender, EventArgs e)
         {
             if (tb_email.Text == "" || tb_email.Text == "Ingresa tu correo")
@@ -90,12 +110,20 @@ namespace PY03___Control_de_vuelos.Programa.APP
             secondaryForm.Show();
 
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GUI_Login_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GUI_Login_Load(object sender, EventArgs e)
         {
 
