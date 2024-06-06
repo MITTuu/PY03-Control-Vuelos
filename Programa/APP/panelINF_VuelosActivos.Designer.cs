@@ -89,6 +89,7 @@
             this.dgv_vuelos.RowTemplate.Height = 24;
             this.dgv_vuelos.Size = new System.Drawing.Size(1051, 497);
             this.dgv_vuelos.TabIndex = 19;
+            this.dgv_vuelos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_vuelos_CellContentClick);
             // 
             // panel1
             // 
