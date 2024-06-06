@@ -142,7 +142,7 @@ namespace PY03___Control_de_vuelos.Programa.APP
             {
                 string listPassportNumber = dgvPassengers.Rows[i].Cells["Pasaporte"].Value.ToString();
 
-                if (passportNumber == listPassportNumber) return true;
+                if (passportNumber.ToUpper() == listPassportNumber.ToUpper()) return true;
             }
 
             return false;
