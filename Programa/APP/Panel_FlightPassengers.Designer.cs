@@ -91,11 +91,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(1053, 623);
             this.Controls.Add(this.dgvPassengers);
             this.Controls.Add(this.cbFlight);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Panel_FlightPassengers";
             this.Text = "Panel_FlightPassengers";
             ((System.ComponentModel.ISupportInitialize)(this.dgvPassengers)).EndInit();

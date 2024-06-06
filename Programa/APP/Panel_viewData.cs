@@ -44,6 +44,8 @@ namespace PY03___Control_de_vuelos.Programa.APP
                     break;
                 case 2:
                     panel_cuerpo.Controls.Clear();
+                    Panel_PassengerFlights form = new Panel_PassengerFlights();
+                    FormManager.OpenFormInPanel(form, panel_cuerpo);
                     break;
                 case 3:
                     panel_cuerpo.Controls.Clear();
