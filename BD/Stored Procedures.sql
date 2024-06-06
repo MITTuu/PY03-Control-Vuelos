@@ -451,6 +451,7 @@ CREATE VIEW ActiveFlightsInfo AS
 SELECT
 	idFlight,
     CONCAT(A.idAirline, '; ', A.name) AS AirlineName,
+
 CREATE OR ALTER PROCEDURE GetPlanesByCity
     @AirlineId INT = NULL
 AS
@@ -478,7 +479,8 @@ GO
 -- Visualizaci�n de datos
 CREATE OR ALTER VIEW ActiveFlightsInfo AS
 SELECT 
-    A.name AS AirlineName,
+	F.idFlight,
+	CONCAT(A.idAirline, '; ', A.name) AS AirlineName,
     F.registrationNumber AS RegistrationNumber,
     CONCAT(P.idPilot, '; ' , P.name, ' ', P.lastName1, ' ', P.lastName2) AS PilotFullName,
     F.departureDateTime AS DepartureDate,
@@ -687,4 +689,4 @@ BEGIN
         P.registrationNumber, B.name;
 END;
 
-
+SELECT * FROM Flight

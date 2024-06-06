@@ -211,12 +211,15 @@ namespace PY03___Control_de_vuelos.Programa.APP
                     return;
                 }
 
-                bool isPilotAvailable = cnx.isPilotAvailable(idPiloto, fechaHoraSalida, fechaHoraLlegada);
-
-                if (isPilotAvailable)
+                if (idPilot != idPiloto)
                 {
-                    MessageBox.Show("El piloto seleccionado no se encuentra disponible.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    bool isPilotAvailable = cnx.isPilotAvailable(idPiloto, fechaHoraSalida, fechaHoraLlegada);
+
+                    if (isPilotAvailable)
+                    {
+                        MessageBox.Show("El piloto seleccionado no se encuentra disponible.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                 }
 
                 if (MessageBox.Show("¿Deseas confirmar el registro?", "Confirmar registro", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)

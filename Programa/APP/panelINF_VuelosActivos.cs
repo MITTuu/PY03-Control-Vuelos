@@ -125,5 +125,9 @@ namespace PY03___Control_de_vuelos.Programa.APP
             }
         }
 
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
