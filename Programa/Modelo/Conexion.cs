@@ -229,6 +229,104 @@ namespace PY03___Control_de_vuelos.Programa.Modelo
             }
         }
 
+        public static DataTable GetAllFlightsInfo()
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("GetAllFlightsInfo", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        return dataTable;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
+                return null;
+            }
+        }
+
+        public static DataTable GetAllPassengers()
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("GetAllPassengers", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        return dataTable;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
+                return null;
+            }
+        }
+
+        public static DataTable GetFlightPassengers(int idFlight)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("GetFlightPassengers", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@idFlight", idFlight);
+
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        return dataTable;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
+                return null;
+            }
+        }
+
+        public static DataTable GetPassengerFlights(string passportNumber)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("GetPassengerFlights", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@passportNumber", passportNumber);
+
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        return dataTable;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
+                return null;
+            }
+        }
+
         public static int InsertPassenger(string passportNumber, string name, string lastName1, string lastName2, string email, string phoneNumber)
         {
             try
@@ -785,7 +883,7 @@ namespace PY03___Control_de_vuelos.Programa.Modelo
             }
         }
 
-
+        
 
         public int DeletePlane(string idPlane)
         {

@@ -72,6 +72,18 @@
     <Compile Include="Programa\APP\Panel_flight.Designer.cs">
       <DependentUpon>Panel_flight.cs</DependentUpon>
     </Compile>
+    <Compile Include="Programa\APP\Panel_FlightPassengers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_FlightPassengers.Designer.cs">
+      <DependentUpon>Panel_FlightPassengers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_PassengerFlights.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_PassengerFlights.Designer.cs">
+      <DependentUpon>Panel_PassengerFlights.cs</DependentUpon>
+    </Compile>
     <Compile Include="Programa\APP\Panel_passengers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +145,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Programa\APP\Panel_flight.resx">
       <DependentUpon>Panel_flight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\APP\Panel_FlightPassengers.resx">
+      <DependentUpon>Panel_FlightPassengers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\APP\Panel_PassengerFlights.resx">
+      <DependentUpon>Panel_PassengerFlights.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Programa\APP\Panel_passengers.resx">
       <DependentUpon>Panel_passengers.cs</DependentUpon>

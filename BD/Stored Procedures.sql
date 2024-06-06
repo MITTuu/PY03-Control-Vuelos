@@ -90,6 +90,78 @@ BEGIN
 END;
 GO
 
+CREATE OR ALTER PROCEDURE GetAllFlightsInfo
+AS
+BEGIN
+    SELECT
+        fl.idFlight AS [Num],
+        fl.departureDateTime AS [Salida],
+        fl.arrivalDateTime AS [Llegada],
+        (SELECT name FROM City WHERE cityCode = fl.departureCityCode) AS [Ciudad Partida],
+        (SELECT name FROM City WHERE cityCode = fl.arrivalCityCode) AS [Ciudad Llegada],
+        fl.registrationNumber AS [Avion],
+        CONCAT_WS(' ', pl.name, pl.lastName1, pl.lastName2) AS [Nombre de Piloto]
+    FROM Flight fl
+    INNER JOIN Plane pn ON fl.registrationNumber = pn.registrationNumber
+    INNER JOIN Pilots pl ON fl.idPilot = pl.idPilot
+    INNER JOIN Airline al ON pn.idAirline = al.idAirline
+    ORDER BY departureDateTime DESC
+END;
+GO
+
+CREATE OR ALTER PROCEDURE GetPassengerFlights
+    @passportNumber VARCHAR(30)
+AS
+BEGIN
+    SELECT
+        fl.idFlight AS [Num],
+        fl.departureDateTime AS [Salida],
+        fl.arrivalDateTime AS [Llegada],
+        (SELECT name FROM City WHERE cityCode = fl.departureCityCode) AS [Ciudad Partida],
+        (SELECT name FROM City WHERE cityCode = fl.arrivalCityCode) AS [Ciudad Llegada],
+        fl.registrationNumber AS [Avion],
+        CONCAT_WS(' ', pl.name, pl.lastName1, pl.lastName2) AS [Nombre de Piloto]
+    FROM FlightPassengers fp
+    INNER JOIN Flight fl ON fp.idFlight = fl.idFlight
+    INNER JOIN Plane pn ON fl.registrationNumber = pn.registrationNumber
+    INNER JOIN Pilots pl ON fl.idPilot = pl.idPilot
+    INNER JOIN Airline al ON pn.idAirline = al.idAirline
+    WHERE fp.idPassenger = (SELECT idPassenger FROM Passengers WHERE passportNumber = @passportNumber)
+    ORDER BY departureDateTime DESC
+END;
+GO
+
+CREATE OR ALTER PROCEDURE GetFlightPassengers
+    @idFlight INT
+AS
+BEGIN
+    SELECT
+        ps.passportNumber AS [Pasaporte],
+        ps.name AS [Nombre],
+        ps.lastName1 AS [Apellido 1],
+        ps.lastName2 AS [Apellido 2],
+        ps.email,
+        ps.phoneNumber AS [Telefono]
+    FROM FlightPassengers AS fp
+    INNER JOIN Passengers AS ps ON fp.idPassenger = ps.idPassenger
+    WHERE fp.idFlight = @idFlight
+END;
+GO
+
+CREATE OR ALTER PROCEDURE GetAllPassengers
+AS
+BEGIN
+    SELECT
+        passportNumber AS [Pasaporte],
+        name AS [Nombre],
+        lastName1 AS [Apellido 1],
+        lastName2 AS [Apellido 2],
+        email,
+        phoneNumber AS [Telefono]
+    FROM Passengers
+END;
+GO
+
 CREATE OR ALTER PROCEDURE InsertPassenger
     @passportNumber VARCHAR(32),
     @name VARCHAR(255),
