@@ -34,6 +34,7 @@ namespace PY03___Control_de_vuelos.Programa.APP
             9 Pasajeros confirmados por vuelo
             10 Vuelos por avion
             11 Total de horas de vuelo por aerolinea
+            12
             */
 
             int indice = cb_opciones.SelectedIndex;
@@ -94,6 +95,11 @@ namespace PY03___Control_de_vuelos.Programa.APP
                     panel_cuerpo.Controls.Clear();
                     Panel_FlightHours formFlightHours = new Panel_FlightHours();
                     FormManager.OpenFormInPanel(formFlightHours, panel_cuerpo);
+                    break;
+                case 12:
+                    panel_cuerpo.Controls.Clear();
+                    PanelINF_CntVuelosAvion formCntVuelosAvion = new PanelINF_CntVuelosAvion();
+                    FormManager.OpenFormInPanel(formCntVuelosAvion, panel_cuerpo);
                     break;
                 default:
                     panel_cuerpo.Controls.Clear();

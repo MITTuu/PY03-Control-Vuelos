@@ -665,4 +665,26 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE GetFlightsByPlane
+AS
+BEGIN
+    DECLARE @CurrentDate DATETIME = GETDATE();
+
+    SELECT 
+        P.registrationNumber,
+        B.name,
+        COUNT(F.idFlight) AS NumberOfFlights
+    FROM 
+        Flight F
+    INNER JOIN 
+        Plane P ON F.registrationNumber = P.registrationNumber
+    INNER JOIN 
+        Brand B ON P.idBrand = B.idBrand
+    WHERE 
+        F.arrivalDateTime < @CurrentDate
+        AND F.cancelled = 0
+    GROUP BY 
+        P.registrationNumber, B.name;
+END;
+
 
