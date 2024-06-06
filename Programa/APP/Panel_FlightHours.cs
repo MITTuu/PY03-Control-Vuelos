@@ -25,7 +25,7 @@ namespace PY03___Control_de_vuelos.Programa.APP
         /// </summary>
         private void LoadChart()
         {
-            // traer info
+            // Traer info
             DataTable dt = Conexion.GetTotalFlightHoursByAirline();
 
             // Limpiar series anteriores
@@ -35,18 +35,38 @@ namespace PY03___Control_de_vuelos.Programa.APP
             Series series = new Series("FlightHours");
             series.ChartType = SeriesChartType.Pie;
             series.IsValueShownAsLabel = true;
+            series.LabelForeColor = Color.Black;
+            series.Palette = ChartColorPalette.SeaGreen;
+
+            // Configurar el gráfico para mostrar etiquetas dentro de las secciones del pie
+            series.Label = "#VALX (#PERCENT)"; // Muestra el nombre de la aerolínea y el porcentaje
+            series.ToolTip = "#VALX: #VALY horas"; // Tooltip con el nombre de la aerolínea y las horas totales
+
+            series["PieLabelStyle"] = "Outside"; // Coloca las etiquetas afuera del gráfico
+            series["PieLineColor"] = "Black"; // Color de la línea que conecta las etiquetas
 
             // Agregar datos de DataTable a la serie
             foreach (DataRow row in dt.Rows)
             {
-                string tipo = row["AirlineName"].ToString();
-                int cantidad = Convert.ToInt32(row["TotalFlightHours"]);
+                string airlineName = row["AirlineName"].ToString();
+                int totalFlightHours = Convert.ToInt32(row["TotalFlightHours"]);
 
-                series.Points.AddXY(tipo, cantidad);
+                DataPoint point = new DataPoint();
+                point.AxisLabel = airlineName;
+                point.YValues = new double[] { totalFlightHours };
+                point.Label = airlineName + ": " + totalFlightHours + " horas";
+
+                series.Points.Add(point);
             }
 
             // Agregar la serie al Chart
             chart.Series.Add(series);
+
+            // Ajustar las propiedades del gráfico para mejorar la visualización
+            chart.Legends.Clear(); // Opcional: si no quieres mostrar la leyenda a un lado
+            chart.Titles.Clear();
+            chart.Titles.Add("Total de horas de vuelo por aerolínea");
         }
+
     }
 }

@@ -97,6 +97,7 @@
             this.dgvPassengers.ShowRowErrors = false;
             this.dgvPassengers.Size = new System.Drawing.Size(452, 223);
             this.dgvPassengers.TabIndex = 1;
+            this.dgvPassengers.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvPassengers_CellMouseDoubleClick);
             // 
             // dgvFlights
             // 
