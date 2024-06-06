@@ -78,6 +78,12 @@
     <Compile Include="Programa\APP\panelINF_VuelosCancelados.Designer.cs">
       <DependentUpon>panelINF_VuelosCancelados.cs</DependentUpon>
     </Compile>
+    <Compile Include="Programa\APP\PanelMANTENIMIENTO_Aerolineas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\APP\PanelMANTENIMIENTO_Aerolineas.Designer.cs">
+      <DependentUpon>PanelMANTENIMIENTO_Aerolineas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Programa\APP\Panel_airlines.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -155,6 +161,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Programa\APP\panelINF_VuelosCancelados.resx">
       <DependentUpon>panelINF_VuelosCancelados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\APP\PanelMANTENIMIENTO_Aerolineas.resx">
+      <DependentUpon>PanelMANTENIMIENTO_Aerolineas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Programa\APP\Panel_airlines.resx">
       <DependentUpon>Panel_airlines.cs</DependentUpon>
