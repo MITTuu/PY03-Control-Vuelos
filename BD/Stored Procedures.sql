@@ -389,6 +389,7 @@ FROM
     INNER JOIN Airline A ON PL.idAirline = A.idAirline
 WHERE 
     F.cancelled = 0;
+GO
 
 CREATE PROCEDURE GetActiveFlightsByDateRange
     @StartDate DATETIME,
@@ -409,6 +410,7 @@ BEGIN
         DepartureDate BETWEEN @StartDate AND @EndDate
         AND ArrivalDate BETWEEN @StartDate AND @EndDate;
 END;
+GO
 
 CREATE PROCEDURE GetCancelledFlights
 AS
@@ -431,6 +433,7 @@ BEGIN
 	WHERE 
 		F.cancelled = 1;
 END;
+GO
 
 CREATE FUNCTION GetAirlineFlightInfoById
 (
@@ -464,6 +467,7 @@ RETURN
     WHERE 
         A.idAirline = @idAirline
 );
+GO
 
 CREATE PROCEDURE GetFlightInfo
     @idAirline INT
@@ -472,3 +476,37 @@ BEGIN
     SELECT name, idFlight, DepartureCity, ArrivalCity, DepartureDateTime, ArrivalDateTime  
     FROM GetAirlineFlightInfoById(@idAirline);
 END;
+GO
+
+
+CREATE PROCEDURE GetUniquePlanesByRoute
+AS
+BEGIN
+    SELECT 
+        departureCityCode, 
+        arrivalCityCode, 
+        COUNT(DISTINCT registrationNumber) AS UniquePlanesCount
+    FROM 
+        Flight
+    GROUP BY 
+        departureCityCode, 
+        arrivalCityCode
+END;
+GO
+
+CREATE PROCEDURE GetFlightStatistics
+AS
+BEGIN
+    SELECT 
+        COUNT(DISTINCT p.registrationNumber) AS PlaneCount,
+        COUNT(f.idFlight) AS FlightCount,
+        c.name AS CityName
+    FROM Flight f
+    JOIN City c ON f.arrivalCityCode = c.cityCode
+    JOIN Plane p ON f.registrationNumber = p.registrationNumber
+    GROUP BY c.name
+    ORDER BY FlightCount DESC;
+END
+GO
+
+

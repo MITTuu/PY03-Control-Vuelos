@@ -1,4 +1,5 @@
-﻿using PY03___Control_de_vuelos.Programa.Modelo;
+﻿using PY03___Control_de_vuelos.Programa.FormsViewsData;
+using PY03___Control_de_vuelos.Programa.Modelo;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -47,15 +48,23 @@ namespace PY03___Control_de_vuelos.Programa.APP
                     break;
                 case 3:
                     panel_cuerpo.Controls.Clear();
+                    AirlineChartForm airlineChartForm = new AirlineChartForm();
+                    FormManager.OpenFormInPanel(airlineChartForm, panel_cuerpo);
                     break;
                 case 4:
                     panel_cuerpo.Controls.Clear();
+                    PlanesByCityForm planesByCityForm = new PlanesByCityForm();
+                    FormManager.OpenFormInPanel(planesByCityForm, panel_cuerpo);
                     break;
                 case 5:
                     panel_cuerpo.Controls.Clear();
+                    UniquePlanesByRouteForm uniquePlanesByRouteForm = new UniquePlanesByRouteForm();
+                    FormManager.OpenFormInPanel(uniquePlanesByRouteForm, panel_cuerpo);
                     break;
                 case 6:
                     panel_cuerpo.Controls.Clear();
+                    FlightStatisticsForm flightStatisticsForm = new FlightStatisticsForm(); 
+                    FormManager.OpenFormInPanel(flightStatisticsForm, panel_cuerpo);
                     break;
                 case 7:
                     panel_cuerpo.Controls.Clear();

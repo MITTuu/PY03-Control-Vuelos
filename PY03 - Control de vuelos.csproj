@@ -145,11 +145,23 @@
     <Compile Include="Programa\FormsViewsData\AirlineChartForm.Designer.cs">
       <DependentUpon>AirlineChartForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Programa\FormsViewsData\FlightStatisticsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\FormsViewsData\FlightStatisticsForm.Designer.cs">
+      <DependentUpon>FlightStatisticsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Programa\FormsViewsData\PlanesByCityForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Programa\FormsViewsData\PlanesByCityForm.Designer.cs">
       <DependentUpon>PlanesByCityForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Programa\FormsViewsData\UniquePlanesByRouteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\FormsViewsData\UniquePlanesByRouteForm.Designer.cs">
+      <DependentUpon>UniquePlanesByRouteForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Programa\Modelo\Conexion.cs" />
     <Compile Include="Programa\Modelo\FormManager.cs" />

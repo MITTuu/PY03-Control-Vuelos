@@ -638,35 +638,6 @@ namespace PY03___Control_de_vuelos.Programa.Modelo
                 return false;
             }
         }
-        public bool InsertPilot(string nombre, string apellido1, string apellido2, string correo, string telefono, int idAerolinea)
-        {
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    using (SqlCommand command = new SqlCommand("InsertPilot", connection))
-                    {
-                        command.CommandType = CommandType.StoredProcedure;
-
-                        command.Parameters.AddWithValue("@nombre", nombre);
-                        command.Parameters.AddWithValue("@apellido1", apellido1);
-                        command.Parameters.AddWithValue("@apellido2", apellido2);
-                        command.Parameters.AddWithValue("@correo", correo);
-                        command.Parameters.AddWithValue("@telefono", telefono);
-                        command.Parameters.AddWithValue("@idAerolinea", idAerolinea);
-
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                    }
-                }
-                return true;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
-                return false;
-            }
-        }
 
         public int UpdateAirline(int idAirline, string name, string motto)
         {
@@ -852,59 +823,7 @@ namespace PY03___Control_de_vuelos.Programa.Modelo
             }
         }
 
-        public int DeleteAirline(int idAirline)
-        {
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    using (SqlCommand command = new SqlCommand("DeleteAirline", connection))
-                    {
-                        command.CommandType = CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("@idAirline", idAirline);
 
-                        connection.Open();
-                        int rowsAffected = command.ExecuteNonQuery();
-                        connection.Close();
-
-                        return rowsAffected;
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
-                return 0;
-            }
-        }
-
-
-
-        public int DeletePlane(string idPlane)
-        {
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    using (SqlCommand command = new SqlCommand("DeletePlane", connection))
-                    {
-                        command.CommandType = CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("@idPlane", idPlane);
-
-                        connection.Open();
-                        int rowsAffected = command.ExecuteNonQuery();
-                        connection.Close();
-
-                        return rowsAffected;
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
-                return 0;
-            }
-        }
 
         public DataTable GetActiveFlights(DateTime fechaIni, DateTime fechaFin)
         {
@@ -990,5 +909,42 @@ namespace PY03___Control_de_vuelos.Programa.Modelo
             return dataTable;
         }
 
+
+        public DataTable GetUniquePlanesByRoute()
+        {
+            DataTable dataTable = new DataTable();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+                try
+            {
+                SqlCommand command = new SqlCommand("GetUniquePlanesByRoute", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                adapter.Fill(dataTable);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+
+            return dataTable;
+        }
+
+
+
+        public DataTable GetFlightStatistics()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand("GetFlightStatistics", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+
+                return dataTable;
+            }
+        }
     }
 }
