@@ -22,30 +22,57 @@ namespace PY03___Control_de_vuelos.Programa.APP
         private void cb_aerolineas_SelectedIndexChanged(object sender, EventArgs e)
         {
             /*
-            Seleccione la información que desea visualizar
-            Vuelos activos utilizando un selector de fechas
-            Vuelos por pasajero
-            Aviones por aerolínea
-            Cantidad de Aviones que volaron por ciudad
-            Cantidad de aviones diferentes que volaron de una ciudad a otra.
-            Cantidad de aviones, cantidad de vuelos, nombre de ciudad a la que han
-            viajado más veces
-            Vuelos cancelados
-            Información de Aerolínea, vuelo, origen, destino, horas de salida y llegada.
-            Pasajeros confirmados por vuelo
+            1 Vuelos activos utilizando un selector de fechas
+            2 Vuelos por pasajero
+            3 Aviones por aerolínea
+            4 Cantidad de Aviones que volaron por ciudad
+            5 Cantidad de aviones diferentes que volaron de una ciudad a otra.
+            6 Cantidad de aviones, cantidad de vuelos, nombre de ciudad a la que han viajado más veces
+            7 Vuelos cancelados
+            8 Información de Aerolínea, vuelo, origen, destino, horas de salida y llegada.
+            9 Pasajeros confirmados por vuelo
             */
 
             int indice = cb_opciones.SelectedIndex;
             
-            if (indice == 1)
+            switch (indice)
             {
-                panel_cuerpo.Controls.Clear();
-                panelINF_VuelosActivos formVuelosActivos = new panelINF_VuelosActivos();
-                FormManager.OpenFormInPanel(formVuelosActivos, panel_cuerpo);
-            }
-            else
-            {
-                panel_cuerpo.Controls.Clear();
+                case 1:
+                    panel_cuerpo.Controls.Clear();
+                    panelINF_VuelosActivos formVuelosActivos = new panelINF_VuelosActivos();
+                    FormManager.OpenFormInPanel(formVuelosActivos, panel_cuerpo);
+                    break;
+                case 2:
+                    panel_cuerpo.Controls.Clear();
+                    break;
+                case 3:
+                    panel_cuerpo.Controls.Clear();
+                    break;
+                case 4:
+                    panel_cuerpo.Controls.Clear();
+                    break;
+                case 5:
+                    panel_cuerpo.Controls.Clear();
+                    break;
+                case 6:
+                    panel_cuerpo.Controls.Clear();
+                    break;
+                case 7:
+                    panel_cuerpo.Controls.Clear();
+                    panelINF_VuelosCancelados formVuelosCancelados = new panelINF_VuelosCancelados();
+                    FormManager.OpenFormInPanel(formVuelosCancelados, panel_cuerpo);
+                    break;
+                case 8:
+                    panel_cuerpo.Controls.Clear();
+                    panelINF_Aerolineas formAerolineas = new panelINF_Aerolineas();
+                    FormManager.OpenFormInPanel(formAerolineas, panel_cuerpo);
+                    break;
+                case 9:
+                    panel_cuerpo.Controls.Clear();
+                    break;
+                default:
+                    panel_cuerpo.Controls.Clear();
+                    break;
             }
         }
     }

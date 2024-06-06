@@ -33,8 +33,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.dtp_fechaIni = new System.Windows.Forms.DateTimePicker();
             this.dgv_vuelos = new System.Windows.Forms.DataGridView();
-            this.btn_buscar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_buscar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_vuelos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,6 +90,14 @@
             this.dgv_vuelos.Size = new System.Drawing.Size(1051, 497);
             this.dgv_vuelos.TabIndex = 19;
             // 
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1051, 80);
+            this.panel1.TabIndex = 26;
+            // 
             // btn_buscar
             // 
             this.btn_buscar.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -102,14 +110,6 @@
             this.btn_buscar.Text = "🔍";
             this.btn_buscar.UseVisualStyleBackColor = false;
             this.btn_buscar.Click += new System.EventHandler(this.btn_registrarPiloto_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1051, 80);
-            this.panel1.TabIndex = 26;
             // 
             // panelINF_VuelosActivos
             // 
@@ -140,7 +140,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dtp_fechaIni;
         private System.Windows.Forms.DataGridView dgv_vuelos;
-        private System.Windows.Forms.Button btn_buscar;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btn_buscar;
     }
 }

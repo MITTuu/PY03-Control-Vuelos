@@ -866,7 +866,31 @@ namespace PY03___Control_de_vuelos.Programa.Modelo
             return dataTable;
         }
 
+        public DataTable GetCancelledFlights()
+        {
+            DataTable dataTable = new DataTable();
 
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("GetCancelledFlights", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        connection.Open();
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                        adapter.Fill(dataTable);
+                        connection.Close();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
+            }
+            return dataTable;
+        }
 
 
     }

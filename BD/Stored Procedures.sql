@@ -370,3 +370,25 @@ BEGIN
         DepartureDate BETWEEN @StartDate AND @EndDate
         AND ArrivalDate BETWEEN @StartDate AND @EndDate;
 END;
+
+CREATE PROCEDURE GetCancelledFlights
+AS
+BEGIN
+	SELECT 
+		A.name AS AirlineName,
+		F.registrationNumber AS RegistrationNumber,
+		CONCAT(P.name, ' ', P.lastName1, ' ', P.lastName2) AS PilotFullName,
+		F.departureDateTime AS DepartureDate,
+		F.arrivalDateTime AS ArrivalDate,
+		CONCAT('(', DC.cityCode, ') ', DC.name) AS DepartureCity,
+		CONCAT('(', AC.cityCode, ') ', AC.name) AS ArrivalCity
+	FROM 
+		Flight F
+		INNER JOIN Plane PL ON F.registrationNumber = PL.registrationNumber
+		INNER JOIN Pilots P ON F.idPilot = P.idPilot
+		INNER JOIN City DC ON F.departureCityCode = DC.cityCode
+		INNER JOIN City AC ON F.arrivalCityCode = AC.cityCode
+		INNER JOIN Airline A ON PL.idAirline = A.idAirline
+	WHERE 
+		F.cancelled = 1;
+END;

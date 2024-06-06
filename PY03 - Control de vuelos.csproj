@@ -60,11 +60,23 @@
     <Compile Include="Programa\APP\GUI_Main.Designer.cs">
       <DependentUpon>GUI_Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Programa\APP\panelINF_Aerolineas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\APP\panelINF_Aerolineas.Designer.cs">
+      <DependentUpon>panelINF_Aerolineas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Programa\APP\panelINF_VuelosActivos.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Programa\APP\panelINF_VuelosActivos.Designer.cs">
       <DependentUpon>panelINF_VuelosActivos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Programa\APP\panelINF_VuelosCancelados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\APP\panelINF_VuelosCancelados.Designer.cs">
+      <DependentUpon>panelINF_VuelosCancelados.cs</DependentUpon>
     </Compile>
     <Compile Include="Programa\APP\Panel_airlines.cs">
       <SubType>Form</SubType>
@@ -135,8 +147,14 @@
     <EmbeddedResource Include="Programa\APP\GUI_Main.resx">
       <DependentUpon>GUI_Main.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Programa\APP\panelINF_Aerolineas.resx">
+      <DependentUpon>panelINF_Aerolineas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Programa\APP\panelINF_VuelosActivos.resx">
       <DependentUpon>panelINF_VuelosActivos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\APP\panelINF_VuelosCancelados.resx">
+      <DependentUpon>panelINF_VuelosCancelados.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Programa\APP\Panel_airlines.resx">
       <DependentUpon>Panel_airlines.cs</DependentUpon>
