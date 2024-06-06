@@ -42,7 +42,7 @@
             this.label_Title.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Title.Location = new System.Drawing.Point(12, 9);
             this.label_Title.Name = "label_Title";
-            this.label_Title.Size = new System.Drawing.Size(321, 32);
+            this.label_Title.Size = new System.Drawing.Size(251, 26);
             this.label_Title.TabIndex = 3;
             this.label_Title.Text = "Visualización de datos";
             // 
@@ -62,10 +62,11 @@
                 "s veces",
             "Vuelos cancelados",
             "Información de Aerolínea, vuelo, origen, destino, horas de salida y llegada.",
-            "Pasajeros confirmados por vuelo"});
+            "Pasajeros confirmados por vuelo",
+            "Vuelos por avion"});
             this.cb_opciones.Location = new System.Drawing.Point(12, 80);
             this.cb_opciones.Name = "cb_opciones";
-            this.cb_opciones.Size = new System.Drawing.Size(958, 31);
+            this.cb_opciones.Size = new System.Drawing.Size(958, 27);
             this.cb_opciones.TabIndex = 7;
             this.cb_opciones.SelectedIndexChanged += new System.EventHandler(this.cb_aerolineas_SelectedIndexChanged);
             // 
@@ -75,7 +76,7 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(14, 91);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 20);
+            this.label2.Size = new System.Drawing.Size(0, 17);
             this.label2.TabIndex = 6;
             // 
             // label1
@@ -84,7 +85,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(14, 57);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 20);
+            this.label1.Size = new System.Drawing.Size(81, 17);
             this.label1.TabIndex = 21;
             this.label1.Text = "Información";
             // 
@@ -106,7 +107,7 @@
             // 
             // Panel_viewData
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1069, 662);

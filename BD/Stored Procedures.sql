@@ -85,7 +85,8 @@ BEGIN
         cancelled = 0 AND
         CONVERT(DATE, departureDateTime) = @selectedDate AND
         departureCityCode LIKE @selectedOrigin AND
-        arrivalCityCode LIKE @selectedDestination
+        arrivalCityCode LIKE @selectedDestination AND
+        cancelled = 0
     ORDER BY departureDateTime
 END;
 GO
@@ -121,8 +122,7 @@ BEGIN
         (SELECT name FROM City WHERE cityCode = fl.arrivalCityCode) AS [Ciudad Llegada],
         fl.registrationNumber AS [Avion],
         CONCAT_WS(' ', pl.name, pl.lastName1, pl.lastName2) AS [Nombre de Piloto]
-    FROM FlightPassengers fp
-    INNER JOIN Flight fl ON fp.idFlight = fl.idFlight
+    FROM Flight fl
     INNER JOIN Plane pn ON fl.registrationNumber = pn.registrationNumber
     INNER JOIN Pilots pl ON fl.idPilot = pl.idPilot
     INNER JOIN Airline al ON pn.idAirline = al.idAirline
@@ -435,7 +435,7 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE GetPlanesByAirline
+CREATE OR ALTER PROCEDURE GetPlanesByAirline
 AS
 BEGIN
     SELECT a.name AS AirlineName, COUNT(p.registrationNumber) AS PlaneCount
@@ -446,9 +446,7 @@ BEGIN
 END;
 GO
 
-GO
-
-CREATE PROCEDURE GetPlanesByCity
+CREATE OR ALTER PROCEDURE GetPlanesByCity
     @AirlineId INT = NULL
 AS
 BEGIN
@@ -470,12 +468,10 @@ BEGIN
     ORDER BY 
         C.name;
 END
-
-
 GO
 
 -- Visualizaci�n de datos
-CREATE VIEW ActiveFlightsInfo AS
+CREATE OR ALTER VIEW ActiveFlightsInfo AS
 SELECT 
     A.name AS AirlineName,
     F.registrationNumber AS RegistrationNumber,
@@ -493,8 +489,9 @@ FROM
     INNER JOIN Airline A ON PL.idAirline = A.idAirline
 WHERE 
     F.cancelled = 0;
+GO
 
-CREATE PROCEDURE GetActiveFlightsByDateRange
+CREATE OR ALTER PROCEDURE GetActiveFlightsByDateRange
     @StartDate DATETIME,
     @EndDate DATETIME
 AS
@@ -513,8 +510,9 @@ BEGIN
         DepartureDate BETWEEN @StartDate AND @EndDate
         AND ArrivalDate BETWEEN @StartDate AND @EndDate;
 END;
+GO
 
-CREATE PROCEDURE GetCancelledFlights
+CREATE OR ALTER PROCEDURE GetCancelledFlights
 AS
 BEGIN
 	SELECT 
@@ -535,8 +533,9 @@ BEGIN
 	WHERE 
 		F.cancelled = 1;
 END;
+GO
 
-CREATE FUNCTION GetAirlineFlightInfoById
+CREATE OR ALTER FUNCTION GetAirlineFlightInfoById
 (
     @idAirline INT
 )
@@ -568,11 +567,13 @@ RETURN
     WHERE 
         A.idAirline = @idAirline
 );
+GO
 
-CREATE PROCEDURE GetFlightInfo
+CREATE OR ALTER PROCEDURE GetFlightInfo
     @idAirline INT
 AS
 BEGIN
     SELECT name, idFlight, DepartureCity, ArrivalCity, DepartureDateTime, ArrivalDateTime  
     FROM GetAirlineFlightInfoById(@idAirline);
 END;
+Go

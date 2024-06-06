@@ -65,6 +65,7 @@
             this.cbPlane.Name = "cbPlane";
             this.cbPlane.Size = new System.Drawing.Size(910, 21);
             this.cbPlane.TabIndex = 22;
+            this.cbPlane.SelectedIndexChanged += new System.EventHandler(this.cbPlane_SelectedIndexChanged);
             // 
             // label6
             // 
@@ -82,19 +83,21 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(36, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(250, 29);
+            this.label1.Size = new System.Drawing.Size(210, 29);
             this.label1.TabIndex = 20;
-            this.label1.Text = "Vuelos por Pasajero";
+            this.label1.Text = "Vuelos por Avion";
             // 
             // Panel_PlaneFlights
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(1053, 623);
             this.Controls.Add(this.dgvFlights);
             this.Controls.Add(this.cbPlane);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Panel_PlaneFlights";
             this.Text = "Panel_PlaneFlights";
             ((System.ComponentModel.ISupportInitialize)(this.dgvFlights)).EndInit();

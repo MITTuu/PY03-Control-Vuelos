@@ -49,7 +49,7 @@ namespace PY03___Control_de_vuelos.Programa.APP
             return planeNumber;
         }
 
-        private void LoadPassengerFlightsIntoList()
+        private void LoadPlaneFlightsIntoList()
         {
             string registrationNumber = GetSelectedPlaneNumber();
             if (registrationNumber == null) return;
@@ -58,6 +58,11 @@ namespace PY03___Control_de_vuelos.Programa.APP
             if (dataTable == null) return;
 
             dgvFlights.DataSource = dataTable;
+        }
+
+        private void cbPlane_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadPlaneFlightsIntoList();
         }
     }
 }
