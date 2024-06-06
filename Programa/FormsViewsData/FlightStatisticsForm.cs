@@ -110,7 +110,7 @@ namespace PY03___Control_de_vuelos.Programa.FormsViewsData
             // 
             chartArea1.Name = "ChartArea1";
             this.chartPlanes.ChartAreas.Add(chartArea1);
-            this.chartPlanes.Location = new System.Drawing.Point(12, 12);
+            this.chartPlanes.Location = new System.Drawing.Point(32, 12);
             this.chartPlanes.Name = "chartPlanes";
             this.chartPlanes.Size = new System.Drawing.Size(400, 400);
             this.chartPlanes.TabIndex = 0;
@@ -121,7 +121,7 @@ namespace PY03___Control_de_vuelos.Programa.FormsViewsData
             this.chartFlights.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             chartArea2.Name = "ChartArea1";
             this.chartFlights.ChartAreas.Add(chartArea2);
-            this.chartFlights.Location = new System.Drawing.Point(420, 12);
+            this.chartFlights.Location = new System.Drawing.Point(400, 12);
             this.chartFlights.Name = "chartFlights";
             this.chartFlights.Size = new System.Drawing.Size(400, 400);
             this.chartFlights.TabIndex = 1;
@@ -132,7 +132,7 @@ namespace PY03___Control_de_vuelos.Programa.FormsViewsData
             this.labelTopCity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelTopCity.AutoSize = true;
             this.labelTopCity.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTopCity.Location = new System.Drawing.Point(12, 420);
+            this.labelTopCity.Location = new System.Drawing.Point(17, 381);
             this.labelTopCity.Name = "labelTopCity";
             this.labelTopCity.Size = new System.Drawing.Size(237, 21);
             this.labelTopCity.TabIndex = 2;
