@@ -16,7 +16,9 @@ namespace PY03___Control_de_vuelos.Programa.Componets
             conexion = new Conexion();
             LoadData();
         }
-
+        /// <summary>
+        /// Carga y contruye el componente
+        /// </summary>
         public void LoadData()
         {
             flowLayoutPanel.Controls.Clear(); // Clear previous content
@@ -161,7 +163,11 @@ namespace PY03___Control_de_vuelos.Programa.Componets
                 }
             }
         }
-
+        /// <summary>
+        /// Boton para editar las aerolineas
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditAirlineButton_Click(object sender, EventArgs e)
         {
             Button editButton = sender as Button;
@@ -178,7 +184,11 @@ namespace PY03___Control_de_vuelos.Programa.Componets
             }
         }
 
-
+        /// <summary>
+        /// Boton para editar los aviones
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditPlaneButton_Click(object sender, EventArgs e)
         {
             Button editButton = sender as Button;
