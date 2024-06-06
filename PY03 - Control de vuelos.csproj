@@ -67,6 +67,12 @@
     <Compile Include="Programa\APP\panelINF_Aerolineas.Designer.cs">
       <DependentUpon>panelINF_Aerolineas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Programa\APP\PanelINF_CntVuelosAvion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\APP\PanelINF_CntVuelosAvion.Designer.cs">
+      <DependentUpon>PanelINF_CntVuelosAvion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Programa\APP\panelINF_VuelosActivos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -204,6 +210,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Programa\APP\panelINF_Aerolineas.resx">
       <DependentUpon>panelINF_Aerolineas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\APP\PanelINF_CntVuelosAvion.resx">
+      <DependentUpon>PanelINF_CntVuelosAvion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Programa\APP\panelINF_VuelosActivos.resx">
       <DependentUpon>panelINF_VuelosActivos.cs</DependentUpon>

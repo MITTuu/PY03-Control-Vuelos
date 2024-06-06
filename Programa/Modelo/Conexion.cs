@@ -1192,6 +1192,33 @@ namespace PY03___Control_de_vuelos.Programa.Modelo
             }
         }
 
+        public DataTable GetFlightsByPlane()
+        {
+            DataTable dataTable = new DataTable();
 
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand("GetFlightsByPlane", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        conn.Open();
+
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                        {
+                            adapter.Fill(dataTable);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al obtener los vuelos por avión: " + ex.Message);
+            }
+
+            return dataTable;
+        }
     }
 }
