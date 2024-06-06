@@ -29,10 +29,9 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dgv_aerolineas = new System.Windows.Forms.DataGridView();
             this.cb_aerolineas = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.btn_buscar = new System.Windows.Forms.Button();
+            this.dgv_aerolineas = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_aerolineas)).BeginInit();
             this.SuspendLayout();
@@ -40,7 +39,6 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panel1.Controls.Add(this.btn_buscar);
             this.panel1.Controls.Add(this.cb_aerolineas);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -48,22 +46,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1051, 80);
             this.panel1.TabIndex = 27;
-            // 
-            // dgv_aerolineas
-            // 
-            this.dgv_aerolineas.AllowUserToAddRows = false;
-            this.dgv_aerolineas.AllowUserToDeleteRows = false;
-            this.dgv_aerolineas.AllowUserToResizeColumns = false;
-            this.dgv_aerolineas.AllowUserToResizeRows = false;
-            this.dgv_aerolineas.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dgv_aerolineas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_aerolineas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv_aerolineas.Location = new System.Drawing.Point(0, 80);
-            this.dgv_aerolineas.Name = "dgv_aerolineas";
-            this.dgv_aerolineas.RowHeadersWidth = 51;
-            this.dgv_aerolineas.RowTemplate.Height = 24;
-            this.dgv_aerolineas.Size = new System.Drawing.Size(1051, 473);
-            this.dgv_aerolineas.TabIndex = 28;
             // 
             // cb_aerolineas
             // 
@@ -88,18 +70,21 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Aerolíneas";
             // 
-            // btn_buscar
+            // dgv_aerolineas
             // 
-            this.btn_buscar.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btn_buscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_buscar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btn_buscar.Location = new System.Drawing.Point(486, 38);
-            this.btn_buscar.Name = "btn_buscar";
-            this.btn_buscar.Size = new System.Drawing.Size(40, 40);
-            this.btn_buscar.TabIndex = 26;
-            this.btn_buscar.Text = "🔍";
-            this.btn_buscar.UseVisualStyleBackColor = false;
-            this.btn_buscar.Click += new System.EventHandler(this.btn_buscar_Click);
+            this.dgv_aerolineas.AllowUserToAddRows = false;
+            this.dgv_aerolineas.AllowUserToDeleteRows = false;
+            this.dgv_aerolineas.AllowUserToResizeColumns = false;
+            this.dgv_aerolineas.AllowUserToResizeRows = false;
+            this.dgv_aerolineas.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dgv_aerolineas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_aerolineas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_aerolineas.Location = new System.Drawing.Point(0, 80);
+            this.dgv_aerolineas.Name = "dgv_aerolineas";
+            this.dgv_aerolineas.RowHeadersWidth = 51;
+            this.dgv_aerolineas.RowTemplate.Height = 24;
+            this.dgv_aerolineas.Size = new System.Drawing.Size(1051, 473);
+            this.dgv_aerolineas.TabIndex = 28;
             // 
             // panelINF_Aerolineas
             // 
@@ -125,6 +110,5 @@
         private System.Windows.Forms.DataGridView dgv_aerolineas;
         private System.Windows.Forms.ComboBox cb_aerolineas;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btn_buscar;
     }
 }

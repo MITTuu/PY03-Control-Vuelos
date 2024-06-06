@@ -392,3 +392,44 @@ BEGIN
 	WHERE 
 		F.cancelled = 1;
 END;
+
+CREATE FUNCTION GetAirlineFlightInfoById
+(
+    @idAirline INT
+)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT 
+        A.name,
+        F.idFlight,
+        (
+            SELECT CONCAT('(', DC.cityCode, ') ', DC.name)
+            FROM City DC
+            WHERE DC.cityCode = F.departureCityCode
+        ) AS DepartureCity,
+        (
+            SELECT CONCAT('(', AC.cityCode, ') ', AC.name)
+            FROM City AC
+            WHERE AC.cityCode = F.arrivalCityCode
+        ) AS ArrivalCity,
+        F.departureDateTime,
+        F.arrivalDateTime
+    FROM 
+        Flight F
+    INNER JOIN 
+        Plane P ON F.registrationNumber = P.registrationNumber
+    INNER JOIN 
+        Airline A ON P.idAirline = A.idAirline
+    WHERE 
+        A.idAirline = @idAirline
+);
+
+CREATE PROCEDURE GetFlightInfo
+    @idAirline INT
+AS
+BEGIN
+    SELECT name, idFlight, DepartureCity, ArrivalCity, DepartureDateTime, ArrivalDateTime  
+    FROM GetAirlineFlightInfoById(@idAirline);
+END;

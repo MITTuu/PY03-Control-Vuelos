@@ -892,6 +892,34 @@ namespace PY03___Control_de_vuelos.Programa.Modelo
             return dataTable;
         }
 
+        public DataTable GetFlightInfoByAirlineId(int idAirline)
+        {
+            DataTable dataTable = new DataTable();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("GetFlightInfo", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@idAirline", idAirline);
+
+                    try
+                    {
+                        connection.Open();
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                        {
+                            adapter.Fill(dataTable);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Error: " + ex.Message);
+                    }
+                }
+            }
+
+            return dataTable;
+        }
 
     }
 }
