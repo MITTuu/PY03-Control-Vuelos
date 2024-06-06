@@ -109,6 +109,28 @@ BEGIN
 END;
 GO
 
+CREATE OR ALTER PROCEDURE GetPlaneFlights
+    @registrationNumber VARCHAR(30)
+AS
+BEGIN
+    SELECT
+        fl.idFlight AS [Num],
+        fl.departureDateTime AS [Salida],
+        fl.arrivalDateTime AS [Llegada],
+        (SELECT name FROM City WHERE cityCode = fl.departureCityCode) AS [Ciudad Partida],
+        (SELECT name FROM City WHERE cityCode = fl.arrivalCityCode) AS [Ciudad Llegada],
+        fl.registrationNumber AS [Avion],
+        CONCAT_WS(' ', pl.name, pl.lastName1, pl.lastName2) AS [Nombre de Piloto]
+    FROM FlightPassengers fp
+    INNER JOIN Flight fl ON fp.idFlight = fl.idFlight
+    INNER JOIN Plane pn ON fl.registrationNumber = pn.registrationNumber
+    INNER JOIN Pilots pl ON fl.idPilot = pl.idPilot
+    INNER JOIN Airline al ON pn.idAirline = al.idAirline
+    WHERE pn.registrationNumber = @registrationNumber
+    ORDER BY departureDateTime DESC
+END;
+GO
+
 CREATE OR ALTER PROCEDURE GetPassengerFlights
     @passportNumber VARCHAR(30)
 AS
@@ -244,6 +266,16 @@ CREATE OR ALTER PROCEDURE SavePlane
 AS
 BEGIN 
      INSERT INTO Plane (registrationNumber, idAirline, idBrand, capacity) VALUES ( @registrationNumber, @idAirline, @idBrand, @capacity);
+END;
+GO
+
+CREATE OR ALTER PROCEDURE GetAllPlanes
+AS 
+BEGIN
+    SELECT p.registrationNumber, a.name AS Airline, b.name AS Brand, p.capacity
+    FROM Plane p
+    INNER JOIN Airline a ON p.idAirline = a.idAirline
+    INNER JOIN Brand b ON p.idBrand = b.idBrand
 END;
 GO
 
