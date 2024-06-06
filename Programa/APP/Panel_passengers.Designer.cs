@@ -82,12 +82,13 @@
             this.dgvPassengers.AllowUserToAddRows = false;
             this.dgvPassengers.AllowUserToDeleteRows = false;
             this.dgvPassengers.AllowUserToResizeRows = false;
-            this.dgvPassengers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvPassengers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPassengers.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvPassengers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPassengers.Location = new System.Drawing.Point(565, 343);
             this.dgvPassengers.MultiSelect = false;
             this.dgvPassengers.Name = "dgvPassengers";
+            this.dgvPassengers.ReadOnly = true;
             this.dgvPassengers.RowHeadersVisible = false;
             this.dgvPassengers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPassengers.ShowCellErrors = false;
@@ -102,12 +103,13 @@
             this.dgvFlights.AllowUserToAddRows = false;
             this.dgvFlights.AllowUserToDeleteRows = false;
             this.dgvFlights.AllowUserToResizeRows = false;
-            this.dgvFlights.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvFlights.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvFlights.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvFlights.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFlights.Location = new System.Drawing.Point(49, 146);
             this.dgvFlights.MultiSelect = false;
             this.dgvFlights.Name = "dgvFlights";
+            this.dgvFlights.ReadOnly = true;
             this.dgvFlights.RowHeadersVisible = false;
             this.dgvFlights.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvFlights.ShowCellErrors = false;
@@ -119,10 +121,12 @@
             // 
             // dtpDate
             // 
+            this.dtpDate.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.dtpDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpDate.Location = new System.Drawing.Point(49, 118);
             this.dtpDate.Name = "dtpDate";
-            this.dtpDate.Size = new System.Drawing.Size(98, 22);
+            this.dtpDate.Size = new System.Drawing.Size(98, 20);
             this.dtpDate.TabIndex = 5;
             this.dtpDate.ValueChanged += new System.EventHandler(this.dtpDate_ValueChanged);
             // 
@@ -130,6 +134,7 @@
             // 
             this.cbOrigin.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbOrigin.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbOrigin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.cbOrigin.FormattingEnabled = true;
             this.cbOrigin.Location = new System.Drawing.Point(153, 118);
             this.cbOrigin.Name = "cbOrigin";
@@ -141,6 +146,7 @@
             // 
             this.cbDestination.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbDestination.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbDestination.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.cbDestination.FormattingEnabled = true;
             this.cbDestination.Location = new System.Drawing.Point(335, 118);
             this.cbDestination.Name = "cbDestination";
@@ -151,38 +157,38 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Lucida Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Lucida Sans", 9F);
             this.label3.Location = new System.Drawing.Point(153, 102);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 13);
+            this.label3.Size = new System.Drawing.Size(45, 15);
             this.label3.TabIndex = 8;
             this.label3.Text = "Origen";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Lucida Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Lucida Sans", 9F);
             this.label4.Location = new System.Drawing.Point(332, 102);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 13);
+            this.label4.Size = new System.Drawing.Size(52, 15);
             this.label4.TabIndex = 9;
             this.label4.Text = "Destino";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Lucida Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Lucida Sans", 9F);
             this.label5.Location = new System.Drawing.Point(46, 102);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(43, 13);
+            this.label5.Size = new System.Drawing.Size(42, 15);
             this.label5.TabIndex = 10;
             this.label5.Text = "Fecha";
             // 
             // btnAddPassenger
             // 
-            this.btnAddPassenger.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnAddPassenger.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(45)))), ((int)(((byte)(70)))));
             this.btnAddPassenger.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddPassenger.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddPassenger.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.btnAddPassenger.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.btnAddPassenger.Location = new System.Drawing.Point(565, 303);
             this.btnAddPassenger.Name = "btnAddPassenger";
@@ -195,26 +201,27 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Lucida Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Lucida Sans", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(562, 102);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(72, 13);
+            this.label6.Size = new System.Drawing.Size(65, 15);
             this.label6.TabIndex = 12;
             this.label6.Text = "Pasaporte";
             // 
             // tbPassport
             // 
+            this.tbPassport.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbPassport.Location = new System.Drawing.Point(565, 118);
             this.tbPassport.MaxLength = 32;
             this.tbPassport.Name = "tbPassport";
-            this.tbPassport.Size = new System.Drawing.Size(245, 22);
+            this.tbPassport.Size = new System.Drawing.Size(245, 20);
             this.tbPassport.TabIndex = 13;
             // 
             // btnConfirmPassport
             // 
-            this.btnConfirmPassport.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnConfirmPassport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(45)))), ((int)(((byte)(70)))));
             this.btnConfirmPassport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConfirmPassport.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfirmPassport.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfirmPassport.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.btnConfirmPassport.Location = new System.Drawing.Point(828, 118);
             this.btnConfirmPassport.Name = "btnConfirmPassport";
@@ -226,87 +233,92 @@
             // 
             // tbName
             // 
+            this.tbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.tbName.Location = new System.Drawing.Point(565, 184);
             this.tbName.MaxLength = 255;
             this.tbName.Name = "tbName";
             this.tbName.ReadOnly = true;
-            this.tbName.Size = new System.Drawing.Size(156, 22);
+            this.tbName.Size = new System.Drawing.Size(156, 20);
             this.tbName.TabIndex = 16;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Lucida Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Lucida Sans", 9F);
             this.label7.Location = new System.Drawing.Point(562, 168);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(58, 13);
+            this.label7.Size = new System.Drawing.Size(54, 15);
             this.label7.TabIndex = 15;
             this.label7.Text = "Nombre";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Lucida Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Font = new System.Drawing.Font("Lucida Sans", 9F);
             this.label8.Location = new System.Drawing.Point(741, 168);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(86, 13);
+            this.label8.Size = new System.Drawing.Size(79, 15);
             this.label8.TabIndex = 17;
             this.label8.Text = "1er Apellido";
             // 
             // tbLastname1
             // 
+            this.tbLastname1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.tbLastname1.Location = new System.Drawing.Point(741, 184);
             this.tbLastname1.MaxLength = 255;
             this.tbLastname1.Name = "tbLastname1";
             this.tbLastname1.ReadOnly = true;
-            this.tbLastname1.Size = new System.Drawing.Size(130, 22);
+            this.tbLastname1.Size = new System.Drawing.Size(130, 20);
             this.tbLastname1.TabIndex = 18;
             // 
             // tbLastname2
             // 
+            this.tbLastname2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.tbLastname2.Location = new System.Drawing.Point(889, 184);
             this.tbLastname2.MaxLength = 255;
             this.tbLastname2.Name = "tbLastname2";
             this.tbLastname2.ReadOnly = true;
-            this.tbLastname2.Size = new System.Drawing.Size(128, 22);
+            this.tbLastname2.Size = new System.Drawing.Size(128, 20);
             this.tbLastname2.TabIndex = 19;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Lucida Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Font = new System.Drawing.Font("Lucida Sans", 9F);
             this.label9.Location = new System.Drawing.Point(886, 168);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(90, 13);
+            this.label9.Size = new System.Drawing.Size(84, 15);
             this.label9.TabIndex = 20;
             this.label9.Text = "2do Apellido";
             // 
             // tbEmail
             // 
+            this.tbEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.tbEmail.Location = new System.Drawing.Point(565, 248);
             this.tbEmail.MaxLength = 255;
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.ReadOnly = true;
-            this.tbEmail.Size = new System.Drawing.Size(245, 22);
+            this.tbEmail.Size = new System.Drawing.Size(245, 20);
             this.tbEmail.TabIndex = 22;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Lucida Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Font = new System.Drawing.Font("Lucida Sans", 9F);
             this.label10.Location = new System.Drawing.Point(562, 232);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(52, 13);
+            this.label10.Size = new System.Drawing.Size(46, 15);
             this.label10.TabIndex = 21;
             this.label10.Text = "Correo";
             // 
             // tbPhoneNumber
             // 
+            this.tbPhoneNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.tbPhoneNumber.Location = new System.Drawing.Point(828, 248);
             this.tbPhoneNumber.MaxLength = 50;
             this.tbPhoneNumber.Name = "tbPhoneNumber";
             this.tbPhoneNumber.ReadOnly = true;
-            this.tbPhoneNumber.Size = new System.Drawing.Size(189, 22);
+            this.tbPhoneNumber.Size = new System.Drawing.Size(189, 20);
             this.tbPhoneNumber.TabIndex = 24;
             this.tbPhoneNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPhoneNumber_KeyPress);
             this.tbPhoneNumber.Leave += new System.EventHandler(this.tbPhoneNumber_Leave);
@@ -314,18 +326,18 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Lucida Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Font = new System.Drawing.Font("Lucida Sans", 9F);
             this.label11.Location = new System.Drawing.Point(825, 232);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(66, 13);
+            this.label11.Size = new System.Drawing.Size(58, 15);
             this.label11.TabIndex = 23;
             this.label11.Text = "Telefono";
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(45)))), ((int)(((byte)(70)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.button1.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.button1.Location = new System.Drawing.Point(313, 591);
             this.button1.Name = "button1";

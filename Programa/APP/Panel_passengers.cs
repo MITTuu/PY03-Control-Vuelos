@@ -254,7 +254,7 @@ namespace PY03___Control_de_vuelos.Programa.APP
         private int RegisterPassengerListInFlight()
         {
             int idFlight = GetValidatedFlightId();
-            if (idFlight == 1) return -1;
+            if (idFlight == -1) return -1;
 
             for (int i = 0; i < dgvPassengers.RowCount; i++)
             {

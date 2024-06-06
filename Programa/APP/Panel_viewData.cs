@@ -32,6 +32,7 @@ namespace PY03___Control_de_vuelos.Programa.APP
             7 Vuelos cancelados
             8 Información de Aerolínea, vuelo, origen, destino, horas de salida y llegada.
             9 Pasajeros confirmados por vuelo
+            10 Vuelos por avion
             */
 
             int indice = cb_opciones.SelectedIndex;
@@ -45,6 +46,8 @@ namespace PY03___Control_de_vuelos.Programa.APP
                     break;
                 case 2:
                     panel_cuerpo.Controls.Clear();
+                    Panel_PassengerFlights formPassengerFlights = new Panel_PassengerFlights();
+                    FormManager.OpenFormInPanel(formPassengerFlights, panel_cuerpo);
                     break;
                 case 3:
                     panel_cuerpo.Controls.Clear();
@@ -78,6 +81,13 @@ namespace PY03___Control_de_vuelos.Programa.APP
                     break;
                 case 9:
                     panel_cuerpo.Controls.Clear();
+                    Panel_FlightPassengers formFlightPassengers = new Panel_FlightPassengers();
+                    FormManager.OpenFormInPanel(formFlightPassengers, panel_cuerpo);
+                    break;
+                case 10:
+                    panel_cuerpo.Controls.Clear();
+                    Panel_PlaneFlights formPlaneFlights = new Panel_PlaneFlights();
+                    FormManager.OpenFormInPanel(formPlaneFlights, panel_cuerpo);
                     break;
                 default:
                     panel_cuerpo.Controls.Clear();

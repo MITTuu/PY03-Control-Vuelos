@@ -91,6 +91,18 @@
     <Compile Include="Programa\APP\Panel_flight.Designer.cs">
       <DependentUpon>Panel_flight.cs</DependentUpon>
     </Compile>
+    <Compile Include="Programa\APP\Panel_FlightPassengers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_FlightPassengers.Designer.cs">
+      <DependentUpon>Panel_FlightPassengers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_PassengerFlights.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_PassengerFlights.Designer.cs">
+      <DependentUpon>Panel_PassengerFlights.cs</DependentUpon>
+    </Compile>
     <Compile Include="Programa\APP\Panel_passengers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +114,12 @@
     </Compile>
     <Compile Include="Programa\APP\Panel_Pilots.Designer.cs">
       <DependentUpon>Panel_Pilots.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_PlaneFlights.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_PlaneFlights.Designer.cs">
+      <DependentUpon>Panel_PlaneFlights.cs</DependentUpon>
     </Compile>
     <Compile Include="Programa\APP\Panel_viewData.cs">
       <SubType>Form</SubType>
@@ -187,11 +205,20 @@
     <EmbeddedResource Include="Programa\APP\Panel_flight.resx">
       <DependentUpon>Panel_flight.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Programa\APP\Panel_FlightPassengers.resx">
+      <DependentUpon>Panel_FlightPassengers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\APP\Panel_PassengerFlights.resx">
+      <DependentUpon>Panel_PassengerFlights.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Programa\APP\Panel_passengers.resx">
       <DependentUpon>Panel_passengers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Programa\APP\Panel_Pilots.resx">
       <DependentUpon>Panel_Pilots.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\APP\Panel_PlaneFlights.resx">
+      <DependentUpon>Panel_PlaneFlights.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Programa\APP\Panel_viewData.resx">
       <DependentUpon>Panel_viewData.cs</DependentUpon>

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
@@ -201,6 +201,30 @@ namespace PY03___Control_de_vuelos.Programa.Modelo
             }
         }
 
+        public static DataTable GetAllPlanes()
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("GetAllPlanes", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        return dataTable;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
+                return null;
+            }
+        }
+
         public static DataTable GetFlights(DateTime selectedDate, string originCityCode, string destinationCityCode)
         {
             try
@@ -214,6 +238,129 @@ namespace PY03___Control_de_vuelos.Programa.Modelo
                         command.Parameters.AddWithValue("@selectedOrigin", originCityCode);
                         command.Parameters.AddWithValue("@selectedDestination", destinationCityCode);
                         command.Parameters.AddWithValue("@selectedDate", selectedDate);
+
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        return dataTable;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
+                return null;
+            }
+        }
+
+        public static DataTable GetAllFlightsInfo()
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("GetAllFlightsInfo", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        return dataTable;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
+                return null;
+            }
+        }
+
+        public static DataTable GetAllPassengers()
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("GetAllPassengers", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        return dataTable;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
+                return null;
+            }
+        }
+
+        public static DataTable GetFlightPassengers(int idFlight)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("GetFlightPassengers", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@idFlight", idFlight);
+
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        return dataTable;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
+                return null;
+            }
+        }
+
+        public static DataTable GetPassengerFlights(string passportNumber)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("GetPassengerFlights", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@passportNumber", passportNumber);
+
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        return dataTable;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
+                return null;
+            }
+        }
+
+        public static DataTable GetPlaneFlights(string registrationNumber)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("GetPlaneFlights", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@registrationNumber", registrationNumber);
 
                         SqlDataAdapter adapter = new SqlDataAdapter(command);
                         DataTable dataTable = new DataTable();
@@ -288,7 +435,13 @@ namespace PY03___Control_de_vuelos.Programa.Modelo
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
+                string message = e.Message;
+                if (message.StartsWith("Violation of PRIMARY KEY"))
+                {
+                    message = "Se ha encontrado pasajero que ya está registrado al vuelo, por lo que se omitirá por esta vez";
+                }
+
+                MessageBox.Show("Error: " + message, "Error", MessageBoxButtons.OK);
                 return -1;
             }
         }
@@ -793,36 +946,49 @@ namespace PY03___Control_de_vuelos.Programa.Modelo
                 }
             }
         }
-        public bool InsertPilot(string nombre, string apellido1, string apellido2, string correo, string telefono, int idAerolinea)
+
+        public int DeleteAirline(int idAirline)
         {
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("InsertPilot", connection))
+                    using (SqlCommand command = new SqlCommand("DeleteAirline", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
-
-                        command.Parameters.AddWithValue("@nombre", nombre);
-                        command.Parameters.AddWithValue("@apellido1", apellido1);
-                        command.Parameters.AddWithValue("@apellido2", apellido2);
-                        command.Parameters.AddWithValue("@correo", correo);
-                        command.Parameters.AddWithValue("@telefono", telefono);
-                        command.Parameters.AddWithValue("@idAerolinea", idAerolinea);
+                        command.Parameters.AddWithValue("@idAirline", idAirline);
 
                         connection.Open();
-                        command.ExecuteNonQuery();
+                        int rowsAffected = command.ExecuteNonQuery();
+                        connection.Close();
+
+                        return rowsAffected;
                     }
                 }
-                return true;
             }
             catch (Exception e)
             {
                 MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
-                return false;
+                return 0;
             }
         }
 
+        
+
+        public int DeletePlane(string idPlane)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("DeletePlane", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@idPlane", idPlane);
+
+                        connection.Open();
+                        int rowsAffected = command.ExecuteNonQuery();
+                        connection.Close();
 
 
         public DataTable GetActiveFlights(DateTime fechaIni, DateTime fechaFin)
