@@ -63,7 +63,8 @@
             "Vuelos cancelados",
             "Información de Aerolínea, vuelo, origen, destino, horas de salida y llegada.",
             "Pasajeros confirmados por vuelo",
-            "Vuelos por avion"});
+            "Vuelos por avion",
+            "Horas de vuelo total por Aerolinea"});
             this.cb_opciones.Location = new System.Drawing.Point(12, 80);
             this.cb_opciones.Name = "cb_opciones";
             this.cb_opciones.Size = new System.Drawing.Size(958, 27);

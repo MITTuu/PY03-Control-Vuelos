@@ -491,6 +491,21 @@ WHERE
     F.cancelled = 0;
 GO
 
+CREATE OR ALTER PROCEDURE GetTotalFlightHoursByAirline
+AS
+BEGIN
+    SELECT 
+        (SELECT name FROM Airline WHERE idAirline = a.idAirline) AS AirlineName,
+        SUM(DATEDIFF(HOUR, f.departureDateTime, f.arrivalDateTime)) AS [TotalFlightHours]
+    FROM Flight f
+    INNER JOIN Plane p ON f.registrationNumber = p.registrationNumber
+    RIGHT JOIN Airline a ON p.idAirline = a.idAirline
+    WHERE f.cancelled = 0
+    GROUP BY a.idAirline
+    ORDER BY TotalFlightHours DESC;
+END;
+GO
+
 CREATE OR ALTER PROCEDURE GetActiveFlightsByDateRange
     @StartDate DATETIME,
     @EndDate DATETIME
