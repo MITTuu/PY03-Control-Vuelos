@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -96,6 +97,24 @@
     <Compile Include="Programa\APP\Panel_flight.Designer.cs">
       <DependentUpon>Panel_flight.cs</DependentUpon>
     </Compile>
+    <Compile Include="Programa\APP\Panel_FlightHours.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_FlightHours.Designer.cs">
+      <DependentUpon>Panel_FlightHours.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_FlightPassengers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_FlightPassengers.Designer.cs">
+      <DependentUpon>Panel_FlightPassengers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_PassengerFlights.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_PassengerFlights.Designer.cs">
+      <DependentUpon>Panel_PassengerFlights.cs</DependentUpon>
+    </Compile>
     <Compile Include="Programa\APP\Panel_passengers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +126,12 @@
     </Compile>
     <Compile Include="Programa\APP\Panel_Pilots.Designer.cs">
       <DependentUpon>Panel_Pilots.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_PlaneFlights.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\APP\Panel_PlaneFlights.Designer.cs">
+      <DependentUpon>Panel_PlaneFlights.cs</DependentUpon>
     </Compile>
     <Compile Include="Programa\APP\Panel_viewData.cs">
       <SubType>Form</SubType>
@@ -144,6 +169,30 @@
     <Compile Include="Programa\Componets\Dialog_editPlane.Designer.cs">
       <DependentUpon>Dialog_editPlane.cs</DependentUpon>
     </Compile>
+    <Compile Include="Programa\FormsViewsData\AirlineChartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\FormsViewsData\AirlineChartForm.Designer.cs">
+      <DependentUpon>AirlineChartForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Programa\FormsViewsData\FlightStatisticsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\FormsViewsData\FlightStatisticsForm.Designer.cs">
+      <DependentUpon>FlightStatisticsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Programa\FormsViewsData\PlanesByCityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\FormsViewsData\PlanesByCityForm.Designer.cs">
+      <DependentUpon>PlanesByCityForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Programa\FormsViewsData\UniquePlanesByRouteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\FormsViewsData\UniquePlanesByRouteForm.Designer.cs">
+      <DependentUpon>UniquePlanesByRouteForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Programa\Modelo\Conexion.cs" />
     <Compile Include="Programa\Modelo\FormManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -171,11 +220,23 @@
     <EmbeddedResource Include="Programa\APP\Panel_flight.resx">
       <DependentUpon>Panel_flight.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Programa\APP\Panel_FlightHours.resx">
+      <DependentUpon>Panel_FlightHours.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\APP\Panel_FlightPassengers.resx">
+      <DependentUpon>Panel_FlightPassengers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\APP\Panel_PassengerFlights.resx">
+      <DependentUpon>Panel_PassengerFlights.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Programa\APP\Panel_passengers.resx">
       <DependentUpon>Panel_passengers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Programa\APP\Panel_Pilots.resx">
       <DependentUpon>Panel_Pilots.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\APP\Panel_PlaneFlights.resx">
+      <DependentUpon>Panel_PlaneFlights.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Programa\APP\Panel_viewData.resx">
       <DependentUpon>Panel_viewData.cs</DependentUpon>
@@ -194,6 +255,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Programa\Componets\Dialog_editPlane.resx">
       <DependentUpon>Dialog_editPlane.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\FormsViewsData\AirlineChartForm.resx">
+      <DependentUpon>AirlineChartForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\FormsViewsData\FlightStatisticsForm.resx">
+      <DependentUpon>FlightStatisticsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\FormsViewsData\PlanesByCityForm.resx">
+      <DependentUpon>PlanesByCityForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

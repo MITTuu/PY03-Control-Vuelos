@@ -104,14 +104,6 @@ namespace PY03___Control_de_vuelos.Programa.Componets
                         editAirlineButton.Click += EditAirlineButton_Click;
                         tableLayout.Controls.Add(editAirlineButton, 1, 0);
 
-                        Button deleteAirlineButton = new Button
-                        {
-                            Text = "Eliminar",
-                            Tag = airlineId // Almacenar el idAirline en la propiedad Tag
-                        };
-                        deleteAirlineButton.Click += DeleteAirlineButton_Click;
-                        tableLayout.Controls.Add(deleteAirlineButton, 1, 1);
-
                         // Añadir el subtítulo "Aviones"
                         Label planesLabel = new Label
                         {
@@ -163,15 +155,6 @@ namespace PY03___Control_de_vuelos.Programa.Componets
                         editPlaneButton.Click += EditPlaneButton_Click;
                         planePanel.Controls.Add(editPlaneButton);
 
-                        Button deletePlaneButton = new Button
-                        {
-                            Text = "Eliminar",
-                            Location = new Point(330, 40),
-                            Tag = planeID // Almacenar el idPlane en la propiedad Tag
-                        };
-                        deletePlaneButton.Click += DeletePlaneButton_Click;
-                        planePanel.Controls.Add(deletePlaneButton);
-
                         planePanel.Controls.Add(planeInfo);
                         currentPlanesPanel.Controls.Add(planePanel);
                     }
@@ -195,28 +178,6 @@ namespace PY03___Control_de_vuelos.Programa.Componets
             }
         }
 
-        private void DeleteAirlineButton_Click(object sender, EventArgs e)
-        {
-            Button deleteButton = sender as Button;
-            int idAirline = (int)deleteButton.Tag;
-
-            var confirmResult = MessageBox.Show("¿Estás seguro de que quieres eliminar esta aerolínea?",
-                                                 "Confirmar eliminación",
-                                                 MessageBoxButtons.YesNo);
-            if (confirmResult == DialogResult.Yes)
-            {
-                int result = conexion.DeleteAirline(idAirline);
-                if (result > 0)
-                {
-                    MessageBox.Show("Aerolínea eliminada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadData(); // Recargar los datos después de eliminar
-                }
-                else
-                {
-                    MessageBox.Show("Error al eliminar la aerolínea.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
 
         private void EditPlaneButton_Click(object sender, EventArgs e)
         {
@@ -234,27 +195,5 @@ namespace PY03___Control_de_vuelos.Programa.Componets
             }
         }
 
-        private void DeletePlaneButton_Click(object sender, EventArgs e)
-        {
-            Button deleteButton = sender as Button;
-            string planeId = deleteButton.Tag.ToString();
-
-            var confirmResult = MessageBox.Show("¿Estás seguro de que quieres eliminar este avión?",
-                                                 "Confirmar eliminación",
-                                                 MessageBoxButtons.YesNo);
-            if (confirmResult == DialogResult.Yes)
-            {
-                int result = conexion.DeletePlane(planeId);
-                if (result > 0)
-                {
-                    MessageBox.Show("Avión eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadData(); // Recargar los datos después de eliminar
-                }
-                else
-                {
-                    MessageBox.Show("Error al eliminar el avión.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
     }
 }

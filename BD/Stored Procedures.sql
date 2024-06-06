@@ -2,7 +2,7 @@ USE AirlineControl;
 GO
 
 -- Stored Procedures AppUSers
-CREATE PROCEDURE GetUserByEmailAndPassword
+CREATE OR ALTER PROCEDURE GetUserByEmailAndPassword
     @Email VARCHAR(255),
     @Password VARCHAR(255)
 AS
@@ -20,7 +20,7 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE GetAirlinesWithPlanes
+CREATE OR ALTER PROCEDURE GetAirlinesWithPlanes
 AS
 BEGIN
     SELECT 
@@ -42,8 +42,8 @@ END
 GO
 
 
--- Stored Procedure para seleccionar todas las aerolíneas sin duplicados
-CREATE PROCEDURE GetNameAirlines
+-- Stored Procedure para seleccionar todas las aerolï¿½neas sin duplicados
+CREATE OR ALTER PROCEDURE GetNameAirlines
 AS
 BEGIN
     SELECT DISTINCT  name
@@ -52,7 +52,7 @@ END
 GO
 
 -- Stored Procedure para seleccionar todas las marcas
-CREATE PROCEDURE GetNameBrands
+CREATE OR ALTER PROCEDURE GetNameBrands
 AS
 BEGIN
     SELECT DISTINCT name
@@ -60,7 +60,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE GetAllCities
+CREATE OR ALTER PROCEDURE GetAllCities
 AS
 BEGIN
     SELECT
@@ -70,7 +70,7 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE GetFlights
+CREATE OR ALTER PROCEDURE GetFlights
     @selectedDate DATE,
     @selectedOrigin VARCHAR(3),
     @selectedDestination VARCHAR(3)
@@ -85,12 +85,106 @@ BEGIN
         cancelled = 0 AND
         CONVERT(DATE, departureDateTime) = @selectedDate AND
         departureCityCode LIKE @selectedOrigin AND
-        arrivalCityCode LIKE @selectedDestination
+        arrivalCityCode LIKE @selectedDestination AND
+        cancelled = 0
     ORDER BY departureDateTime
 END;
 GO
 
-CREATE PROCEDURE InsertPassenger
+CREATE OR ALTER PROCEDURE GetAllFlightsInfo
+AS
+BEGIN
+    SELECT
+        fl.idFlight AS [Num],
+        fl.departureDateTime AS [Salida],
+        fl.arrivalDateTime AS [Llegada],
+        (SELECT name FROM City WHERE cityCode = fl.departureCityCode) AS [Ciudad Partida],
+        (SELECT name FROM City WHERE cityCode = fl.arrivalCityCode) AS [Ciudad Llegada],
+        fl.registrationNumber AS [Avion],
+        CONCAT_WS(' ', pl.name, pl.lastName1, pl.lastName2) AS [Nombre de Piloto]
+    FROM Flight fl
+    INNER JOIN Plane pn ON fl.registrationNumber = pn.registrationNumber
+    INNER JOIN Pilots pl ON fl.idPilot = pl.idPilot
+    INNER JOIN Airline al ON pn.idAirline = al.idAirline
+    ORDER BY departureDateTime DESC
+END;
+GO
+
+CREATE OR ALTER PROCEDURE GetPlaneFlights
+    @registrationNumber VARCHAR(30)
+AS
+BEGIN
+    SELECT
+        fl.idFlight AS [Num],
+        fl.departureDateTime AS [Salida],
+        fl.arrivalDateTime AS [Llegada],
+        (SELECT name FROM City WHERE cityCode = fl.departureCityCode) AS [Ciudad Partida],
+        (SELECT name FROM City WHERE cityCode = fl.arrivalCityCode) AS [Ciudad Llegada],
+        fl.registrationNumber AS [Avion],
+        CONCAT_WS(' ', pl.name, pl.lastName1, pl.lastName2) AS [Nombre de Piloto]
+    FROM Flight fl
+    INNER JOIN Plane pn ON fl.registrationNumber = pn.registrationNumber
+    INNER JOIN Pilots pl ON fl.idPilot = pl.idPilot
+    INNER JOIN Airline al ON pn.idAirline = al.idAirline
+    WHERE pn.registrationNumber = @registrationNumber
+    ORDER BY departureDateTime DESC
+END;
+GO
+
+CREATE OR ALTER PROCEDURE GetPassengerFlights
+    @passportNumber VARCHAR(30)
+AS
+BEGIN
+    SELECT
+        fl.idFlight AS [Num],
+        fl.departureDateTime AS [Salida],
+        fl.arrivalDateTime AS [Llegada],
+        (SELECT name FROM City WHERE cityCode = fl.departureCityCode) AS [Ciudad Partida],
+        (SELECT name FROM City WHERE cityCode = fl.arrivalCityCode) AS [Ciudad Llegada],
+        fl.registrationNumber AS [Avion],
+        CONCAT_WS(' ', pl.name, pl.lastName1, pl.lastName2) AS [Nombre de Piloto]
+    FROM FlightPassengers fp
+    INNER JOIN Flight fl ON fp.idFlight = fl.idFlight
+    INNER JOIN Plane pn ON fl.registrationNumber = pn.registrationNumber
+    INNER JOIN Pilots pl ON fl.idPilot = pl.idPilot
+    INNER JOIN Airline al ON pn.idAirline = al.idAirline
+    WHERE fp.idPassenger = (SELECT idPassenger FROM Passengers WHERE passportNumber = @passportNumber)
+    ORDER BY departureDateTime DESC
+END;
+GO
+
+CREATE OR ALTER PROCEDURE GetFlightPassengers
+    @idFlight INT
+AS
+BEGIN
+    SELECT
+        ps.passportNumber AS [Pasaporte],
+        ps.name AS [Nombre],
+        ps.lastName1 AS [Apellido 1],
+        ps.lastName2 AS [Apellido 2],
+        ps.email,
+        ps.phoneNumber AS [Telefono]
+    FROM FlightPassengers AS fp
+    INNER JOIN Passengers AS ps ON fp.idPassenger = ps.idPassenger
+    WHERE fp.idFlight = @idFlight
+END;
+GO
+
+CREATE OR ALTER PROCEDURE GetAllPassengers
+AS
+BEGIN
+    SELECT
+        passportNumber AS [Pasaporte],
+        name AS [Nombre],
+        lastName1 AS [Apellido 1],
+        lastName2 AS [Apellido 2],
+        email,
+        phoneNumber AS [Telefono]
+    FROM Passengers
+END;
+GO
+
+CREATE OR ALTER PROCEDURE InsertPassenger
     @passportNumber VARCHAR(32),
     @name VARCHAR(255),
     @lastName1 VARCHAR(255),
@@ -108,7 +202,7 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE GetPassengerByPassport
+CREATE OR ALTER PROCEDURE GetPassengerByPassport
     @passportNumber VARCHAR(32)
 AS
 BEGIN
@@ -126,7 +220,7 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE SaveAirline 
+CREATE OR ALTER PROCEDURE SaveAirline 
     @name VARCHAR(255),
     @motto VARCHAR(255)
 AS
@@ -163,7 +257,7 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE SavePlane 
+CREATE OR ALTER PROCEDURE SavePlane 
     @registrationNumber VARCHAR(50),
     @idAirline INT,
     @idBrand INT,
@@ -175,8 +269,18 @@ BEGIN
 END;
 GO
 
+CREATE OR ALTER PROCEDURE GetAllPlanes
+AS 
+BEGIN
+    SELECT p.registrationNumber, a.name AS Airline, b.name AS Brand, p.capacity
+    FROM Plane p
+    INNER JOIN Airline a ON p.idAirline = a.idAirline
+    INNER JOIN Brand b ON p.idBrand = b.idBrand
+END;
+GO
+
 -- Stored procedures Flights
-CREATE PROCEDURE GetAirlines
+CREATE OR ALTER PROCEDURE GetAirlines
 AS
 BEGIN
 	SELECT idAirline, name, motto
@@ -184,7 +288,7 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE GetPlaneByIdAirline
+CREATE OR ALTER PROCEDURE GetPlaneByIdAirline
 	@idAirline INT
 AS
 BEGIN
@@ -195,7 +299,7 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE GetPilotsByIdAirline
+CREATE OR ALTER PROCEDURE GetPilotsByIdAirline
 	@idAirline INT
 AS
 BEGIN
@@ -205,7 +309,7 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE GetCities
+CREATE OR ALTER PROCEDURE GetCities
 AS
 BEGIN
 	SELECT cityCode, name
@@ -213,7 +317,7 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE isPilotAvailable
+CREATE OR ALTER PROCEDURE isPilotAvailable
     @idPilot INT,
     @departureDate DATETIME,
     @arrivalDate DATETIME
@@ -228,16 +332,16 @@ BEGIN
 		AND cancelled = 0
     )
     BEGIN
-        SELECT 1 AS IsPilotBusy; -- El piloto está ocupado en ese rango de fechas
+        SELECT 1 AS IsPilotBusy; -- El piloto estï¿½ ocupado en ese rango de fechas
     END
     ELSE
     BEGIN
-        SELECT 0 AS IsPilotBusy; -- El piloto no está ocupado en ese rango de fechas
+        SELECT 0 AS IsPilotBusy; -- El piloto no estï¿½ ocupado en ese rango de fechas
     END
 END;
 GO
 
-CREATE PROCEDURE InsertFlight
+CREATE OR ALTER PROCEDURE InsertFlight
     @idPilot INT,
     @departureDateTime DATETIME,
     @arrivalDateTime DATETIME,
@@ -252,8 +356,9 @@ BEGIN
     INSERT INTO Flight (idPilot, departureDateTime, arrivalDateTime, departureCityCode, arrivalCityCode, cancelled, registrationNumber)
     VALUES (@idPilot, @departureDateTime, @arrivalDateTime, @departureCityCode, @arrivalCityCode, @cancelled, @registrationNumber);
 END;
+GO
 
-CREATE PROCEDURE InsertPilot
+CREATE OR ALTER PROCEDURE InsertPilot
     @nombre VARCHAR(255),
     @apellido1 VARCHAR(255),
     @apellido2 VARCHAR(255),
@@ -265,12 +370,11 @@ BEGIN
     INSERT INTO Pilots (name, lastName1, lastName2, email, phoneNumber, idAirline)
     VALUES (@nombre, @apellido1, @apellido2, @correo, @telefono, @idAerolinea);
 END;
-END;
 GO
 
 
 
-CREATE PROCEDURE GetAirlineById
+CREATE OR ALTER PROCEDURE GetAirlineById
     @idAirline INT
 AS
 BEGIN
@@ -282,7 +386,7 @@ END;
 GO
 
 
-CREATE PROCEDURE UpdateAirline
+CREATE OR ALTER PROCEDURE UpdateAirline
     @idAirline INT,
     @name VARCHAR(255),
     @motto VARCHAR(255)
@@ -294,7 +398,7 @@ BEGIN
 END;
 GO  
 
-CREATE PROCEDURE UpdatePlane
+CREATE OR ALTER PROCEDURE UpdatePlane
     @registrationNumber VARCHAR(50),
     @idAirline INT,
     @idBrand INT,
@@ -316,10 +420,10 @@ BEGIN
         THROW;
     END CATCH
 END;
+GO
 
 
-
-CREATE PROCEDURE GetPlaneByRegistrationNumber
+CREATE OR ALTER PROCEDURE GetPlaneByRegistrationNumber
     @registrationNumber VARCHAR(50)
 AS 
 BEGIN
@@ -331,11 +435,50 @@ BEGIN
 END;
 GO
 
--- Visualización de datos
+CREATE OR ALTER PROCEDURE GetPlanesByAirline
+AS
+BEGIN
+    SELECT a.name AS AirlineName, COUNT(p.registrationNumber) AS PlaneCount
+    FROM Airline a
+    LEFT JOIN Plane p ON a.idAirline = p.idAirline
+    GROUP BY a.name
+    ORDER BY PlaneCount DESC;
+END;
+GO
+
+-- VisualizaciÃ³n de datos
 CREATE VIEW ActiveFlightsInfo AS
 SELECT
 	idFlight,
     CONCAT(A.idAirline, '; ', A.name) AS AirlineName,
+CREATE OR ALTER PROCEDURE GetPlanesByCity
+    @AirlineId INT = NULL
+AS
+BEGIN
+    SELECT 
+        C.name AS CityName,
+        COUNT(DISTINCT F.registrationNumber) AS PlaneCount
+    FROM 
+        Flight F
+    JOIN 
+        City C ON F.arrivalCityCode = C.cityCode
+    JOIN 
+        Plane P ON F.registrationNumber = P.registrationNumber
+    LEFT JOIN 
+        Airline A ON P.idAirline = A.idAirline
+    WHERE 
+        (@AirlineId IS NULL OR A.idAirline = @AirlineId)
+    GROUP BY 
+        C.name
+    ORDER BY 
+        C.name;
+END
+GO
+
+-- Visualizaciï¿½n de datos
+CREATE OR ALTER VIEW ActiveFlightsInfo AS
+SELECT 
+    A.name AS AirlineName,
     F.registrationNumber AS RegistrationNumber,
     CONCAT(P.idPilot, '; ' , P.name, ' ', P.lastName1, ' ', P.lastName2) AS PilotFullName,
     F.departureDateTime AS DepartureDate,
@@ -351,8 +494,24 @@ FROM
     INNER JOIN Airline A ON PL.idAirline = A.idAirline
 WHERE 
     F.cancelled = 0;
+GO
 
-CREATE PROCEDURE GetActiveFlightsByDateRange
+CREATE OR ALTER PROCEDURE GetTotalFlightHoursByAirline
+AS
+BEGIN
+    SELECT 
+        (SELECT name FROM Airline WHERE idAirline = a.idAirline) AS AirlineName,
+        SUM(DATEDIFF(HOUR, f.departureDateTime, f.arrivalDateTime)) AS [TotalFlightHours]
+    FROM Flight f
+    INNER JOIN Plane p ON f.registrationNumber = p.registrationNumber
+    RIGHT JOIN Airline a ON p.idAirline = a.idAirline
+    WHERE f.cancelled = 0
+    GROUP BY a.idAirline
+    ORDER BY TotalFlightHours DESC;
+END;
+GO
+
+CREATE OR ALTER PROCEDURE GetActiveFlightsByDateRange
     @StartDate DATETIME,
     @EndDate DATETIME
 AS
@@ -372,8 +531,9 @@ BEGIN
         DepartureDate BETWEEN @StartDate AND @EndDate
         AND ArrivalDate BETWEEN @StartDate AND @EndDate;
 END;
+GO
 
-CREATE PROCEDURE GetCancelledFlights
+CREATE OR ALTER PROCEDURE GetCancelledFlights
 AS
 BEGIN
 	SELECT 
@@ -394,8 +554,9 @@ BEGIN
 	WHERE 
 		F.cancelled = 1;
 END;
+GO
 
-CREATE FUNCTION GetAirlineFlightInfoById
+CREATE OR ALTER FUNCTION GetAirlineFlightInfoById
 (
     @idAirline INT
 )
@@ -427,8 +588,9 @@ RETURN
     WHERE 
         A.idAirline = @idAirline
 );
+GO
 
-CREATE PROCEDURE GetFlightInfo
+CREATE OR ALTER PROCEDURE GetFlightInfo
     @idAirline INT
 AS
 BEGIN
@@ -470,3 +632,37 @@ BEGIN
     WHERE
         idFlight = @idFlight;
 END;
+GO
+
+
+CREATE PROCEDURE GetUniquePlanesByRoute
+AS
+BEGIN
+    SELECT 
+        departureCityCode, 
+        arrivalCityCode, 
+        COUNT(DISTINCT registrationNumber) AS UniquePlanesCount
+    FROM 
+        Flight
+    GROUP BY 
+        departureCityCode, 
+        arrivalCityCode
+END;
+GO
+
+CREATE PROCEDURE GetFlightStatistics
+AS
+BEGIN
+    SELECT 
+        COUNT(DISTINCT p.registrationNumber) AS PlaneCount,
+        COUNT(f.idFlight) AS FlightCount,
+        c.name AS CityName
+    FROM Flight f
+    JOIN City c ON f.arrivalCityCode = c.cityCode
+    JOIN Plane p ON f.registrationNumber = p.registrationNumber
+    GROUP BY c.name
+    ORDER BY FlightCount DESC;
+END
+GO
+
+
