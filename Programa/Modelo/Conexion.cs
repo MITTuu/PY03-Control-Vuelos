@@ -837,7 +837,34 @@ namespace PY03___Control_de_vuelos.Programa.Modelo
             }
         }
 
+        public DataTable GetActiveFlights(DateTime fechaIni, DateTime fechaFin)
+        {
+            DataTable dataTable = new DataTable();
 
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("GetActiveFlightsByDateRange", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@StartDate", fechaIni);
+                        command.Parameters.AddWithValue("@EndDate", fechaFin);
+
+                        connection.Open();
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                        adapter.Fill(dataTable);
+                        connection.Close();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
+            }
+
+            return dataTable;
+        }
 
 
 

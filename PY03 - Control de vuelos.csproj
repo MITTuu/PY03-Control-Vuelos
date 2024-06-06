@@ -60,6 +60,12 @@
     <Compile Include="Programa\APP\GUI_Main.Designer.cs">
       <DependentUpon>GUI_Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Programa\APP\panelINF_VuelosActivos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Programa\APP\panelINF_VuelosActivos.Designer.cs">
+      <DependentUpon>panelINF_VuelosActivos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Programa\APP\Panel_airlines.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,12 +127,16 @@
       <DependentUpon>Dialog_editPlane.cs</DependentUpon>
     </Compile>
     <Compile Include="Programa\Modelo\Conexion.cs" />
+    <Compile Include="Programa\Modelo\FormManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Programa\APP\GUI_Login.resx">
       <DependentUpon>GUI_Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Programa\APP\GUI_Main.resx">
       <DependentUpon>GUI_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Programa\APP\panelINF_VuelosActivos.resx">
+      <DependentUpon>panelINF_VuelosActivos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Programa\APP\Panel_airlines.resx">
       <DependentUpon>Panel_airlines.cs</DependentUpon>

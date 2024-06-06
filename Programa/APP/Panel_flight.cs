@@ -54,7 +54,7 @@ namespace PY03___Control_de_vuelos.Programa.APP
         {
             cb_aviones.Enabled = false;
             cb_pilotos.Enabled = false;
-            btn_registrar.Enabled = false;
+            btn_registrarPiloto.Enabled = false;
             cb_ciudadSalida.Enabled = false;
             cb_ciudadLlegada.Enabled = false;
             dtp_fechaSalida.Enabled = false;
@@ -67,7 +67,7 @@ namespace PY03___Control_de_vuelos.Programa.APP
         {
             cb_aviones.Enabled = true;
             cb_pilotos.Enabled = true;
-            btn_registrar.Enabled = true;
+            btn_registrarPiloto.Enabled = true;
             cb_ciudadSalida.Enabled = true;
             cb_ciudadLlegada.Enabled = true;
             dtp_fechaSalida.Enabled = true;
