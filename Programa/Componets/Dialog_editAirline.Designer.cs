@@ -92,9 +92,9 @@
             this.Controls.Add(this.text_motto);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "Dialog_editAirline";
-            this.Text = "Dialog_editAirline";
+            this.Text = "Edición de aerolineas";
             this.ResumeLayout(false);
             this.PerformLayout();
 

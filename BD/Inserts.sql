@@ -179,3 +179,37 @@ VALUES
 	('Barbara', 'Jackson', 'Hernandez', 'barbara.jackson@gmail.com', '32109876', 4),
 	('William', 'Martin', 'Robinson', 'william.martin@gmail.com', '89012345', 5);
 
+INSERT INTO Flight
+    (registrationNumber, idPilot, departureDateTime, arrivalDateTime, departureCityCode, arrivalCityCode, cancelled)
+    VALUES
+    -- Vuelos de American Airlines (AirlineId = 1)
+    ('N123AA', 1, '2023-06-01 08:00:00', '2023-06-01 12:00:00', 'NYC', 'LAX', 0),
+    ('N654AA', 1, '2023-06-02 09:00:00', '2023-06-02 13:00:00', 'LAX', 'CHI', 0),
+    -- Vuelos de Delta Air Lines (AirlineId = 2)
+    ('N456DL', 2, '2023-06-03 10:00:00', '2023-06-03 14:00:00', 'NYC', 'HOU', 0),
+    ('N321DL', 2, '2023-06-04 11:00:00', '2023-06-04 15:00:00', 'HOU', 'PHX', 0),
+    -- Vuelos de United Airlines (AirlineId = 3)
+    ('N789UA', 3, '2023-06-05 12:00:00', '2023-06-05 16:00:00', 'PHX', 'SAN', 0),
+    ('N987UA', 3, '2023-06-06 13:00:00', '2023-06-06 17:00:00', 'SAN', 'DAL', 0),
+    -- Vuelos de Southwest Airlines (AirlineId = 4)
+    ('N321SW', 4, '2023-06-07 14:00:00', '2023-06-07 18:00:00', 'DAL', 'SFO', 0),
+    ('N123SW', 4, '2023-06-08 15:00:00', '2023-06-08 19:00:00', 'SFO', 'SEA', 0),
+    -- Vuelos de JetBlue Airways (AirlineId = 5)
+    ('N654JB', 5, '2023-06-09 16:00:00', '2023-06-09 20:00:00', 'SEA', 'ATL', 0),
+    ('N456JB', 5, '2023-06-10 17:00:00', '2023-06-10 21:00:00', 'ATL', 'MIA', 0),
+    -- Vuelos de Alaska Airlines (AirlineId = 6)
+    ('N987AS', 6, '2023-06-11 18:00:00', '2023-06-11 22:00:00', 'MIA', 'DEN', 0),
+    ('N789AS', 6, '2023-06-12 19:00:00', '2023-06-12 23:00:00', 'DEN', 'BOS', 0),
+    -- Vuelos de Spirit Airlines (AirlineId = 7)
+    ('N321NK', 7, '2023-06-13 20:00:00', '2023-06-14 00:00:00', 'BOS', 'LAS', 0),
+    ('N322NK', 7, '2023-06-14 21:00:00', '2023-06-15 01:00:00', 'LAS', 'MSP', 0),
+    -- Vuelos de Frontier Airlines (AirlineId = 8)
+    ('N654F9', 8, '2023-06-15 22:00:00', '2023-06-16 02:00:00', 'MSP', 'DTW', 0),
+    ('N654F8', 8, '2023-06-16 23:00:00', '2023-06-17 03:00:00', 'DTW', 'PHL', 0),
+    -- Vuelos de Allegiant Air (AirlineId = 9)
+    ('N987G4', 9, '2023-06-17 06:00:00', '2023-06-17 10:00:00', 'PHL', 'CLT', 0),
+    ('N987G3', 9, '2023-06-18 07:00:00', '2023-06-18 11:00:00', 'CLT', 'AUS', 0),
+    -- Vuelos de Hawaiian Airlines (AirlineId = 10)
+    ('N321HA', 10, '2023-06-19 08:00:00', '2023-06-19 12:00:00', 'AUS', 'SLC', 0),
+    ('N321HB', 10, '2023-06-20 09:00:00', '2023-06-20 13:00:00', 'SLC', 'NYC', 0);
+GO

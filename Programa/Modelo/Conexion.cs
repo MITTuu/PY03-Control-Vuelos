@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
@@ -785,7 +785,35 @@ namespace PY03___Control_de_vuelos.Programa.Modelo
                 return false;
             }
         }
+        public bool InsertPilot(string nombre, string apellido1, string apellido2, string correo, string telefono, int idAerolinea)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("InsertPilot", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
 
+                        command.Parameters.AddWithValue("@nombre", nombre);
+                        command.Parameters.AddWithValue("@apellido1", apellido1);
+                        command.Parameters.AddWithValue("@apellido2", apellido2);
+                        command.Parameters.AddWithValue("@correo", correo);
+                        command.Parameters.AddWithValue("@telefono", telefono);
+                        command.Parameters.AddWithValue("@idAerolinea", idAerolinea);
+
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
+                return false;
+            }
+        }
 
         public int UpdateAirline(int idAirline, string name, string motto)
         {
@@ -900,11 +928,76 @@ namespace PY03___Control_de_vuelos.Programa.Modelo
             return dataTable;
         }
 
+        public DataTable GetPlanesByAirline()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("GetPlanesByAirline", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        return dataTable;
+                    }
+                }
+            }
+        }
 
 
+        public DataTable GetPlanesByCity(int? airlineId)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("GetPlanesByCity", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    if (airlineId.HasValue)
+                    {
+                        command.Parameters.AddWithValue("@AirlineId", airlineId.Value);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@AirlineId", DBNull.Value);
+                    }
 
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+                    return dataTable;
+                }
+            }
+        }
+        public bool InsertPilot(string nombre, string apellido1, string apellido2, string correo, string telefono, int idAerolinea)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("InsertPilot", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
 
+                        command.Parameters.AddWithValue("@nombre", nombre);
+                        command.Parameters.AddWithValue("@apellido1", apellido1);
+                        command.Parameters.AddWithValue("@apellido2", apellido2);
+                        command.Parameters.AddWithValue("@correo", correo);
+                        command.Parameters.AddWithValue("@telefono", telefono);
+                        command.Parameters.AddWithValue("@idAerolinea", idAerolinea);
 
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
+                return false;
+            }
+        }
 
         public int DeleteAirline(int idAirline)
         {
@@ -960,35 +1053,89 @@ namespace PY03___Control_de_vuelos.Programa.Modelo
             }
         }
 
-
-        public bool InsertPilot(string nombre, string apellido1, string apellido2, string correo, string telefono, int idAerolinea)
+        public DataTable GetActiveFlights(DateTime fechaIni, DateTime fechaFin)
         {
+            DataTable dataTable = new DataTable();
+
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    using (SqlCommand command = new SqlCommand("InsertPilot", connection))
+                    using (SqlCommand command = new SqlCommand("GetActiveFlightsByDateRange", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
-
-                        command.Parameters.AddWithValue("@nombre", nombre);
-                        command.Parameters.AddWithValue("@apellido1", apellido1);
-                        command.Parameters.AddWithValue("@apellido2", apellido2);
-                        command.Parameters.AddWithValue("@correo", correo);
-                        command.Parameters.AddWithValue("@telefono", telefono);
-                        command.Parameters.AddWithValue("@idAerolinea", idAerolinea);
+                        command.Parameters.AddWithValue("@StartDate", fechaIni);
+                        command.Parameters.AddWithValue("@EndDate", fechaFin);
 
                         connection.Open();
-                        command.ExecuteNonQuery();
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                        adapter.Fill(dataTable);
+                        connection.Close();
                     }
                 }
-                return true;
             }
             catch (Exception e)
             {
                 MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
-                return false;
             }
+
+            return dataTable;
         }
+
+        public DataTable GetCancelledFlights()
+        {
+            DataTable dataTable = new DataTable();
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("GetCancelledFlights", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        connection.Open();
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                        adapter.Fill(dataTable);
+                        connection.Close();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
+            }
+            return dataTable;
+        }
+
+        public DataTable GetFlightInfoByAirlineId(int idAirline)
+        {
+            DataTable dataTable = new DataTable();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("GetFlightInfo", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@idAirline", idAirline);
+
+                    try
+                    {
+                        connection.Open();
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                        {
+                            adapter.Fill(dataTable);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Error: " + ex.Message);
+                    }
+                }
+            }
+
+            return dataTable;
+        }
+
     }
 }
