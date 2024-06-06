@@ -38,7 +38,7 @@ namespace PY03___Control_de_vuelos.Programa.APP
         }
 
         /// <summary>
-        /// 
+        /// Contador para animacion de bar
         /// </summary>
         private void InicializarToolTip()
         {
@@ -81,12 +81,20 @@ namespace PY03___Control_de_vuelos.Programa.APP
                 }
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_menu_Click(object sender, EventArgs e)
         {
             sidebarTimer.Start();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_flight_Click(object sender, EventArgs e)
         {
             changeButtonColor(btn_flight);
@@ -96,7 +104,11 @@ namespace PY03___Control_de_vuelos.Programa.APP
             }
             loadForm(new Panel_flight());
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_passengers_Click(object sender, EventArgs e)
         {
             changeButtonColor(btn_passengers);
@@ -106,7 +118,11 @@ namespace PY03___Control_de_vuelos.Programa.APP
             }
             loadForm(new Panel_passengers());
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_airlines_Click(object sender, EventArgs e)
         {
             changeButtonColor(btn_airlines);
@@ -116,7 +132,11 @@ namespace PY03___Control_de_vuelos.Programa.APP
             }
             loadForm(new Panel_airlines());
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_viewData_Click(object sender, EventArgs e)
         {
             changeButtonColor(btn_viewData);
@@ -126,27 +146,47 @@ namespace PY03___Control_de_vuelos.Programa.APP
             }
             loadForm(new Panel_viewData());
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_menu_MouseHover(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(this.btn_menu, "Menú");
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_flight_MouseHover(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(this.btn_viewData, "Gestor de vuelos");
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_passengers_MouseHover(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(this.btn_flight, "Gestor de pasajeros");
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_airlines_MouseHover(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(this.btn_passengers, "Gestor de aerolíneas");
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_viewData_MouseHover(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(this.btn_airlines, "Vista de datos");
@@ -182,7 +222,11 @@ namespace PY03___Control_de_vuelos.Programa.APP
             this.PanelAreaDeTrabajo.Tag = f;
             f.Show();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GUI_Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (this.close) { Application.Exit(); }
@@ -199,7 +243,11 @@ namespace PY03___Control_de_vuelos.Programa.APP
                 else { e.Cancel = true; }
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GUI_Main_Load(object sender, EventArgs e)
         {
 

@@ -1124,6 +1124,74 @@ namespace PY03___Control_de_vuelos.Programa.Modelo
             }
         }
 
+        public bool UpdateFlight(int idFlight,
+                                 string registrationNumber,
+                                 int idPilot,
+                                 DateTime departureDateTime,
+                                 DateTime arrivalDateTime,
+                                 string departureCityCode,
+                                 string arrivalCityCode,
+                                 int cancelled)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand("UpdateFlightById", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@idFlight", idFlight);
+                        cmd.Parameters.AddWithValue("@registrationNumber", registrationNumber);
+                        cmd.Parameters.AddWithValue("@idPilot", idPilot);
+                        cmd.Parameters.AddWithValue("@departureDateTime", departureDateTime);
+                        cmd.Parameters.AddWithValue("@arrivalDateTime", arrivalDateTime);
+                        cmd.Parameters.AddWithValue("@departureCityCode", departureCityCode);
+                        cmd.Parameters.AddWithValue("@arrivalCityCode", arrivalCityCode);
+                        cmd.Parameters.AddWithValue("@cancelled", cancelled);
+
+                        conn.Open();
+
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        return rowsAffected > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error actualizando el vuelo: " + ex.Message);
+                return false;
+            }
+        }
+
+        public bool CancelFlightById(int idFlight)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand("CancelFlightById", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@idFlight", idFlight);
+
+                        conn.Open();
+
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        return rowsAffected > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error actualizando el vuelo: " + ex.Message);
+                return false;
+            }
+        }
+
 
     }
 }

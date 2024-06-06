@@ -47,19 +47,20 @@ namespace PY03___Control_de_vuelos.Programa.APP
                 dtVuelos = consulta;
                 dgv_vuelos.DataSource = dtVuelos;
 
-
                 dgv_vuelos.DefaultCellStyle.ForeColor = Color.Black;
 
                 // Organizar las columnas
-                dgv_vuelos.Columns["AirlineName"].DisplayIndex = 0;
-                dgv_vuelos.Columns["RegistrationNumber"].DisplayIndex = 1;
-                dgv_vuelos.Columns["PilotFullName"].DisplayIndex = 2;
-                dgv_vuelos.Columns["DepartureCity"].DisplayIndex = 3;
-                dgv_vuelos.Columns["ArrivalCity"].DisplayIndex = 4;
-                dgv_vuelos.Columns["DepartureDate"].DisplayIndex = 5;
-                dgv_vuelos.Columns["ArrivalDate"].DisplayIndex = 6;
+                dgv_vuelos.Columns["idFlight"].DisplayIndex = 0;
+                dgv_vuelos.Columns["AirlineName"].DisplayIndex = 1;
+                dgv_vuelos.Columns["RegistrationNumber"].DisplayIndex = 2;
+                dgv_vuelos.Columns["PilotFullName"].DisplayIndex = 3;
+                dgv_vuelos.Columns["DepartureCity"].DisplayIndex = 4;
+                dgv_vuelos.Columns["ArrivalCity"].DisplayIndex = 5;
+                dgv_vuelos.Columns["DepartureDate"].DisplayIndex = 6;
+                dgv_vuelos.Columns["ArrivalDate"].DisplayIndex = 7;
 
                 // Auto size
+                dgv_vuelos.Columns["idFlight"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dgv_vuelos.Columns["AirlineName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dgv_vuelos.Columns["RegistrationNumber"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dgv_vuelos.Columns["PilotFullName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -69,6 +70,7 @@ namespace PY03___Control_de_vuelos.Programa.APP
                 dgv_vuelos.Columns["ArrivalDate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
                 // Cambiar el nombre de las columnas
+                dgv_vuelos.Columns["idFlight"].HeaderText = "id Vuelo";
                 dgv_vuelos.Columns["AirlineName"].HeaderText = "Aerolínea";
                 dgv_vuelos.Columns["RegistrationNumber"].HeaderText = "Código del avión";
                 dgv_vuelos.Columns["PilotFullName"].HeaderText = "Nombre completo del piloto";
@@ -76,7 +78,6 @@ namespace PY03___Control_de_vuelos.Programa.APP
                 dgv_vuelos.Columns["ArrivalCity"].HeaderText = "Ciudad de llegada";
                 dgv_vuelos.Columns["DepartureDate"].HeaderText = "Fecha de salida";
                 dgv_vuelos.Columns["ArrivalDate"].HeaderText = "Fecha de llegada";
-
             }
             else
             {
@@ -85,6 +86,44 @@ namespace PY03___Control_de_vuelos.Programa.APP
             }
         }
 
+        private void dgv_vuelos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                DataGridViewRow row = dgv_vuelos.Rows[e.RowIndex];
+
+                int idFlight = int.Parse(row.Cells["idFlight"].Value.ToString());
+
+                string airlineName = row.Cells["AirlineName"].Value.ToString();
+                int idAirline = int.Parse(airlineName.Split(';')[0]);
+
+                string registrationNumber = row.Cells["RegistrationNumber"].Value.ToString();
+          
+                string pilotFullName = row.Cells["PilotFullName"].Value.ToString();
+                int idPilot = int.Parse(pilotFullName.Split(';')[0]);
+
+                string departureCity = row.Cells["DepartureCity"].Value.ToString();
+                string codeDepartureCity = departureCity.Substring(departureCity.IndexOf('(') + 1, departureCity.IndexOf(')') - departureCity.IndexOf('(') - 1);
+
+                string arrivalCity = row.Cells["ArrivalCity"].Value.ToString();
+                string codeArrivalCity = arrivalCity.Substring(arrivalCity.IndexOf('(') + 1, arrivalCity.IndexOf(')') - arrivalCity.IndexOf('(') - 1);
+
+
+                DateTime departureDateTime = Convert.ToDateTime(row.Cells["DepartureDate"].Value);
+                DateTime arrivalDateTime = Convert.ToDateTime(row.Cells["ArrivalDate"].Value);
+
+                string departureDate = departureDateTime.ToString("yyyy-MM-dd");
+                string departureTime = departureDateTime.ToString("HH:mm:ss");
+
+                string arrivalDate = arrivalDateTime.ToString("yyyy-MM-dd");
+                string arrivalTime = arrivalDateTime.ToString("HH:mm:ss");
+
+                PanelMANTENIMIENTO_Aerolineas form = new PanelMANTENIMIENTO_Aerolineas(idFlight, airlineName, registrationNumber, idPilot, codeDepartureCity, codeArrivalCity, 
+                                                                                       departureDateTime, arrivalDateTime);
+
+                form.Show();
+            }
+        }
 
     }
 }

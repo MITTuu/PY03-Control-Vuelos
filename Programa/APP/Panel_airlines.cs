@@ -20,7 +20,9 @@ namespace PY03___Control_de_vuelos.Programa.APP
         Dialog_addPlanes PanelAddPlanes;
         airlineComponent PanelViewAP;
 
-
+        /// <summary>
+        /// Contructor de la clase
+        /// </summary>
         public Panel_airlines()
         {
             InitializeComponent();
@@ -29,7 +31,11 @@ namespace PY03___Control_de_vuelos.Programa.APP
             PanelAddPlanes = new Dialog_addPlanes();
             PanelViewAP = new airlineComponent();
         }
-
+        /// <summary>
+        /// Carga los datos al panel 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Panel_airlines_Load(object sender, EventArgs e)
         {
             loadFormScroll(PanelViewAP);
@@ -38,7 +44,11 @@ namespace PY03___Control_de_vuelos.Programa.APP
             LoadNameAirlines();
             LoadNameBrands();
         }
-
+        /// <summary>
+        /// Guarda las aerolíneas 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_SaveAirline_Click(object sender, EventArgs e)
         {
             string name = PanelAddArlines.text_nameAirline.Text;
@@ -61,7 +71,11 @@ namespace PY03___Control_de_vuelos.Programa.APP
             } 
             
         }
-
+        /// <summary>
+        /// Guarda los aviones 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_SavePlane_Click(object sender, EventArgs e)
         {
             string airline = PanelAddPlanes.comboBox_Arlines.Text;
@@ -98,21 +112,35 @@ namespace PY03___Control_de_vuelos.Programa.APP
             }
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_AddAirline_Click(object sender, EventArgs e)
         {
             ShowButtons(false, true, true, false);
 
             loadForm(PanelAddArlines);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_AddPlane_Click(object sender, EventArgs e)
         {
             ShowButtons(true, false, false, true);
 
             loadForm(PanelAddPlanes);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="AddAirline"></param>
+        /// <param name="SaveAirline"></param>
+        /// <param name="AddPlane"></param>
+        /// <param name="SavePlane"></param>
         private void ShowButtons(bool AddAirline, bool SaveAirline, bool AddPlane, bool SavePlane)
         {
             btn_AddAirline.Visible = AddAirline;
@@ -121,7 +149,9 @@ namespace PY03___Control_de_vuelos.Programa.APP
             btn_SavePlane.Visible = SavePlane;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         private void LoadNameAirlines()
         {
 
@@ -138,7 +168,9 @@ namespace PY03___Control_de_vuelos.Programa.APP
                 PanelAddPlanes.comboBox_Arlines.Items.Add(airline);
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public void LoadNameBrands()
         {
             // Limpia el comboBox
@@ -154,7 +186,10 @@ namespace PY03___Control_de_vuelos.Programa.APP
             }
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Form"></param>
         public void loadForm(object Form)
         {
             if (this.PanelAdd.Controls.Count > 0)
@@ -166,7 +201,10 @@ namespace PY03___Control_de_vuelos.Programa.APP
             this.PanelAdd.Tag = f;
             f.Show();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Form"></param>
         public void loadFormScroll(object Form)
         {
             if (this.PanelComponet.Controls.Count > 0)

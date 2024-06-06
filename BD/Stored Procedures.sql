@@ -446,6 +446,11 @@ BEGIN
 END;
 GO
 
+-- Visualización de datos
+CREATE VIEW ActiveFlightsInfo AS
+SELECT
+	idFlight,
+    CONCAT(A.idAirline, '; ', A.name) AS AirlineName,
 CREATE OR ALTER PROCEDURE GetPlanesByCity
     @AirlineId INT = NULL
 AS
@@ -475,7 +480,7 @@ CREATE OR ALTER VIEW ActiveFlightsInfo AS
 SELECT 
     A.name AS AirlineName,
     F.registrationNumber AS RegistrationNumber,
-    CONCAT(P.name, ' ', P.lastName1, ' ', P.lastName2) AS PilotFullName,
+    CONCAT(P.idPilot, '; ' , P.name, ' ', P.lastName1, ' ', P.lastName2) AS PilotFullName,
     F.departureDateTime AS DepartureDate,
     F.arrivalDateTime AS ArrivalDate,
     CONCAT('(', DC.cityCode, ') ', DC.name) AS DepartureCity,
@@ -512,6 +517,7 @@ CREATE OR ALTER PROCEDURE GetActiveFlightsByDateRange
 AS
 BEGIN
     SELECT 
+		idFlight,
         AirlineName,
         RegistrationNumber,
         PilotFullName,
@@ -590,6 +596,41 @@ AS
 BEGIN
     SELECT name, idFlight, DepartureCity, ArrivalCity, DepartureDateTime, ArrivalDateTime  
     FROM GetAirlineFlightInfoById(@idAirline);
+END;
+
+CREATE PROCEDURE UpdateFlightById
+    @idFlight INT,
+    @registrationNumber VARCHAR(50),
+    @idPilot INT,
+    @departureDateTime DATETIME,
+    @arrivalDateTime DATETIME,
+    @departureCityCode VARCHAR(3),
+    @arrivalCityCode VARCHAR(3),
+    @cancelled BIT
+AS
+BEGIN
+    UPDATE Flight
+    SET
+        registrationNumber = @registrationNumber,
+        idPilot = @idPilot,
+        departureDateTime = @departureDateTime,
+        arrivalDateTime = @arrivalDateTime,
+        departureCityCode = @departureCityCode,
+        arrivalCityCode = @arrivalCityCode,
+        cancelled = @cancelled
+    WHERE
+        idFlight = @idFlight;
+END;
+
+CREATE PROCEDURE CancelFlightById
+    @idFlight INT
+AS
+BEGIN
+    UPDATE Flight
+    SET
+        cancelled = 1
+    WHERE
+        idFlight = @idFlight;
 END;
 GO
 
