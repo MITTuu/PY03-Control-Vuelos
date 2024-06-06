@@ -86,6 +86,31 @@ namespace PY03___Control_de_vuelos.Programa.Modelo
             }
         }
 
+        public static DataTable GetTotalFlightHoursByAirline()
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("GetTotalFlightHoursByAirline", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        return dataTable;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK);
+                return null;
+            }
+        }
+
         public List<string> GetNameAirlines()
         {
             List<string> airlines = new List<string>();
