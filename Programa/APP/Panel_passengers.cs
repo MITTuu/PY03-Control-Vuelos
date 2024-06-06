@@ -153,7 +153,7 @@ namespace PY03___Control_de_vuelos.Programa.APP
         /// </summary>
         private void AddPassengerToList()
         {
-            string passportNumber = tbPassport.Text;
+            string passportNumber = tbPassport.Text.ToUpper();
             string name = tbName.Text + " " + tbLastname1.Text + " " + tbLastname2.Text;
 
             dgvPassengers.Rows.Add(passportNumber, name);
@@ -253,6 +253,8 @@ namespace PY03___Control_de_vuelos.Programa.APP
         /// <returns></returns>
         private int RegisterPassengerListInFlight()
         {
+            if (dgvPassengers.Rows.Count == 0) return -1;
+
             int idFlight = GetValidatedFlightId();
             if (idFlight == -1) return -1;
 
@@ -367,7 +369,13 @@ namespace PY03___Control_de_vuelos.Programa.APP
             if (RegisterPassengerListInFlight() != -1)
             {
                 MessageBox.Show("Los pasajeros han sido registrados al vuelo", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dgvPassengers.Rows.Clear();
             }
+        }
+
+        private void dgvPassengers_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            dgvPassengers.Rows.RemoveAt(e.RowIndex);
         }
     }
 }

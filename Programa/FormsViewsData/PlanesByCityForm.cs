@@ -18,7 +18,9 @@ namespace PY03___Control_de_vuelos.Programa.FormsViewsData
             LoadAirlines();
             LoadChartData(null);
         }
-
+        /// <summary>
+        /// Carga los datos de las aerolineas
+        /// </summary>
         private void LoadAirlines()
         {
             DataTable airlinesTable = conexion.GetAirlines();
@@ -31,7 +33,11 @@ namespace PY03___Control_de_vuelos.Programa.FormsViewsData
             comboBoxAirlines.DisplayMember = "name";
             comboBoxAirlines.ValueMember = "idAirline";
         }
-
+        /// <summary>
+        /// Filtrado de las cuidades
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxAirlines_SelectedIndexChanged(object sender, EventArgs e)
         {
             int? selectedAirlineId = comboBoxAirlines.SelectedValue as int?;
@@ -43,7 +49,10 @@ namespace PY03___Control_de_vuelos.Programa.FormsViewsData
             LoadChartData(selectedAirlineId);
 
         }
-
+        /// <summary>
+        /// Carga los datos al chart
+        /// </summary>
+        /// <param name="airlineId"></param>
         private void LoadChartData(int? airlineId)
         {
             DataTable dataTable = conexion.GetPlanesByCity(airlineId);
@@ -99,55 +108,9 @@ namespace PY03___Control_de_vuelos.Programa.FormsViewsData
             }
             else
             {
-                // Console.WriteLine("No se obtuvieron datos de GetPlanesByCity.");
+                MessageBox.Show("Error: No hay datos que cargar", "Error", MessageBoxButtons.OK);
             }
         }
-
-
-
-        private void InitializeComponent()
-        {
-            this.comboBoxAirlines = new System.Windows.Forms.ComboBox();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // comboBoxAirlines
-            // 
-            this.comboBoxAirlines.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxAirlines.FormattingEnabled = true;
-            this.comboBoxAirlines.Location = new System.Drawing.Point(12, 12);
-            this.comboBoxAirlines.Name = "comboBoxAirlines";
-            this.comboBoxAirlines.Size = new System.Drawing.Size(200, 21);
-            this.comboBoxAirlines.TabIndex = 0;
-            this.comboBoxAirlines.SelectedIndexChanged += new System.EventHandler(this.comboBoxAirlines_SelectedIndexChanged);
-            // 
-            // chart1
-            // 
-            this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.chart1.Location = new System.Drawing.Point(12, 50);
-            this.chart1.Name = "chart1";
-            this.chart1.Size = new System.Drawing.Size(776, 388);
-            this.chart1.TabIndex = 1;
-            this.chart1.Text = "chart1";
-            // 
-            // PlanesByCityForm
-            // 
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.chart1);
-            this.Controls.Add(this.comboBoxAirlines);
-            this.Name = "PlanesByCityForm";
-            this.Text = "Cantidad de Aviones que Volaron por Ciudad";
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
-            this.ResumeLayout(false);
-
-        }
-
-        private System.Windows.Forms.ComboBox comboBoxAirlines;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-
 
     }
 }
