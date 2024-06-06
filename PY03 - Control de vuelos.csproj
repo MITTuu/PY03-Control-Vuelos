@@ -241,6 +241,9 @@
     <EmbeddedResource Include="Programa\FormsViewsData\AirlineChartForm.resx">
       <DependentUpon>AirlineChartForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Programa\FormsViewsData\FlightStatisticsForm.resx">
+      <DependentUpon>FlightStatisticsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Programa\FormsViewsData\PlanesByCityForm.resx">
       <DependentUpon>PlanesByCityForm.cs</DependentUpon>
     </EmbeddedResource>

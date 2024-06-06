@@ -97,6 +97,8 @@ namespace PY03___Control_de_vuelos.Programa.FormsViewsData
 
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             this.chartPlanes = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartFlights = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.labelTopCity = new System.Windows.Forms.Label();
@@ -106,8 +108,7 @@ namespace PY03___Control_de_vuelos.Programa.FormsViewsData
             // 
             // chartPlanes
             // 
-            this.chartPlanes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
-            ChartArea chartArea1 = new ChartArea();
+            chartArea1.Name = "ChartArea1";
             this.chartPlanes.ChartAreas.Add(chartArea1);
             this.chartPlanes.Location = new System.Drawing.Point(12, 12);
             this.chartPlanes.Name = "chartPlanes";
@@ -118,7 +119,7 @@ namespace PY03___Control_de_vuelos.Programa.FormsViewsData
             // chartFlights
             // 
             this.chartFlights.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            ChartArea chartArea2 = new ChartArea();
+            chartArea2.Name = "ChartArea1";
             this.chartFlights.ChartAreas.Add(chartArea2);
             this.chartFlights.Location = new System.Drawing.Point(420, 12);
             this.chartFlights.Name = "chartFlights";
@@ -130,9 +131,10 @@ namespace PY03___Control_de_vuelos.Programa.FormsViewsData
             // 
             this.labelTopCity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelTopCity.AutoSize = true;
+            this.labelTopCity.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTopCity.Location = new System.Drawing.Point(12, 420);
             this.labelTopCity.Name = "labelTopCity";
-            this.labelTopCity.Size = new System.Drawing.Size(147, 13);
+            this.labelTopCity.Size = new System.Drawing.Size(237, 21);
             this.labelTopCity.TabIndex = 2;
             this.labelTopCity.Text = "Ciudad con más vuelos: Ninguna";
             // 
@@ -148,6 +150,7 @@ namespace PY03___Control_de_vuelos.Programa.FormsViewsData
             ((System.ComponentModel.ISupportInitialize)(this.chartFlights)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         private System.Windows.Forms.DataVisualization.Charting.Chart chartPlanes;
